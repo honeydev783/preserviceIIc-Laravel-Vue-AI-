@@ -17,7 +17,7 @@ body{width:100%;
 
 <style>
 .btn-group-list .btn {
-    width: 76px;
+    width: 85px;
     margin-right: 4px;
     margin-bottom: 10px;
 }

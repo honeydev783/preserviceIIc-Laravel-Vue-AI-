@@ -1,0 +1,8 @@
+[04-May-2024 23:32:41 America/Boise] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home3/lobalpx1/public_html/admin/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home3/lobalpx1/public_html/admin/config/database.php on line 18
+[06-May-2024 00:15:46 America/Boise] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home3/lobalpx1/public_html/admin/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home3/lobalpx1/public_html/admin/config/database.php on line 18

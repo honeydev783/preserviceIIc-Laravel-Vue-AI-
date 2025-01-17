@@ -1027,7 +1027,6 @@ export default {
             }
 
 
-            // this.totalCalculation = sortableArray;
         },
         down(id, ind) {
             var selected = 0;

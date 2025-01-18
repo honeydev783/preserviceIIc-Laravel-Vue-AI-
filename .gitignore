@@ -1,4 +1,6 @@
 node_modules/
 vendor/
+storage/VertexAIKey.json
+VertexAIKey.json
 .env
 server.php 

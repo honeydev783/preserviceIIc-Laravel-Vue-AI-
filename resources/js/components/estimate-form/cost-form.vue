@@ -546,8 +546,8 @@
                                     <th width="8%">COST/SF GFA</th>
                                     <th width="8%">UNIT/SF</th>
                                     <th width="11%">ELEMENT COST</th>
-                                    <th width="9%">FACTOR %</th>
-                                    <th width="12%">Action</th>
+                                    <th width="9%"> FACTOR %</th>
+                                    <th width="12%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="row_position">

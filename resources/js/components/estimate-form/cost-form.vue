@@ -369,8 +369,8 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <input type="text" style="border:1px solid #ccc" v-model="description"
-                                                    class="form-control-plaintext" id="description">
+                                                <textarea type="text" style="border:1px solid #ccc" v-model="description"
+                                                    class="form-control-plaintext" id="description"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -380,9 +380,9 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <input type="text" style="border:1px solid #ccc"
+                                                <textarea type="text" style="border:1px solid #ccc"
                                                     v-model="conceptual_note" class="form-control-plaintext"
-                                                    id="conceptual_note">
+                                                    id="conceptual_note"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -392,8 +392,8 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <input type="text" style="border:1px solid #ccc" v-model="estimate_note"
-                                                    class="form-control-plaintext" id="estimate_note">
+                                                <textarea type="text" style="border:1px solid #ccc" v-model="estimate_note"
+                                                    class="form-control-plaintext" id="estimate_note"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -403,9 +403,9 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <input type="text" style="border:1px solid #ccc"
+                                                <textarea type="text" style="border:1px solid #ccc"
                                                     v-model="exculstion_note" class="form-control-plaintext"
-                                                    id="exculstion_note">
+                                                    id="exculstion_note"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -536,61 +536,65 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <table class="table table-striped table-bordered" style="background: aliceblue;">
-                            <thead>
-                                <tr>
-                                    <th width="8%">ELEMENT CODE</th>
-                                    <th width="28%">ELEMENT DESCRIPTION</th>
-                                    <th width="8%">COST / M2 GFA</th>
-                                    <th width="8%">UNIT / M2</th>
-                                    <th width="8%">COST/SF GFA</th>
-                                    <th width="8%">UNIT/SF</th>
-                                    <th width="11%">ELEMENT COST</th>
-                                    <th width="9%"> FACTOR %</th>
-                                    <th width="12%">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="row_position">
-                                <tr v-for="(element, i) in elements" :key="i" :id="i + '-row'"
-                                    :data="element.element_code">
-                                    <td><span :id="'element_code_label' + i">{{ element.element_code }}</span>
-                                        <input class="form-control" type="text" :id="'element_code_' + i"
-                                            :value="element.element_code" style="display: none" />
-                                    </td>
-                                    <td><span :id="'element_description_label' + i">{{ element.description }}</span>
-                                        <input class="form-control" type="text" :id="'element_description_code_' + i"
-                                            :value="element.description" style="display: none" />
-                                    </td>
-                                    <td>
-                                        {{ element.cost_m2 | currency }}
-                                    </td>
-                                    <td>{{ element.unit_m2 }}</td>
-                                    <td>{{ element.cost_sf | currency }}</td>
-                                    <td>{{ element.unit_sf }}</td>
-                                    <td>{{ element.element_cost | currency }}</td>
-                                    <td>{{ element.factor_type }}</td>
-                                    <td>
-                                        <div class="btn-group-list">
-                                            <span class="btn btn-success" :id="'edit-btn-' + i"
-                                                @click="edit(i)">Edit</span>
-                                            <span class="btn btn-success" :id="'delete-btn-' + i"
-                                                @click="deleteFromSum(i)">Remove</span>
-                                            <span class="btn btn-success" :id="'up-btn-' + i"
-                                                @click="up(element.element_code, i)">Up</span>
-                                            <span class="btn btn-success" :id="'down-btn-' + i"
-                                                @click="down(element.element_code, i)">Down</span>
-                                            <span class="btn btn-success" :id="'done-btn-' + i" @click="doneUpdate(i)"
-                                                style="display: none">Done</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6"><b>Total:</b></td>
-                                    <td>{{ total | currency }}</td>
-                                    <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" style="background: aliceblue;">
+                                <thead>
+                                    <tr>
+                                        <th width="8%">ELEMENT CODE</th>
+                                        <th width="28%">ELEMENT DESCRIPTION</th>
+                                        <th width="8%">COST / M2 GFA</th>
+                                        <th width="8%">UNIT / M2</th>
+                                        <th width="8%">COST/SF GFA</th>
+                                        <th width="8%">UNIT/SF</th>
+                                        <th width="11%">ELEMENT COST</th>
+                                        <th width="9%">FACTOR %</th>
+                                        <th width="12%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="row_position detail-form-list">
+                                    <tr v-for="(element, i) in elements" :key="i" :id="i + '-row'"
+                                        :data="element.element_code" :data-index="i">
+                                        <td><span :id="'element_code_label' + i">{{ element.element_code }}</span>
+                                            <input class="form-control" type="text" :id="'element_code_' + i"
+                                                :value="element.element_code" style="display: none" />
+                                        </td>
+                                        <td><span :id="'element_description_label' + i">{{ element.description }}</span>
+                                            <input class="form-control" type="text"
+                                                :id="'element_description_code_' + i" :value="element.description"
+                                                style="display: none" />
+                                        </td>
+                                        <td>
+                                            {{ element.cost_m2 | currency }}
+                                        </td>
+                                        <td>{{ element.unit_m2 }}</td>
+                                        <td>{{ element.cost_sf | currency }}</td>
+                                        <td>{{ element.unit_sf }}</td>
+                                        <td>{{ element.element_cost | currency }}</td>
+                                        <td>{{ element.factor_type }}</td>
+                                        <td>
+                                            <div class="btn-group-list">
+                                                <span class="btn btn-success" :id="'edit-btn-' + i"
+                                                    @click="edit(i)">Edit</span>
+                                                <span class="btn btn-success" :id="'delete-btn-' + i"
+                                                    @click="deleteFromSum(i)">Remove</span>
+                                                <span class="btn btn-success" :id="'up-btn-' + i"
+                                                    @click="up(element.element_code, i)">Up</span>
+                                                <span class="btn btn-success" :id="'down-btn-' + i"
+                                                    @click="down(element.element_code, i)">Down</span>
+                                                <span class="btn btn-success" :id="'done-btn-' + i"
+                                                    @click="doneUpdate(i)" style="display: none">Done</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6"><b>Total:</b></td>
+                                        <td>{{ total | currency }}</td>
+                                        <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <table class="table table-bordered text-white">
@@ -782,6 +786,7 @@ var id = $('#approx_id').val();
 export default {
     mounted() {
         console.log('Estimation Form 1 Component');
+        
     },
     created() {
         this.getResults();
@@ -910,6 +915,7 @@ export default {
                     console.log("response data===>", response.data.data);
 
                 });
+
         },
         getCountrys() {
             var _this = this
@@ -919,8 +925,12 @@ export default {
                 .then(function (response) {
                     _this.countrys = response.data.data.countrys
                     _this.$Progress.finish()
-                    _this.loading = false
+                    _this.loading = false   
+                    $(".detail-form-list").sortable({
+                        delay: 150
+                    })                                 
                 });
+                
         },
         getEstimateType() {
             var _this = this
@@ -1027,6 +1037,7 @@ export default {
             }
 
 
+            // this.totalCalculation = sortableArray;
         },
         down(id, ind) {
             var selected = 0;
@@ -1045,24 +1056,24 @@ export default {
         },
         deleteFromSum(index) {
             this.elements.splice(index, 1);
-            
+
             this.total = this.elements.reduce(function (
                 sum,
                 current
             ) {
                 return (sum += Number(parseFloat(current.element_cost).toFixed(2)));
             },
-            0);
-            this.total_cost=this.total;
-            this.t_unit_cost=this.total_cost/this.num_unit;
+                0);
+            this.total_cost = this.total;
+            this.t_unit_cost = this.total_cost / this.num_unit;
             this.total_factor = this.elements.reduce(function (
                 sum,
                 current
             ) {
                 return (sum += Number(parseFloat(current.factor).toFixed(2)));
             },
-            0);
-            
+                0);
+
         },
         showModal(type) {
             this.$modal.show('image-upload-modal')
@@ -1263,6 +1274,9 @@ export default {
                     _this.getResults();
                     _this.calculateTwo();
                     _this.loading = false
+                    $(".detail-form-list").sortable({
+                        delay: 150
+                    });
                 });
         },
         printForm() {

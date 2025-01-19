@@ -1889,11 +1889,11 @@ input::-webkit-inner-spin-button {
           <br />
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <form :action="route('upload.pdf')" method="POST" enctype="multipart/form-data">
+                <!-- <form :action="route('upload.pdf')" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="file" name="pdf_file" accept=".pdf" required>
                     <button type="submit">Upload PDF</button>
-                </form>
+                </form> -->
             </div>
           </div>
           <div class="row mt-2">

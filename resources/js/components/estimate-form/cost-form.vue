@@ -1055,7 +1055,12 @@ export default {
             }
         },
         deleteFromSum(index) {
+            this.total = this.total - this.elements[index].element_cost;
             this.elements.splice(index, 1);
+            this.elements.forEach((value, key) => {
+                value.factor_type = Number(parseFloat(value.element_cost / this.total*100).toFixed(2));
+                console.log("key, id==>", value, key);
+            });
 
             this.total = this.elements.reduce(function (
                 sum,
@@ -1070,7 +1075,7 @@ export default {
                 sum,
                 current
             ) {
-                return (sum += Number(parseFloat(current.factor).toFixed(2)));
+                return (sum += Number(parseFloat(current.factor_type).toFixed(2)));
             },
                 0);
 

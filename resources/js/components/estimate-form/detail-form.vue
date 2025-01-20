@@ -1,22 +1,20 @@
 <style>
+
 .pull-right {
   float: right;
 }
-
 .pull-left {
   float: left;
 }
 
 .btn-group-list .btn {
-  width: 90px;
-  margin-right: 4px;
-  margin-bottom: 10px;
+    width: 90px;
+    margin-right: 4px;
+    margin-bottom: 10px;
 }
-
 .btn-group-list {
-  min-width: 210px;
+    min-width: 210px;
 }
-
 .loader {
   /* Loader Div Class */
   position: absolute;
@@ -34,141 +32,118 @@
   opacity: 0.4;
   filter: alpha(opacity=40);
 }
-
 span.select2 {
   width: 100% !important;
 }
 
-.select2-container--default .select2-results>.select2-results__options {
+.select2-container--default .select2-results > .select2-results__options {
   max-height: 380px !important;
 }
-
 .icon_src {
   background-image: url("/images/icon.png");
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-
 @media (max-width: 575.98px) {
   .modal-fullscreen {
     padding: 0 !important;
   }
-
   .modal-fullscreen .modal-dialog {
     width: 100%;
     max-width: none;
     height: 100%;
     margin: 0;
   }
-
   .modal-fullscreen .modal-content {
     height: 100%;
     border: 0;
     border-radius: 0;
   }
-
   .modal-fullscreen .modal-body {
     overflow-y: auto;
   }
-
   .btn.btn-activity-component {
     cursor: none !important;
   }
 }
-
 @media (max-width: 767.98px) {
   .modal-fullscreen-sm {
     padding: 0 !important;
   }
-
   .modal-fullscreen-sm .modal-dialog {
     width: 100%;
     max-width: none;
     height: 100%;
     margin: 0;
   }
-
   .modal-fullscreen-sm .modal-content {
     height: 100%;
     border: 0;
     border-radius: 0;
   }
-
   .modal-fullscreen-sm .modal-body {
     overflow-y: auto;
   }
 }
-
 @media (max-width: 991.98px) {
   .modal-fullscreen-md {
     padding: 0 !important;
   }
-
   .modal-fullscreen-md .modal-dialog {
     width: 100%;
     max-width: none;
     height: 100%;
     margin: 0;
   }
-
   .modal-fullscreen-md .modal-content {
     height: 100%;
     border: 0;
     border-radius: 0;
   }
-
   .modal-fullscreen-md .modal-body {
     overflow-y: auto;
   }
 }
-
 @media (max-width: 1199.98px) {
   .modal-fullscreen-lg {
     padding: 0 !important;
   }
-
   .modal-fullscreen-lg .modal-dialog {
     width: 100%;
     max-width: none;
     height: 100%;
     margin: 0;
   }
-
   .modal-fullscreen-lg .modal-content {
     height: 100%;
     border: 0;
     border-radius: 0;
   }
-
   .modal-fullscreen-lg .modal-body {
     overflow-y: auto;
   }
 }
 
 @media (max-width: 1990px) {
-  .jac {
-    padding-top: 20px;
+  .jac{
+    padding-top:20px;
   }
 }
-
 .modal-fullscreen-xl {
   padding: 0 !important;
 }
-
 .modal-fullscreen-xl .modal-dialog {
   width: 100%;
   max-width: none;
   height: 100%;
   margin: 0;
 }
-
 .modal-fullscreen-xl .modal-content {
   height: 100%;
   border: 0;
   border-radius: 0;
 }
-
 .modal-fullscreen-xl .modal-body {
   overflow-y: auto;
 }
@@ -176,21 +151,17 @@ span.select2 {
 .btn-open-modal {
   margin-bottom: 0.5em;
 }
-
 .col-form-label {
   color: #000;
   font-weight: 700;
   font-size: 18x;
 }
-
 .form-control-plaintext {
   padding-left: 10px;
 }
-
 .show-currency {
   border: none;
 }
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -206,11 +177,9 @@ input::-webkit-inner-spin-button {
   /* display:inline-block; */
   position: relative;
 }
-
 .dollar input {
   padding-left: 15px;
 }
-
 .dollar:before {
   position: absolute;
   content: "$";
@@ -222,7 +191,10 @@ input::-webkit-inner-spin-button {
 <template>
   <div>
     <vue-progress-bar></vue-progress-bar>
-    <div class="card text-white detail-form" style="background-color: rgba(24, 104, 172, 1)">
+    <div
+      class="card text-white detail-form"
+      style="background-color: rgba(24, 104, 172, 1)"
+    >
       <div class="card-body">
         <div class="form">
           <div class="row">
@@ -232,7 +204,11 @@ input::-webkit-inner-spin-button {
                 <div class="col-xs-7 col-sm-7 col-md-7">
                   <div class="form-group">
                     <strong>Project Title:</strong>
-                    <input type="text" class="form-control" v-model="project_title" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="project_title"
+                    />
                   </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-5">
@@ -252,9 +228,18 @@ input::-webkit-inner-spin-button {
                     <div class="col-xs-6 col-sm-6 col-md-6">
                       <div class="form-group">
                         <strong>Country:</strong>
-                        <select class="form-control" v-model="country" @change="getComponents($event)" id="country_id">
+                        <select
+                          class="form-control"
+                          v-model="country"
+                          @change="getComponents($event)"
+                          id="country_id"
+                        >
                           <option value=""></option>
-                          <option v-for="con in countrys" :key="con.id" :value="con.id">
+                          <option
+                            v-for="con in countrys"
+                            :key="con.id"
+                            :value="con.id"
+                          >
                             {{ con.country_name }}
                           </option>
                         </select>
@@ -270,17 +255,29 @@ input::-webkit-inner-spin-button {
                     <div class="col-xs-6 col-sm-6 col-md-6">
                       <div class="form-group">
                         <strong>ACTIVITY CODE:</strong>
-                        <input type="text" v-model="activity_code" class="form-control" />
+                        <input
+                          type="text"
+                          v-model="activity_code"
+                          class="form-control"
+                        />
                       </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                       <div class="form-group">
                         <strong>ACTIVITY CATEGORY:</strong>
-                        <select class="form-control" v-model="category" @change="getResults($event)">
+                        <select
+                          class="form-control"
+                          v-model="category"
+                          @change="getResults($event)"
+                        >
                           <option value="">
                             [Select To View Relative Job Activity Listing:]
                           </option>
-                          <option v-for="temp in descriptions" :key="temp.id" :value="temp.id">
+                          <option
+                            v-for="temp in descriptions"
+                            :key="temp.id"
+                            :value="temp.id"
+                          >
                             {{ temp.title }}
                           </option>
                         </select>
@@ -292,11 +289,19 @@ input::-webkit-inner-spin-button {
                       <strong>IMPERIAL RATE:</strong>
                       <div class="form-group">
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="imperial_rate"></vue-numeric> -->
-                        <input type="text" v-model="imperial_rate" class="form-control" />
+                        <input
+                          type="text"
+                          v-model="imperial_rate"
+                          class="form-control"
+                        />
                       </div>
                       <div class="form-group">
                         <strong>UNIT:</strong>
-                        <input class="form-control" type="text" v-model="imperial_unit" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          v-model="imperial_unit"
+                        />
                       </div>
                     </div>
                     <!-- <div class="col-xs-3 col-sm-3 col-md-3">
@@ -310,11 +315,19 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="metric_rate"></vue-numeric> -->
 
-                        <input type="text" v-model="metric_rate" class="form-control" />
+                        <input
+                          type="text"
+                          v-model="metric_rate"
+                          class="form-control"
+                        />
                       </div>
                       <div class="form-group">
                         <strong>UNIT:</strong>
-                        <input type="text" v-model="metric_unit" class="form-control" />
+                        <input
+                          type="text"
+                          v-model="metric_unit"
+                          class="form-control"
+                        />
                       </div>
                     </div>
                     <!-- <div class="col-xs-3 col-sm-3 col-md-3">
@@ -331,11 +344,19 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>JOB ACTIVITY:</strong>
                         <!-- <select class="form-control" v-model="activity_description" @change="getComponents">  -->
-                        <select class="form-control" id="select2" v-model="activity_description">
+                        <select
+                          class="form-control"
+                          id="select2"
+                          v-model="activity_description"
+                        >
                           <option value="" selected>
                             [Select To View Relative Job Activity Listing:]
                           </option>
-                          <option v-for="active in actives" :key="active.id" :value="active.id">
+                          <option
+                            v-for="active in actives"
+                            :key="active.id"
+                            :value="active.id"
+                          >
                             {{ active.description }}
                           </option>
                         </select>
@@ -345,16 +366,35 @@ input::-webkit-inner-spin-button {
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                       <div class="form-group">
-                        <strong style="width: 100%; float: left">JOB ACTIVITY QUANTITY - IMPERIAL</strong>
-                        <input style="float: left; width: 25%" type="number" v-model="quantity" class="form-control"
-                          value="1" />
-                        <input style="float: left; width: 15%" type="text" v-model="imperial_unit"
-                          class="form-control" />
+                        <strong style="width: 100%; float: left"
+                          >JOB ACTIVITY QUANTITY - IMPERIAL</strong
+                        >
+                        <input
+                          style="float: left; width: 25%"
+                          type="number"
+                          v-model="quantity"
+                          class="form-control"
+                          value="1"
+                        />
+                        <input
+                          style="float: left; width: 15%"
+                          type="text"
+                          v-model="imperial_unit"
+                          class="form-control"
+                        />
                         <div style="float: left; width: 60%">
-                          <span style="float: left;width: 40%;margin-left: 5px;padding: 0.375rem 0.3rem !important"
-                            class="btn btn-success" @click="checkDetails">Add Quantity</span>
-                          <span style="float: left;width: 50%;margin-left: 5px;padding: 0.375rem 0.5rem !important;"
-                            class="btn btn-success" @click="loadComponent">Load Job Activity</span>
+                          <span
+                            style="float: left;width: 40%;margin-left: 5px;padding: 0.375rem 0.3rem !important"
+                            class="btn btn-success"
+                            @click="checkDetails"
+                            >Add Quantity</span
+                          >
+                          <span
+                            style="float: left;width: 50%;margin-left: 5px;padding: 0.375rem 0.5rem !important;"
+                            class="btn btn-success"
+                            @click="loadComponent"
+                            >Load Job Activity</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -373,8 +413,11 @@ input::-webkit-inner-spin-button {
                 <div class="col-xs-7 col-sm-7 col-md-7">
                   <div class="form-group">
                     <strong>Project Discription:</strong>
-                    <textarea id="project_discription" class="form-control" rows="11"
-                      v-model="project_description"></textarea>
+                    <textarea id="project_discription"
+                      class="form-control"
+                      rows="11"
+                      v-model="project_description"
+                    ></textarea>
                   </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-5">
@@ -384,7 +427,11 @@ input::-webkit-inner-spin-button {
                         <strong>LABOUR COST:</strong>
                         <!-- <span class="form-control"></span>  -->
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="labour_cost"></vue-numeric> -->
-                        <input type="text" class="form-control" v-model="labour_cost" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="labour_cost"
+                        />
                       </div>
                     </div>
                   </div>
@@ -394,7 +441,11 @@ input::-webkit-inner-spin-button {
                         <strong>EQUIPMENT COST:</strong>
                         <!-- <span class="form-control"></span>                                        -->
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="equipment_cost"></vue-numeric> -->
-                        <input type="text" class="form-control" v-model="equipment_cost" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="equipment_cost"
+                        />
                       </div>
                     </div>
                   </div>
@@ -402,7 +453,11 @@ input::-webkit-inner-spin-button {
                     <div class="col-sm-12">
                       <div class="form-group">
                         <strong>MATERIAL COST:</strong>
-                        <input type="text" class="form-control" v-model="material_cost" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="material_cost"
+                        />
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="material_cost"></vue-numeric>                                     -->
                       </div>
                     </div>
@@ -413,8 +468,13 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>ADDITIONAL / DISCOUNT COST (+/-):</strong>
                         <!-- <vue-numeric class="form-control"  currency="$" separator=","  v-model="additional_cost"></vue-numeric>  -->
-                        <input type="text" class="form-control" v-model="additional_cost" v-on:keyup="additionalCost"
-                          v-on:mouseleave="additionalLeave" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="additional_cost"
+                          v-on:keyup="additionalCost"
+                          v-on:mouseleave="additionalLeave"
+                        />
                       </div>
                     </div>
                   </div>
@@ -424,22 +484,38 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>SUB-TOTAL:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="sub_total"></vue-numeric>  -->
-                        <input type="text" class="form-control" v-model="sub_total" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="sub_total"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-4 jac">
                       <strong>%:</strong>
-                      <input type="number" class="form-control" v-model="preliminary_percentage" max="100" value="0"
-                        placeholder="%" v-on:keyup="preliminaryCost" />
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="preliminary_percentage"
+                        max="100"
+                        value="0"
+                        placeholder="%"
+                        v-on:keyup="preliminaryCost"
+                      />
                     </div>
                     <div class="col-sm-8">
                       <div class="form-group">
                         <strong>PRELIMINARIES / GENERAL REQUIREMENTS COST:</strong>
 
-                        <input type="text" class="form-control" v-model="preliminary_cost"
-                          v-on:keyup="preliminaryCostAmount" v-on:mouseleave="preliminaryLeave" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="preliminary_cost"
+                          v-on:keyup="preliminaryCostAmount"
+                          v-on:mouseleave="preliminaryLeave"
+                        />
                         <!-- <div class="dollar">
                                               <input type="text" class="form-control" v-model="preliminary_cost" value="0"  >  
                                         </div> -->
@@ -454,16 +530,32 @@ input::-webkit-inner-spin-button {
                     <div class="col-sm-4">
                       <strong>%:</strong>
 
-                      <input type="number" class="form-control" v-model="overhead_percentage" min="0" max="100"
-                        value="0" placeholder="%" v-on:keyup="overheadProfit" />
+                      <input
+                        type="number"
+                        class="form-control"
+                        v-model="overhead_percentage"
+                        min="0"
+                        max="100"
+                        value="0"
+                        placeholder="%"
+                        v-on:keyup="overheadProfit"
+                      />
                     </div>
                     <div class="col-sm-8">
                       <div class="form-group">
                         <strong>OVERHEADS & PROFIT:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="overhead_cost"></vue-numeric>  -->
                         <!-- <div class="dollar"> -->
-                        <input type="text" class="form-control" v-model="overhead_cost" max="100" value="0"
-                          placeholder="%" v-on:keyup="overheadCost" v-on:mouseleave="overheadLeave" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="overhead_cost"
+                          max="100"
+                          value="0"
+                          placeholder="%"
+                          v-on:keyup="overheadCost"
+                          v-on:mouseleave="overheadLeave"
+                        />
                         <!-- </div> -->
                       </div>
                     </div>
@@ -472,16 +564,27 @@ input::-webkit-inner-spin-button {
                   <div class="row">
                     <div class="col-sm-4">
                       <strong>%:</strong>
-                      <input type="text" class="form-control" min="0" max="100" v-model="consistgency_percentage"
-                        v-on:keyup="consistgencyCost" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        min="0"
+                        max="100"
+                        v-model="consistgency_percentage"
+                        v-on:keyup="consistgencyCost"
+                      />
                     </div>
                     <div class="col-sm-8">
                       <div class="form-group">
                         <strong>CONTINGENCY COST:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="consistgency_cost" v-on:change="consistgencyCostAmount"></vue-numeric>  -->
                         <!-- <div class="dollar"> -->
-                        <input type="text" class="form-control" v-model="consistgency_cost"
-                          v-on:keyup="consistgencyCostAmount" v-on:mouseleave="consistgencyLeave" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="consistgency_cost"
+                          v-on:keyup="consistgencyCostAmount"
+                          v-on:mouseleave="consistgencyLeave"
+                        />
                         <!-- </div> -->
                         <!-- Val: {{this.consistgency_cost | currency}}                                   -->
                       </div>
@@ -492,7 +595,13 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>TOTAL ACTIVITY COST:</strong>
 
-                        <input type="text" class="form-control" v-model="total_cost" min="0" value="0" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="total_cost"
+                          min="0"
+                          value="0"
+                        />
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="total_cost"></vue-numeric>  -->
                         <!-- <input type="number" class="form-control" v-model="total_cost" min="0"  >                                       -->
                       </div>
@@ -504,16 +613,22 @@ input::-webkit-inner-spin-button {
             <div class="col-md-4 jac">
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                  <span class="btn btn-success form-control btn-activity-component" style="cursor: auto !important">JOB
-                    ACTIVITY COMPONENT:</span>
+                  <span
+                    class="btn btn-success form-control btn-activity-component"
+                    style="cursor: auto !important"
+                    >JOB ACTIVITY COMPONENT:</span
+                  >
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="form-group" style="height: 400px;
+                  <div
+                    class="form-group"
+                    style="height: 400px;
                       overflow: scroll;
                       background: aliceblue;
-                    ">
+                    "
+                  >
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -558,14 +673,21 @@ input::-webkit-inner-spin-button {
                 <div class="col-xs-12 col-sm-12 col-md-12">
                   <div class="form-group">
                     <strong>Job Activity Specification:</strong>
-                    <textarea id="project_specification" class="form-control" rows="5"
-                      v-model="project_specification"></textarea>
+                    <textarea id="project_specification"
+                      class="form-control"
+                      rows="5"
+                      v-model="project_specification"
+                    ></textarea>
                   </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                   <div class="form-group">
                     <strong>Component List & Prices:</strong>
-                    <textarea id="component_note" class="form-control" rows="5" v-model="component_note"></textarea>
+                    <textarea id="component_note"
+                      class="form-control"
+                      rows="5"
+                      v-model="component_note"
+                    ></textarea>
                   </div>
                 </div>
               </div>
@@ -582,106 +704,212 @@ input::-webkit-inner-spin-button {
   Fullscreen modal xl down
 </button> -->
               <!-- <span class="btn btn-success" @click="printPDF" >Print / Preview</span> -->
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#modal-fullscreen-xl"
-                @click="printForm">Print Estimate</span>
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#print2"
-                @click="printForm">Print / Est-Comp</span>
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#print2-general"
-                @click="printForm">Project Resource List</span>
-              <span class="btn btn-success btn-open-modal" @click="clearForm">Clear / Reset Form</span>
-              <span class="btn btn-success btn-open-modal" @click="showSaveModal">Save Estimate</span>
-              <span class="btn btn-success btn-open-modal" id="viewestimate" @click="viewEsitmate">View Estimate</span>
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#filterdata"
-                @click="onClickResComponent('Labour')">Labour</span>
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#filterdata"
-                @click="onClickResComponent('Equipment')">Equipment</span>
-              <span class="btn btn-success btn-open-modal" data-toggle="modal" data-target="#filterdata"
-                @click="onClickResComponent('Material')">Material</span>
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#modal-fullscreen-xl"
+                @click="printForm"
+                >Print Estimate</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#print2"
+                @click="printForm"
+                >Print / Est-Comp</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#print2-general"
+                @click="printForm"
+                >Project Resource List</span
+              >
+              <span class="btn btn-success btn-open-modal" @click="clearForm"
+                >Clear / Reset Form</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                @click="showSaveModal"
+                >Save Estimate</span
+              >
+              <span
+                class="btn btn-success btn-open-modal" id="viewestimate"
+                @click="viewEsitmate"
+                >View Estimate</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#filterdata"
+                @click="onClickResComponent('Labour')"
+                >Labour</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#filterdata"
+                @click="onClickResComponent('Equipment')"
+                >Equipment</span
+              >
+              <span
+                class="btn btn-success btn-open-modal"
+                data-toggle="modal"
+                data-target="#filterdata"
+                @click="onClickResComponent('Material')"
+                >Material</span
+              >
 
-              <div class="modal modal-fullscreen-xl printme" id="modal-fullscreen-xl" tabindex="-1" role="dialog"
-                aria-hidden="true">
+              <div
+                class="modal modal-fullscreen-xl printme"
+                id="modal-fullscreen-xl"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body" id="print-this">
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> PROJECT TITLE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input style="border: 1px solid #ccc" v-model="project_title_sum" id="project_title_sum"
-                            type="text" class="form-control-plaintext" />
+                          <input
+                            style="border: 1px solid #ccc"
+                            v-model="project_title_sum"
+                            id="project_title_sum"
+                            type="text"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> ESTIMATE TYPE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="estimate_type_sum"
-                            id="estimate_type_sum" class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="estimate_type_sum"
+                            id="estimate_type_sum"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> COUNTRY </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="country_name" id="country_name"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="country_name"
+                            id="country_name"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> CONTRACTOR </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="contractor" id="contractor"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="contractor"
+                            id="contractor"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> OWNER </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="owner"
-                            class="form-control-plaintext" id="owner" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="owner"
+                            class="form-control-plaintext"
+                            id="owner"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT DESCRIPTION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_description" id="project_description"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_description"
+                            id="project_description"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_description"  class="form-control-plaintext"   value=" NOTE:Project consist of reinforced concrete structures Etc"> -->
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT SPECIFICATION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_specification" id="project_specification"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_specification"
+                            id="project_specification"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_specification"  class="form-control-plaintext description-on"  value=" NOTE:Project specification described how the project to be carried out" > -->
                         </div>
                       </div>
-                      <table class="table table-striped table-bordered" id="print_1" style="background: aliceblue"
-                        v-columns-resizable>
+                      <table
+                        class="table table-striped table-bordered"
+                        id="print_1"
+                        style="background: aliceblue"
+                        v-columns-resizable
+                      >
                         <thead>
                           <tr>
                             <th width="8%">ACTIVITY CODE</th>
@@ -700,7 +928,10 @@ input::-webkit-inner-spin-button {
                           </tr>
                         </thead>
                         <tbody v-if="loadResourceComponent">
-                          <tr v-for="(component, i) in totalCalculation" :key="i">
+                          <tr
+                            v-for="(component, i) in totalCalculation"
+                            :key="i"
+                          >
                             <td>{{ component.activity_code }}</td>
                             <td>{{ component.element_description }}</td>
                             <td>{{ component.job_activity }}</td>
@@ -739,7 +970,7 @@ input::-webkit-inner-spin-button {
                           <tr>
                             <td colspan="10"></td>
 
-                            <td colspan="2">ADDITIONAL/DISCOUNT COST </td>
+                            <td colspan="2">ADDITIONAL/DISCOUNT COST	</td>
                             <td align="right">{{ this.total_addition_sum | currency }}</td>
                           </tr>
                           <tr>
@@ -777,10 +1008,19 @@ input::-webkit-inner-spin-button {
                       </table>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="printCloseFirst()">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        @click="printCloseFirst()"
+                      >
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary" @click="print()">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="print()"
+                      >
                         Print
                       </button>
                     </div>
@@ -788,89 +1028,156 @@ input::-webkit-inner-spin-button {
                 </div>
               </div>
 
-              <div class="modal modal-fullscreen-xl printme" id="print2" tabindex="-1" role="dialog" aria-hidden="true">
+              <div
+                class="modal modal-fullscreen-xl printme"
+                id="print2"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body" id="print-this-two">
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> PROJECT TITLE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input style="border: 1px solid #ccc" v-model="project_title_sum" id="project_title_sum_two"
-                            type="text" class="form-control-plaintext" />
+                          <input
+                            style="border: 1px solid #ccc"
+                            v-model="project_title_sum"
+                            id="project_title_sum_two"
+                            type="text"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> ESTIMATE TYPE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="estimate_type_sum"
-                            id="estimate_type_sum_two" class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="estimate_type_sum"
+                            id="estimate_type_sum_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> COUNTRY </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="country_name" id="country_name_two"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="country_name"
+                            id="country_name_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> CONTRACTOR </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="contractor" id="contractor_two"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="contractor"
+                            id="contractor_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> OWNER </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="owner"
-                            class="form-control-plaintext" id="owner_two" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="owner"
+                            class="form-control-plaintext"
+                            id="owner_two"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT DESCRIPTION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_description" id="project_description_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_description"
+                            id="project_description_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_description"  class="form-control-plaintext"   value=" NOTE:Project consist of reinforced concrete structures Etc"> -->
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT SPECIFICATION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_specification" id="project_specification_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_specification"
+                            id="project_specification_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_specification"  class="form-control-plaintext description-on"  value=" NOTE:Project specification described how the project to be carried out" > -->
                         </div>
                       </div>
-                      <table class="table table-striped table-bordered" id="print_2" style="background: aliceblue"
-                        v-columns-resizable>
+                      <table
+                        class="table table-striped table-bordered"
+                        id="print_2"
+                        style="background: aliceblue"
+                        v-columns-resizable
+                      >
                         <thead>
                           <tr>
                             <th width="8%">ACTIVITY CODE</th>
@@ -889,14 +1196,20 @@ input::-webkit-inner-spin-button {
                           </tr>
                         </thead>
                         <tbody v-if="loadResourceComponent">
-                          <tr v-for="(component, i) in totalCalculation" :key="i">
+                          <tr
+                            v-for="(component, i) in totalCalculation"
+                            :key="i"
+                          >
                             <td>{{ component.activity_code }}</td>
                             <td>{{ component.element_description }}</td>
                             <td>{{ component.job_activity }}</td>
                             <td>
                               {{ component.quantity }}
-                              <table class="table table-striped table-bordered" style="background: aliceblue"
-                                v-columns-resizable>
+                              <table
+                                class="table table-striped table-bordered"
+                                style="background: aliceblue"
+                                v-columns-resizable
+                              >
                                 <thead>
                                   <tr>
                                     <th colspan="6" align="center">
@@ -914,9 +1227,12 @@ input::-webkit-inner-spin-button {
                                 </thead>
 
                                 <tbody>
-                                  <tr v-for="(
+                                  <tr
+                                    v-for="(
                                       acd, i
-                                    ) in component.activity_detail" :key="i">
+                                    ) in component.activity_detail"
+                                    :key="i"
+                                  >
                                     <td>{{ acd.key }}</td>
                                     <td>{{ acd.resource_type }}</td>
                                     <td>{{ acd.quantity }}</td>
@@ -924,7 +1240,7 @@ input::-webkit-inner-spin-button {
                                     <td align="right">
                                       {{ acd.rate | currency }}
                                     </td>
-                                    <td align="right">{{ acd.amount | currency }}</td>
+                                    <td align="right">{{ acd.amount | currency }}</td>                                    
                                   </tr>
                                   <tr>
                                     <td></td>
@@ -1009,10 +1325,19 @@ input::-webkit-inner-spin-button {
                       </table>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="printCloseSecond()">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        @click="printCloseSecond()"
+                      >
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary" @click="print2()">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="print2()"
+                      >
                         Print
                       </button>
                     </div>
@@ -1020,90 +1345,156 @@ input::-webkit-inner-spin-button {
                 </div>
               </div>
 
-              <div class="modal modal-fullscreen-xl printme" id="print2-general" tabindex="-1" role="dialog"
-                aria-hidden="true">
+              <div
+                class="modal modal-fullscreen-xl printme"
+                id="print2-general"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body" id="print-this-two">
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> PROJECT TITLE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input style="border: 1px solid #ccc" v-model="project_title_sum" id="project_title_sum_two"
-                            type="text" class="form-control-plaintext" />
+                          <input
+                            style="border: 1px solid #ccc"
+                            v-model="project_title_sum"
+                            id="project_title_sum_two"
+                            type="text"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> ESTIMATE TYPE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="estimate_type_sum"
-                            id="estimate_type_sum_two" class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="estimate_type_sum"
+                            id="estimate_type_sum_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> COUNTRY </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="country_name" id="country_name_two"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="country_name"
+                            id="country_name_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> CONTRACTOR </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="contractor" id="contractor_two"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="contractor"
+                            id="contractor_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> OWNER </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="owner"
-                            class="form-control-plaintext" id="owner_two" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="owner"
+                            class="form-control-plaintext"
+                            id="owner_two"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT DESCRIPTION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_description" id="project_description_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_description"
+                            id="project_description_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_description"  class="form-control-plaintext"   value=" NOTE:Project consist of reinforced concrete structures Etc"> -->
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT SPECIFICATION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_specification" id="project_specification_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_specification"
+                            id="project_specification_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_specification"  class="form-control-plaintext description-on"  value=" NOTE:Project specification described how the project to be carried out" > -->
                         </div>
                       </div>
-                      <table class="table table-striped table-bordered" id="print_2" style="background: aliceblue"
-                        v-columns-resizable>
+                      <table
+                        class="table table-striped table-bordered"
+                        id="print_2"
+                        style="background: aliceblue"
+                        v-columns-resizable
+                      >
                         <thead>
                           <tr>
                             <th width="8%">ITEM #</th>
@@ -1114,8 +1505,11 @@ input::-webkit-inner-spin-button {
                           </tr>
                         </thead>
                         <tbody v-if="loadResourceComponent">
-                          <tr v-for="(component, i) in groupComponents()" :key="i">
-                            <td>{{ i + 1 }}</td>
+                          <tr
+                            v-for="(component, i) in groupComponents()"
+                            :key="i"
+                          >
+                            <td>{{ i+1 }}</td>
                             <td>{{ component.resource_type }}</td>
                             <td>{{ component.category }}</td>
                             <td>{{ component.quantity }}</td>
@@ -1126,10 +1520,19 @@ input::-webkit-inner-spin-button {
                       </table>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="printCloseSecond()">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        @click="printCloseSecond()"
+                      >
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary" @click="print2()">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="print2()"
+                      >
                         Print
                       </button>
                     </div>
@@ -1137,91 +1540,157 @@ input::-webkit-inner-spin-button {
                 </div>
               </div>
 
-              <div class="modal modal-fullscreen-xl printme" id="filterdata" tabindex="-1" role="dialog"
-                aria-hidden="true">
+                <div
+                class="modal modal-fullscreen-xl printme"
+                id="filterdata"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+              >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body" id="print-this-three">
-
+                        
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> PROJECT TITLE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input style="border: 1px solid #ccc" v-model="project_title_sum"
-                            id="p3_project_title_sum_two" type="text" class="form-control-plaintext" />
+                          <input
+                            style="border: 1px solid #ccc"
+                            v-model="project_title_sum"
+                            id="p3_project_title_sum_two"
+                            type="text"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> ESTIMATE TYPE </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="estimate_type_sum"
-                            id="p3_estimate_type_sum_two" class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="estimate_type_sum"
+                            id="p3_estimate_type_sum_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> COUNTRY </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="country_name"
-                            id="p3_country_name_two" class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="country_name"
+                            id="p3_country_name_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> CONTRACTOR </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="contractor" id="p3_contractor_two"
-                            class="form-control-plaintext" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="contractor"
+                            id="p3_contractor_two"
+                            class="form-control-plaintext"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000"> OWNER </strong>
                         </label>
                         <div class="col-sm-10">
-                          <input type="text" style="border: 1px solid #ccc" v-model="owner"
-                            class="form-control-plaintext" id="p3_owner_two" />
+                          <input
+                            type="text"
+                            style="border: 1px solid #ccc"
+                            v-model="owner"
+                            class="form-control-plaintext"
+                            id="p3_owner_two"
+                          />
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT DESCRIPTION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_description" id="p3_project_description_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_description"
+                            id="p3_project_description_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_description"  class="form-control-plaintext"   value=" NOTE:Project consist of reinforced concrete structures Etc"> -->
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">
+                        <label
+                          for="staticEmail"
+                          class="col-sm-2 col-form-label"
+                        >
                           <strong style="color: 000000">
                             PROJECT SPECIFICATION
                           </strong>
                         </label>
                         <div class="col-sm-10">
-                          <textarea v-model="project_specification" id="p3_project_specification_two"
-                            class="form-control"></textarea>
+                          <textarea
+                            v-model="project_specification"
+                            id="p3_project_specification_two"
+                            class="form-control"
+                          ></textarea>
 
                           <!-- <input type="text"  style="border:1px solid #ccc;height:200px"  v-model="project_specification"  class="form-control-plaintext description-on"  value=" NOTE:Project specification described how the project to be carried out" > -->
                         </div>
                       </div>
-                      <table class="table table-striped table-bordered" id="print_3" style="background: aliceblue"
-                        v-columns-resizable>
+                      <table
+                        class="table table-striped table-bordered"
+                        id="print_3"
+                        style="background: aliceblue"
+                        v-columns-resizable
+                      >
                         <thead>
                           <tr>
                             <th>ACTIVITY CODE</th>
@@ -1240,14 +1709,20 @@ input::-webkit-inner-spin-button {
                           </tr>
                         </thead>
                         <tbody v-if="loadResourceComponent">
-                          <tr v-for="(rescomponent, i) in rescomponents" :key="i">
+                          <tr
+                            v-for="(rescomponent, i) in rescomponents"
+                            :key="i"
+                          >
                             <td>{{ rescomponent.activity_code }}</td>
                             <td>{{ rescomponent.element_description }}</td>
                             <td>{{ rescomponent.job_activity }}</td>
                             <td>
                               {{ rescomponent.quantity }}
-                              <table class="table table-striped table-bordered" style="background: aliceblue"
-                                v-columns-resizable>
+                              <table
+                                class="table table-striped table-bordered"
+                                style="background: aliceblue"
+                                v-columns-resizable
+                              >
                                 <thead>
                                   <tr>
                                     <th colspan="6" align="center">
@@ -1265,17 +1740,20 @@ input::-webkit-inner-spin-button {
                                 </thead>
 
                                 <tbody>
-                                  <tr v-for="(
+                                  <tr
+                                    v-for="(
                                       acd, i
-                                    ) in rescomponent.activity_details" :key="i">
-                                    <td>{{ i + 1 }}</td>
+                                    ) in rescomponent.activity_details"
+                                    :key="i"
+                                  >
+                                    <td>{{ i+1 }}</td>
                                     <td>{{ acd.resource_type }}</td>
                                     <td>{{ acd.quantity }}</td>
                                     <td>{{ acd.unit }}</td>
                                     <td align="right">
                                       {{ acd.rate | currency }}
                                     </td>
-                                    <td align="right">{{ acd.amount | currency }}</td>
+                                    <td align="right">{{ acd.amount | currency }}</td>                                    
                                   </tr>
                                   <tr>
                                     <td></td>
@@ -1290,37 +1768,28 @@ input::-webkit-inner-spin-button {
                             </td>
                             <td>{{ rescomponent.unit }}</td>
                             <td>{{ (rescomponent.per_unit).toFixed(2) | currency }}</td>
-
+                            
                             <!--<td v-if="lab_category">{{ (parseFloat(rescomponent.lab)/parseInt(rescomponent.quantity)) | currency }}</td>
                             <td v-if="eqp_category">{{ (parseFloat(rescomponent.eqp)/parseInt(rescomponent.quantity)) | currency }}</td>
                             <td v-if="mat_category">{{ (parseFloat(rescomponent.mat)/parseInt(rescomponent.quantity)) | currency }}</td>-->
-
+                            
                             <td v-if="lab_category">{{ rescomponent.lab | currency }}</td>
                             <td v-if="eqp_category">{{ rescomponent.eqp | currency }}</td>
                             <td v-if="mat_category">{{ rescomponent.mat | currency }}</td>
                             <td>{{ rescomponent.addcost | currency }}</td>
 
-                            <td v-if="lab_category">{{ (rescomponent.lab * overhead_percentage) / 100 | currency }}</td>
-                            <td v-if="eqp_category">{{ (rescomponent.eqp * overhead_percentage) / 100 | currency }}</td>
-                            <td v-if="mat_category">{{ (rescomponent.mat * overhead_percentage) / 100 | currency }}</td>
-
-                            <td v-if="lab_category">{{ (rescomponent.lab * consistgency_percentage) / 100 | currency }}
-                            </td>
-                            <td v-if="eqp_category">{{ (rescomponent.eqp * consistgency_percentage) / 100 | currency }}
-                            </td>
-                            <td v-if="mat_category">{{ (rescomponent.mat * consistgency_percentage) / 100 | currency }}
-                            </td>
-
-                            <td align="right" v-if="lab_category">{{ rescomponent.lab + ((rescomponent.lab *
-                              overhead_percentage) / 100) + ((rescomponent.lab * consistgency_percentage) / 100) +
-                              ((rescomponent.lab * preliminary_percentage)/100) | currency }}</td>
-                            <td align="right" v-if="eqp_category">{{ rescomponent.eqp + ((rescomponent.eqp *
-                              overhead_percentage) / 100) + ((rescomponent.eqp * consistgency_percentage) / 100) +
-                              ((rescomponent.eqp * preliminary_percentage)/100) | currency }}</td>
-                            <td align="right" v-if="mat_category">{{ rescomponent.mat + ((rescomponent.mat *
-                              overhead_percentage) / 100) + ((rescomponent.mat * consistgency_percentage) / 100) +
-                              ((rescomponent.mat * preliminary_percentage)/100) | currency }}</td>
-
+                            <td v-if="lab_category">{{ (rescomponent.lab * overhead_percentage)/100 | currency }}</td>
+                            <td v-if="eqp_category">{{ (rescomponent.eqp * overhead_percentage)/100 | currency }}</td>
+                            <td v-if="mat_category">{{ (rescomponent.mat * overhead_percentage)/100 | currency }}</td>
+                            
+                            <td v-if="lab_category">{{ (rescomponent.lab * consistgency_percentage)/100 | currency }}</td>
+                            <td v-if="eqp_category">{{ (rescomponent.eqp * consistgency_percentage)/100 | currency }}</td>
+                            <td v-if="mat_category">{{ (rescomponent.mat * consistgency_percentage)/100 | currency }}</td>
+                            
+                            <td align="right" v-if="lab_category">{{ rescomponent.lab + ((rescomponent.lab * overhead_percentage)/100) + ((rescomponent.lab * consistgency_percentage)/100) + ((rescomponent.lab * preliminary_percentage)/100) | currency }}</td>
+                            <td align="right" v-if="eqp_category">{{ rescomponent.eqp + ((rescomponent.eqp * overhead_percentage)/100) + ((rescomponent.eqp * consistgency_percentage)/100) + ((rescomponent.eqp * preliminary_percentage)/100) | currency }}</td>
+                            <td align="right" v-if="mat_category">{{ rescomponent.mat + ((rescomponent.mat * overhead_percentage)/100) + ((rescomponent.mat * consistgency_percentage)/100) + ((rescomponent.mat * preliminary_percentage)/100) | currency }}</td>
+                            
                           </tr>
 
                           <tr>
@@ -1328,7 +1797,7 @@ input::-webkit-inner-spin-button {
                             <td colspan="3">SUB-TOTAL-COST</td>
                             <td align="right">{{ this.rescomp_sub_total | currency }}</td>
                           </tr>
-                          <tr v-if="lab_category">
+                          <tr v-if="lab_category"> 
                             <td colspan="7"></td>
                             <td colspan="3">TOTAL-LABOUR-COST</td>
                             <td align="right">{{ this.lab_category_sum | currency }}</td>
@@ -1384,10 +1853,19 @@ input::-webkit-inner-spin-button {
                       </table>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="printCloseSecond()">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        @click="printCloseSecond()"
+                      >
                         Close
                       </button>
-                      <button type="button" class="btn btn-primary" @click="print3()">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="print3()"
+                      >
                         Print
                       </button>
                     </div>
@@ -1411,11 +1889,19 @@ input::-webkit-inner-spin-button {
           <br />
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
+                <form  method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="pdf_file" accept=".pdf" required>
+                    <button type="submit">Upload PDF</button>
+                </form>
             </div>
           </div>
           <div class="row mt-2">
             <div class="col-xs-12 col-sm-12 col-md-12">
-              <table class="table table-striped table-bordered" style="background: aliceblue">
+              <table
+                class="table table-striped table-bordered"
+                style="background: aliceblue"
+              >
                 <thead>
                   <tr>
                     <th width="30%">COMPONENT LIST</th>
@@ -1437,9 +1923,17 @@ input::-webkit-inner-spin-button {
                           <strong>Preliminaries / General Requirements:</strong>
                         </div>
                         <div class="col-md-8">
-                          <select class="form-control" v-model="prelim_comp" id="preliminries">
+                          <select
+                            class="form-control"
+                            v-model="prelim_comp"
+                            id="preliminries"
+                          >
                             <option value=""></option>
-                            <option v-for="(cat, i) in preliminries" :value="cat.id" :key="i">
+                            <option
+                              v-for="(cat, i) in preliminries"
+                              :value="cat.id"
+                              :key="i"
+                            >
                               {{ cat.resource_type }}
                             </option>
                           </select>
@@ -1447,12 +1941,18 @@ input::-webkit-inner-spin-button {
                       </div>
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="addPreliminries">Add</span>
+                      <span class="btn btn-success" @click="addPreliminries"
+                        >Add</span
+                      >
                     </td>
                     <td></td>
                     <td></td>
                     <td>
-                      <input type="number" v-model="preliminries_quantity" v-on:keyup="preliminriesCost" />
+                      <input
+                        type="number"
+                        v-model="preliminries_quantity"
+                        v-on:keyup="preliminriesCost"
+                      />
                     </td>
 
                     <td>
@@ -1462,7 +1962,11 @@ input::-webkit-inner-spin-button {
                     <td>
                       <span v-if="preliminries_price">
                         <!-- $ {{ preliminries_price }} -->
-                        <input type="number" v-model="preliminries_price" v-on:keyup="preliminriesCost" />
+                        <input
+                          type="number"
+                          v-model="preliminries_price"
+                          v-on:keyup="preliminriesCost"
+                        />
                         <!-- {{ preliminries_price | currency }} -->
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="preliminries_price"></vue-numeric> -->
                       </span>
@@ -1482,9 +1986,17 @@ input::-webkit-inner-spin-button {
                           <strong>Labour:</strong>
                         </div>
                         <div class="col-md-8">
-                          <select class="form-control" v-model="lab_comp" id="labour">
+                          <select
+                            class="form-control"
+                            v-model="lab_comp"
+                            id="labour"
+                          >
                             <option value=""></option>
-                            <option v-for="(cat, i) in labour" :value="cat.id" :key="i">
+                            <option
+                              v-for="(cat, i) in labour"
+                              :value="cat.id"
+                              :key="i"
+                            >
                               {{ cat.resource_type }}
                             </option>
                           </select>
@@ -1492,16 +2004,26 @@ input::-webkit-inner-spin-button {
                       </div>
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="addLabour">Add</span>
+                      <span class="btn btn-success" @click="addLabour"
+                        >Add</span
+                      >
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="overTime()">1.5X</span>
+                      <span class="btn btn-success" @click="overTime()"
+                        >1.5X</span
+                      >
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="doubleTime()">2X</span>
+                      <span class="btn btn-success" @click="doubleTime()"
+                        >2X</span
+                      >
                     </td>
                     <td>
-                      <input type="number" v-model="labour_quantity" v-on:keyup="labourCost" />
+                      <input
+                        type="number"
+                        v-model="labour_quantity"
+                        v-on:keyup="labourCost"
+                      />
                     </td>
 
                     <td>
@@ -1511,7 +2033,11 @@ input::-webkit-inner-spin-button {
                     <td>
                       <span v-if="labour_price">
                         <!-- {{ labour_price | currency }} -->
-                        <input type="number" v-model="labour_price" v-on:keyup="labourCost" />
+                        <input
+                          type="number"
+                          v-model="labour_price"
+                          v-on:keyup="labourCost"
+                        />
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="labour_price"></vue-numeric> -->
 
                         <!-- $ {{ labour_price }} -->
@@ -1532,9 +2058,17 @@ input::-webkit-inner-spin-button {
                           <strong>Equipment:</strong>
                         </div>
                         <div class="col-md-8">
-                          <select class="form-control" v-model="equipment_comp" id="equipment">
+                          <select
+                            class="form-control"
+                            v-model="equipment_comp"
+                            id="equipment"
+                          >
                             <option value=""></option>
-                            <option v-for="(cat, i) in equipment" :value="cat.id" :key="i">
+                            <option
+                              v-for="(cat, i) in equipment"
+                              :value="cat.id"
+                              :key="i"
+                            >
                               {{ cat.resource_type }}
                             </option>
                           </select>
@@ -1542,12 +2076,18 @@ input::-webkit-inner-spin-button {
                       </div>
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="addEquipment">Add</span>
+                      <span class="btn btn-success" @click="addEquipment"
+                        >Add</span
+                      >
                     </td>
                     <td></td>
                     <td></td>
                     <td>
-                      <input type="number" v-model="equipment_quantity" v-on:keyup="equipmentCost" />
+                      <input
+                        type="number"
+                        v-model="equipment_quantity"
+                        v-on:keyup="equipmentCost"
+                      />
                     </td>
 
                     <td>
@@ -1557,7 +2097,11 @@ input::-webkit-inner-spin-button {
                     <td>
                       <span v-if="equipment_price">
                         <!-- {{ equipment_price | currency }} -->
-                        <input type="number" v-model="equipment_price" v-on:keyup="equipmentCost" />
+                        <input
+                          type="number"
+                          v-model="equipment_price"
+                          v-on:keyup="equipmentCost"
+                        />
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="equipment_price"></vue-numeric> -->
 
                         <!-- ${{ equipment_price }} -->
@@ -1578,9 +2122,17 @@ input::-webkit-inner-spin-button {
                           <strong>Material:</strong>
                         </div>
                         <div class="col-md-8">
-                          <select class="form-control" v-model="material_comp" id="material">
+                          <select
+                            class="form-control"
+                            v-model="material_comp"
+                            id="material"
+                          >
                             <option value="0.00" selected></option>
-                            <option v-for="(cat, i) in material" :value="cat.id" :key="i">
+                            <option
+                              v-for="(cat, i) in material"
+                              :value="cat.id"
+                              :key="i"
+                            >
                               {{ cat.resource_type }}
                             </option>
                           </select>
@@ -1588,12 +2140,18 @@ input::-webkit-inner-spin-button {
                       </div>
                     </td>
                     <td>
-                      <span class="btn btn-success" @click="addMaterial">Add</span>
+                      <span class="btn btn-success" @click="addMaterial"
+                        >Add</span
+                      >
                     </td>
                     <td></td>
                     <td></td>
                     <td>
-                      <input type="number" v-model="material_quantity" v-on:keyup="materialCost" />
+                      <input
+                        type="number"
+                        v-model="material_quantity"
+                        v-on:keyup="materialCost"
+                      />
                     </td>
 
                     <td>
@@ -1603,7 +2161,11 @@ input::-webkit-inner-spin-button {
                     <td>
                       <span v-if="material_price">
                         <!-- {{ material_price | currency }} -->
-                        <input type="number" v-model="material_price" v-on:keyup="materialCost" />
+                        <input
+                          type="number"
+                          v-model="material_price"
+                          v-on:keyup="materialCost"
+                        />
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="material_price"></vue-numeric> -->
 
                         <!-- $ {{ material_price  }} -->
@@ -1622,19 +2184,20 @@ input::-webkit-inner-spin-button {
               </table>
             </div>
             <div v-if="!job_activity_section" class="col-xs-12 col-sm-12 col-md-12">
-              <a href="javascript:;" id="view-grid-btn" v-el:my-btn @click="viewGrid(true)" class="btn btn-info mb-3"><i
-                  class="fa fa-eye"></i> View Grid</a>
+              <a href="javascript:;" id="view-grid-btn" v-el:my-btn @click="viewGrid(true)" class="btn btn-info mb-3"><i class="fa fa-eye"></i> View Grid</a>
             </div>
             <div v-if="job_activity_section" class="col-xs-12 col-sm-12 col-md-12">
               <div class="table-responsive">
-                <table class="table table-striped table-bordered" style="background: aliceblue" v-columns-resizable>
+                <table
+                  class="table table-striped table-bordered"
+                  style="background: aliceblue"
+                  v-columns-resizable
+                  >
                   <thead>
                     <tr>
                       <th colspan="143">
-                        <a href="javascript:;" @click="jobActivityWindow" class="btn btn-primary">Open as Separate
-                          Window</a>
-                        <a href="javascript:;" @click="jobActivityWindow" class="btn btn-primary">UPLOAD AUTOCAD PDF
-                          DRAWINGS</a>
+                          <a href="javascript:;" @click="jobActivityWindow" class="btn btn-primary">Open as Separate Window</a>
+                          <a href="javascript:;" @click="jobActivityWindow" class="btn btn-primary">UPLOAD AUTOCAD PDF DRAWINGS</a>
                       </th>
                     </tr>
                     <tr>
@@ -1650,34 +2213,54 @@ input::-webkit-inner-spin-button {
                       <th>ADD/DISC</th>
                       <th>OH&P</th>
                       <th>CONT</th>
-                      <th>AMOUNT
+                      <th>AMOUNT 
                       </th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody v-if="loadResourceComponent" class="row_position detail-form-list">
-                    <tr v-for="(activity, i) in jobActivitiesList" :key="i" :id="i + '-row'"
-                      :data="activity.activity_code" :data-index="i">
+                    <tr
+                      v-for="(activity, i) in jobActivitiesList"
+                      :key="i"
+                      :id="i+'-row'"
+                      :data="activity.activity_code"
+                      :data-index="i"
+                    >
                       <td>
                         <span :id="'activity_code_label' + i">{{
                           activity.activity_code
                         }}</span>
-                        <input class="form-control activity_code" type="text" :id="'activity_code_' + i"
-                          style="display: none" :value="activity.activity_code" />
+                        <input
+                          class="form-control activity_code"
+                          type="text"
+                          :id="'activity_code_' + i"
+                          style="display: none"
+                          :value="activity.activity_code"
+                        />
                       </td>
                       <td>
                         <span :id="'element_description_label' + i">{{
                           activity.element_description
                         }}</span>
-                        <input class="form-control element_description" type="text" :id="'element_description_' + i"
-                          style="display: none" :value="activity.element_description" />
+                        <input
+                          class="form-control element_description"
+                          type="text"
+                          :id="'element_description_' + i"
+                          style="display: none"
+                          :value="activity.element_description"
+                        />
                       </td>
                       <td>
                         <span :id="'job_activity_label' + i">{{
                           activity.job_activity
                         }}</span>
-                        <input class="form-control job_activity" type="text" :id="'job_activity_' + i"
-                          style="display: none;width:450px" :value="activity.job_activity" />
+                        <input
+                          class="form-control job_activity"
+                          type="text"
+                          :id="'job_activity_' + i"
+                          style="display: none;width:450px"
+                          :value="activity.job_activity"
+                        />
                       </td>
                       <td>{{ activity.quantity }}</td>
                       <td>{{ activity.unit }}</td>
@@ -1691,15 +2274,37 @@ input::-webkit-inner-spin-button {
                       <td align="right">{{ activity.amount | currency }}</td>
                       <td>
                         <div class="btn-group-list">
-                          <span class="btn btn-success editbtn" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
-                          <span class="btn btn-success removebtn" :id="'delete-btn-' + i"
-                            @click="deleteFromSum(i)">Remove</span>
-                          <span class="btn btn-success" :id="'up-btn-' + i"
-                            @click="up(activity.activity_code, i)">Up</span>
-                          <span class="btn btn-success" :id="'down-btn-' + i"
-                            @click="down(activity.activity_code, i)">Down</span>
-                          <span class="btn btn-success donebtn" :id="'done-btn-' + i" @click="doneUpdate(i)"
-                            style="display: none">Done</span>
+                          <span
+                            class="btn btn-success editbtn"
+                            :id="'edit-btn-' + i"
+                            @click="edit(i)"
+                            >Edit</span
+                          >
+                          <span
+                            class="btn btn-success removebtn"
+                            :id="'delete-btn-' + i"
+                            @click="deleteFromSum(i)"
+                            >Remove</span
+                          >
+                          <span
+                            class="btn btn-success"
+                            :id="'up-btn-' + i"
+                            @click="up(activity.activity_code,i)"
+                            >Up</span
+                          >
+                          <span
+                            class="btn btn-success"
+                            :id="'down-btn-' + i"
+                            @click="down(activity.activity_code,i)"
+                            >Down</span
+                          >
+                          <span
+                            class="btn btn-success donebtn"
+                            :id="'done-btn-' + i"
+                            @click="doneUpdate(i)"
+                            style="display: none"
+                            >Done</span
+                          >
                         </div>
                       </td>
                     </tr>
@@ -1720,7 +2325,12 @@ input::-webkit-inner-spin-button {
         </div>
       </div>
     </div>
-    <modal name="save-form" height="auto" :clickToClose="false" :scrollable="true">
+    <modal
+      name="save-form"
+      height="auto"
+      :clickToClose="false"
+      :scrollable="true"
+    >
       <div class="modal-content">
         <div class="modal-header" style="background-color: #28a745">
           <h4 style="color: white">Save Form</h4>
@@ -1745,17 +2355,29 @@ input::-webkit-inner-spin-button {
         </div>
         <div class="modal-body">
           <span @click="saveForm" class="btn btn-info pull-left">Save</span>
-          <span @click="hideSaveModal" class="btn btn-danger pull-right">Close</span>
+          <span @click="hideSaveModal" class="btn btn-danger pull-right"
+            >Close</span
+          >
         </div>
       </div>
     </modal>
 
-    <div class="modal modal-fullscreen-xl printme" id="modal-jobactivitiylist" tabindex="-1" role="dialog"
-      aria-hidden="true">
+    <div
+      class="modal modal-fullscreen-xl printme"
+      id="modal-jobactivitiylist"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1765,8 +2387,13 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> PROJECT TITLE : </strong>
               </label>
               <div class="col-sm-10">
-                <input style="border: 1px solid #ccc" v-model="project_title" type="text" class="form-control-plaintext"
-                  readonly />
+                <input
+                  style="border: 1px solid #ccc"
+                  v-model="project_title"
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -1774,8 +2401,13 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> ESTIMATE TYPE </strong>
               </label>
               <div class="col-sm-10">
-                <input type="text" style="border: 1px solid #ccc" v-model="estimate_type" class="form-control-plaintext"
-                  readonly />
+                <input
+                  type="text"
+                  style="border: 1px solid #ccc"
+                  v-model="estimate_type"
+                  class="form-control-plaintext"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -1783,8 +2415,13 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> COUNTRY </strong>
               </label>
               <div class="col-sm-10">
-                <input type="text" style="border: 1px solid #ccc" v-model="country_job" class="form-control-plaintext"
-                  readonly />
+                <input
+                  type="text"
+                  style="border: 1px solid #ccc"
+                  v-model="country_job"
+                  class="form-control-plaintext"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -1792,8 +2429,13 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> CONTRACTOR </strong>
               </label>
               <div class="col-sm-10">
-                <input type="text" style="border: 1px solid #ccc" v-model="contractor" class="form-control-plaintext"
-                  readonly />
+                <input
+                  type="text"
+                  style="border: 1px solid #ccc"
+                  v-model="contractor"
+                  class="form-control-plaintext"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -1801,8 +2443,13 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> OWNER </strong>
               </label>
               <div class="col-sm-10">
-                <input type="text" style="border: 1px solid #ccc" v-model="owner" class="form-control-plaintext"
-                  readonly />
+                <input
+                  type="text"
+                  style="border: 1px solid #ccc"
+                  v-model="owner"
+                  class="form-control-plaintext"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -1810,7 +2457,11 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> PROJECT DESCRIPTION </strong>
               </label>
               <div class="col-sm-10">
-                <textarea v-model="project_description" id="project_description" class="form-control"></textarea>
+                <textarea
+                  v-model="project_description"
+                  id="project_description"
+                  class="form-control"
+                ></textarea>
               </div>
             </div>
             <div class="form-group row">
@@ -1818,12 +2469,20 @@ input::-webkit-inner-spin-button {
                 <strong style="color: 000000"> PROJECT SPECIFICATION </strong>
               </label>
               <div class="col-sm-10">
-                <textarea v-model="project_specification" id="project_specification" class="form-control"></textarea>
+                <textarea
+                  v-model="project_specification"
+                  id="project_specification"
+                  class="form-control"
+                ></textarea>
               </div>
             </div>
             <div class="row mt-2">
               <div class="col-xs-12 col-sm-12 col-md-12" id="activity-section">
-                <table class="table table-striped table-bordered" style="background: aliceblue" v-columns-resizable>
+                <table
+                  class="table table-striped table-bordered"
+                  style="background: aliceblue"
+                  v-columns-resizable
+                >
                   <thead>
                     <tr>
                       <th>ACTIVITY CODE</th>
@@ -1842,26 +2501,47 @@ input::-webkit-inner-spin-button {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody v-if="loadResourceComponent" class="modal_row_position">
-                    <tr v-for="(component, i) in totalCalculation" :key="i" :id="component.activity_code">
+                  <tbody
+                    v-if="loadResourceComponent"
+                    class="modal_row_position"
+                  >
+                    <tr
+                      v-for="(component, i) in totalCalculation"
+                      :key="i"
+                      :id="component.activity_code"
+                    >
                       <td>
                         <span :id="'activity_code_label' + i">{{
                           component.activity_code
                         }}</span>
-                        <input class="form-control" type="text" :id="'activity_code_' + i" style="display: none" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          :id="'activity_code_' + i"
+                          style="display: none"
+                        />
                       </td>
                       <td>
                         <span :id="'element_description_label' + i">{{
                           component.element_description
                         }}</span>
-                        <input class="form-control" type="text" :id="'element_description_' + i"
-                          style="display: none" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          :id="'element_description_' + i"
+                          style="display: none"
+                        />
                       </td>
                       <td>
                         <span :id="'job_activity_label' + i">{{
                           component.job_activity
                         }}</span>
-                        <input class="form-control" type="text" :id="'job_activity_' + i" style="display: none" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          :id="'job_activity_' + i"
+                          style="display: none"
+                        />
                       </td>
                       <td>{{ component.quantity }}</td>
                       <td>{{ component.unit }}</td>
@@ -1874,15 +2554,38 @@ input::-webkit-inner-spin-button {
                       <td>{{ component.rate | currency }}</td>
                       <td>{{ component.amount | currency }}</td>
                       <td>
-                        <div class="btn-group-list">
-                          <span class="btn btn-success" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
-                          <span class="btn btn-success" :id="'delete-btn-' + i" @click="deleteFromSum(i)">Remove</span>
-                          <span class="btn btn-success" :id="'up-btn-' + i"
-                            @click="up(component.activity_code, i)">Up</span>
-                          <span class="btn btn-success" :id="'down-btn-' + i"
-                            @click="down(component.activity_code, i)">Down</span>
-                          <span class="btn btn-success" :id="'done-btn-' + i" @click="doneUpdate(i)"
-                            style="display: none">Done</span>
+                       <div class="btn-group-list">
+                        <span
+                          class="btn btn-success"
+                          :id="'edit-btn-' + i"
+                          @click="edit(i)"
+                          >Edit</span
+                        >
+                        <span
+                          class="btn btn-success"
+                          :id="'delete-btn-' + i"
+                          @click="deleteFromSum(i)"
+                          >Remove</span
+                        >
+                        <span
+                          class="btn btn-success"
+                          :id="'up-btn-' + i"
+                          @click="up(component.activity_code,i)"
+                          >Up</span
+                        >
+                        <span
+                          class="btn btn-success"
+                          :id="'down-btn-' + i"
+                          @click="down(component.activity_code,i)"
+                          >Down</span
+                        >
+                        <span
+                          class="btn btn-success"
+                          :id="'done-btn-' + i"
+                          @click="doneUpdate(i)"
+                          style="display: none"
+                          >Done</span
+                        >
                         </div>
                       </td>
                     </tr>
@@ -1899,7 +2602,12 @@ input::-webkit-inner-spin-button {
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="printCloseFirst()">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              @click="printCloseFirst()"
+            >
               Close
             </button>
           </div>
@@ -1948,7 +2656,7 @@ export default {
   data() {
     return {
       loadResourceComponent: false,
-      mat_category: false,
+      mat_category:false,
       project_title: "",
       estimate_type: "",
       location: "",
@@ -1966,6 +2674,7 @@ export default {
       element_code: "",
       activity_code: "",
       project_description: "",
+      activity_description: "",
       imperial_rate: 0,
       imperial_rate_collect: 0,
       imperial_unit: 0,
@@ -2074,23 +2783,23 @@ export default {
       mat_catehory_sum: 0,
       rescomp_sub_total: 0,
       rescomp_total: 0,
-      trackActivity: 0,
-      job_activity_section: true,
-      timestamp: Math.floor(Math.random() * 100000000),
+      trackActivity:0,
+      job_activity_section:true,
+      timestamp:Math.floor(Math.random() * 100000000),
     };
   },
   props: ["total_labour_cost", "totalCalculation1"],
 
   computed: {},
   mounted() {
-    sessionStorage.setItem("startTrack", 0);
-
+    sessionStorage.setItem("startTrack",0);
+    
     const vm = this;
     $("#select2").on("select2:select", function (e) {
       var job_activity_data = e.params.data;
       vm.activity_description = job_activity_data.id;
       vm.getActivity();
-      vm.getVertexResults();
+      //vm.getVertexResults(); updated by Ming
     });
     $("#preliminries").on("select2:select", function (e) {
       vm.prelim_comp = e.params.data.id;
@@ -2115,14 +2824,14 @@ export default {
     // this.$root.$on("detail-estimate-form", () => {
     //   // this.trackJobActivity();
 
-
+      
     //   // let d = new Date();
     //   // d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
     //   // let expires = "expires=" + d.toUTCString();
     //   // document.cookie = "jobActivities=CloseTestCookie;" + expires + ";path=/";
 
     //   window.close();
-
+     
     //   // this.totalCalculation = [];
 
     //   // window.close();
@@ -2158,33 +2867,38 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-      var project_description = 'Project Discription of ' + _this.active.description;
+      var project_description = 'Project Discription of ' + _this.job_activity;
+      console.log("Project Description================>", project_description);
       axios
         .get("/predict?text=" + project_description)
         .then(function (response) {
+          console.log("vertex result================>", response.data);
           _this.project_description = response.data.candidates.content.parts.text;
 
-          //   _this.descriptions = response.data.data.descriptions;
+        //   _this.descriptions = response.data.data.descriptions;
           _this.$Progress.finish();
           _this.loading = false;
         });
     },
     getActivity: function () {
       var _this = this;
-      if (_this.activity_description == '') {
+      if(_this.activity_description == ''){
         return false;
       }
       _this.$Progress.start();
       _this.loading = true;
-
+      
       axios
         .get("/job_activities/" + _this.activity_description)
         .then(function (response) {
+          console.log("Activity respponse================>", response.data.data);
           _this.job_activity = response.data.data.description;
           _this.activity_code = response.data.data.activity_code;
           _this.imperial_unit = response.data.data.imperial_unit;
           _this.metric_unit = response.data.data.metric_unit;
           _this.conservation_factor = response.data.data.conservation_factor;
+          //updated by Ming
+           _this.getVertexResults();
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2201,9 +2915,9 @@ export default {
           _this.labour = response.data.data.Labour;
           _this.equipment = response.data.data.Equipment;
           _this.material = response.data.data.Material;
-
+          
           _this.country_job = $("#country_id").find(":selected").text().trim();
-
+          
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2227,7 +2941,7 @@ export default {
       var activity_all_data = [];
       var activity_sum = 0;
 
-      this.components.forEach((value, index) => {
+      this.components.forEach((value, index) => {        
         activity_all_data.push({
           key: value.key,
           category: value.category,
@@ -2264,35 +2978,35 @@ export default {
 
       let exists = 0;
       this.totalCalculation.forEach((value, key) => {
-        if (value.activity_code == this.activity_code) {
+        if(value.activity_code == this.activity_code){
           exists = 1;
         }
       });
       this.jobActivitiesList.push(lists);
       this.totalCalculation.push(lists);
-
+    
       // if(exists == 0){
       //   this.jobActivitiesList.push(lists);
       //   this.totalCalculation.push(lists);
       // }else{
       //   alert("Activity already added");
       // }
-
-
+      
+      
       this.total_amout_sum = this.totalCalculation.reduce(function (
         sum,
         current
       ) {
         return (sum += Number(parseFloat(current.amount).toFixed(2)));
       },
-        0);
+      0);
       this.total_labour_sum = this.totalCalculation.reduce(function (
         sum,
         current
       ) {
         return (sum += Number(parseFloat(current.lab).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_equipment_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2300,7 +3014,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.eqp).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_material_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2308,7 +3022,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.mat).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_addition_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2316,7 +3030,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.addcost).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_preliminary_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2324,8 +3038,8 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.preliminary_cost).toFixed(2)));
       },
-        0);
-
+      0);
+      
       // this.total_ohp_sum = this.totalCalculation.reduce(function (
       //   sum,
       //   current
@@ -2345,7 +3059,7 @@ export default {
           parseFloat(current.consistgency_cost).toFixed(2)
         ));
       },
-        0);
+      0);
 
       this.total_consistgency_sum_collect = parseFloat(
         this.total_consistgency_sum
@@ -2379,9 +3093,9 @@ export default {
       axios
         .get(
           "/cost-estimate/detail-form/getInfo/Components?id=" +
-          _this.activity_description +
-          "&country=" +
-          _this.country
+            _this.activity_description +
+            "&country=" +
+            _this.country
         )
         .then((response) => {
           _this.components = response.data.data.components;
@@ -2446,9 +3160,9 @@ export default {
           var addsub = 0;
           addsub = parseFloat(
             parseFloat(this.additional_cost_collect) +
-            parseFloat(equipmentTotal) +
-            parseFloat(labourTotal) +
-            parseFloat(materialTotal)
+              parseFloat(equipmentTotal) +
+              parseFloat(labourTotal) +
+              parseFloat(materialTotal)
           ).toFixed(2);
 
           this.sub_total = new Intl.NumberFormat("en-US", {
@@ -2630,18 +3344,18 @@ export default {
 
           if (response.data.category == "Preliminries") {
             // (this.preliminary_cost_collect = this.compQuantity * price),
-            this.preliminary_cost_collect = this.components.reduce(function (sum, current) {
-              return sum += current.category == "Preliminries" ? Number(parseFloat(current.amount).toFixed(2)) : 0;
-            }, 0);
-            //  this.sub_total =  parseFloat(parseFloat(this.sub_total) + parseFloat(this.quantity*this.compQuantity*response.data.rate)).toFixed(2)
-            (this.preliminary_cost = new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }).format(this.preliminary_cost_collect)),
+            this.preliminary_cost_collect  = this.components.reduce(function(sum, current) {
+                  return sum += current.category == "Preliminries" ? Number(parseFloat(current.amount).toFixed(2)) : 0;
+              }, 0);
+              //  this.sub_total =  parseFloat(parseFloat(this.sub_total) + parseFloat(this.quantity*this.compQuantity*response.data.rate)).toFixed(2)
+              (this.preliminary_cost = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }).format(this.preliminary_cost_collect)),
               // this.preliminary_cost = Number(parseFloat(this.compQuantity*response.data.rate).toFixed(2)).toLocaleString()
-
+              
               this.totalcostAmount();
           }
           this.sub_total_collect =
@@ -2765,9 +3479,9 @@ export default {
     totalcostAmount() {
       this.total_cost_collect = parseFloat(
         parseFloat(this.sub_total_collect) +
-        parseFloat(this.preliminary_cost_collect) +
-        parseFloat(this.overhead_cost_collect) +
-        parseFloat(this.consistgency_cost_collect)
+          parseFloat(this.preliminary_cost_collect) +
+          parseFloat(this.overhead_cost_collect) +
+          parseFloat(this.consistgency_cost_collect)
       ).toFixed(2);
 
       this.total_cost = Intl.NumberFormat("en-US", {
@@ -2797,7 +3511,7 @@ export default {
     preliminriesCost() {
       this.preliminries_amount = parseFloat(
         parseFloat(this.preliminries_quantity) *
-        parseFloat(this.preliminries_price)
+          parseFloat(this.preliminries_price)
       ).toFixed(2);
     },
     labourCost() {
@@ -2825,14 +3539,14 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.amount).toFixed(2)));
       },
-        0);
+      0);
       this.total_labour_sum = this.totalCalculation.reduce(function (
         sum,
         current
       ) {
         return (sum += Number(parseFloat(current.lab).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_equipment_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2840,7 +3554,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.eqp).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_material_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2848,7 +3562,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.mat).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_addition_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2856,7 +3570,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.addcost).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_preliminary_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2864,7 +3578,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.preliminary_cost).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_ohp_sum = this.totalCalculation.reduce(function (
         sum,
@@ -2872,7 +3586,7 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.ohp).toFixed(2)));
       },
-        0);
+      0);
 
       this.total_preliminary_sum_collect = parseFloat(
         this.total_preliminary_sum
@@ -2885,7 +3599,7 @@ export default {
           parseFloat(current.consistgency_cost).toFixed(2)
         ));
       },
-        0);
+      0);
 
       this.total_consistgency_sum_collect = parseFloat(
         this.total_consistgency_sum
@@ -2893,12 +3607,12 @@ export default {
 
       this.total_amout_collect = parseFloat(
         parseFloat(this.total_labour_sum) +
-        parseFloat(this.total_equipment_sum) +
-        parseFloat(this.total_material_sum) +
-        parseFloat(this.total_preliminary_sum) +
-        parseFloat(this.total_addition_sum) +
-        parseFloat(this.total_ohp_sum) +
-        parseFloat(this.total_consistgency_sum)
+          parseFloat(this.total_equipment_sum) +
+          parseFloat(this.total_material_sum) +
+          parseFloat(this.total_preliminary_sum) +
+          parseFloat(this.total_addition_sum) +
+          parseFloat(this.total_ohp_sum) +
+          parseFloat(this.total_consistgency_sum)
       ).toFixed(2);
     },
 
@@ -2913,7 +3627,7 @@ export default {
       this.totalCalculation.forEach((value, key) => {
         total_ohp_sum += value.ohp;
       });
-      this.total_ohp_sum = total_ohp_sum;
+      this.total_ohp_sum = total_ohp_sum;   
     },
 
     print() {
@@ -3018,7 +3732,7 @@ export default {
       this.actives = [];
       this.totalCalculation = [];
       $(".total_amount_sum").html("$0.00");
-
+      
     },
     edit(index) {
       $("#edit-btn-" + index).css("display", "none");
@@ -3065,11 +3779,11 @@ export default {
       $("#job_activity_label" + index).css("display", "");
       $("#done-btn-" + index).css("display", "none");
     },
-    up(id, ind) {
+    up(id,ind) {
       var selected = 0;
       var itemlist = $(".row_position");
       var len = $(itemlist).children().length;
-      var selected = $("#" + ind + "-row").index();
+      var selected = $("#" + ind+"-row").index();
 
       if (selected > 0) {
         jQuery(
@@ -3080,7 +3794,7 @@ export default {
         selected = selected - 1;
       }
 
-
+      
       // this.totalCalculation = sortableArray;
     },
     // up(id,ind) {
@@ -3115,11 +3829,11 @@ export default {
     //   });
     //   this.totalCalculation = sortableArray;
     // },
-    down(id, ind) {
+    down(id,ind) {
       var selected = 0;
       var itemlist = $(".row_position");
       var len = $(itemlist).children().length;
-      var selected = $("#" + ind + "-row").index();
+      var selected = $("#" + ind+"-row").index();
 
       if (selected < len) {
         jQuery(
@@ -3147,55 +3861,59 @@ export default {
       // });
       // this.totalCalculation = sortableArray;
 
-
+      
     },
-    onClickResComponent(type) {
-      this.rescomponents = [];
-      var alldatares = this.totalCalculation;
-      var allresdata = [];
-      var totaldata = alldatares;
-      var i = 0;
+    onClickResComponent(type) {           
+        this.rescomponents = [];   
+        var alldatares = this.totalCalculation;        
+        var allresdata = [];                
+        var totaldata = alldatares;
+        var i = 0;
+        
+        this.totalCalculation.forEach((value, index) => {
+            var res_amount = 0;
+            allresdata[index] = value; 
+            // res_amount = parseFloat(value.addcost) + parseFloat(value.cont) + parseFloat(value.ohp) + parseFloat(value.rate);                                
+            res_amount = parseFloat(value.addcost) + parseFloat(value.cont) + parseFloat(value.ohp);                                
+            var resdata = [];
+            var amount = 0;
+            value.activity_detail.forEach((value1, index1) => {                                     
+                if(value1.category == type)
+                {
+                    resdata.push(value1);     
+                    // resdata[index1] = value1;        
+                    amount += value1.amount;
+                }
+            });
+            res_amount += parseFloat(amount);
+            var a_amount = 0;
+            if(type == 'Labour')
+            { 
+              a_amount = value.lab + ((value.lab * this.overhead_percentage)/100) + ((value.lab * this.consistgency_percentage)/100) + ((value.lab * this.preliminary_percentage)/100)
+            }
+            if(type == 'Equipment')
+            { 
+              a_amount = value.eqp + ((value.eqp * this.overhead_percentage)/100) + ((value.eqp * this.consistgency_percentage)/100) + ((value.eqp * this.preliminary_percentage)/100)
+            }
+            if(type == 'Material')
+            { 
+              a_amount = value.mat + ((value.mat * this.overhead_percentage)/100) + ((value.mat * this.consistgency_percentage)/100) + ((value.mat * this.preliminary_percentage)/100)
+            }
 
-      this.totalCalculation.forEach((value, index) => {
-        var res_amount = 0;
-        allresdata[index] = value;
-        // res_amount = parseFloat(value.addcost) + parseFloat(value.cont) + parseFloat(value.ohp) + parseFloat(value.rate);                                
-        res_amount = parseFloat(value.addcost) + parseFloat(value.cont) + parseFloat(value.ohp);
-        var resdata = [];
-        var amount = 0;
-        value.activity_detail.forEach((value1, index1) => {
-          if (value1.category == type) {
-            resdata.push(value1);
-            // resdata[index1] = value1;        
-            amount += value1.amount;
-          }
+            allresdata[index]['per_unit'] = a_amount/value.quantity;
+            allresdata[index]['activity_details'] = resdata;  
+            allresdata[index]['res_sum'] = amount;
+            allresdata[index]['res_amount'] = res_amount;
         });
-        res_amount += parseFloat(amount);
-        var a_amount = 0;
-        if (type == 'Labour') {
-          a_amount = value.lab + ((value.lab * this.overhead_percentage) / 100) + ((value.lab * this.consistgency_percentage) / 100) + ((value.lab * this.preliminary_percentage) / 100)
-        }
-        if (type == 'Equipment') {
-          a_amount = value.eqp + ((value.eqp * this.overhead_percentage) / 100) + ((value.eqp * this.consistgency_percentage) / 100) + ((value.eqp * this.preliminary_percentage) / 100)
-        }
-        if (type == 'Material') {
-          a_amount = value.mat + ((value.mat * this.overhead_percentage) / 100) + ((value.mat * this.consistgency_percentage) / 100) + ((value.mat * this.preliminary_percentage) / 100)
-        }
 
-        allresdata[index]['per_unit'] = a_amount / value.quantity;
-        allresdata[index]['activity_details'] = resdata;
-        allresdata[index]['res_sum'] = amount;
-        allresdata[index]['res_amount'] = res_amount;
-      });
+        this.rescomponents = allresdata;
+        this.lab_category = false;
+        this.eqp_category = false;
+        this.mat_category = false;
 
-      this.rescomponents = allresdata;
-      this.lab_category = false;
-      this.eqp_category = false;
-      this.mat_category = false;
-
-      this.lab_category_sum = 0;
-      this.eqp_category_sum = 0;
-      this.mat_category_sum = 0;
+        this.lab_category_sum = 0;
+        this.eqp_category_sum = 0;
+        this.mat_category_sum = 0;
 
 
       this.rescomp_sub_total = this.rescomponents.reduce(function (
@@ -3204,44 +3922,46 @@ export default {
       ) {
         return (sum += Number(parseFloat(current.res_amount).toFixed(2)));
       },
-        0);
+      0);
 
-      if (type == 'Labour') {
-        this.lab_category = true;
-        this.lab_category_sum = this.rescomponents.reduce(function (sum, current) {
-          return (sum += Number(parseFloat(current.lab).toFixed(2)));
-        }, 0);
-        this.total_preliminary_sum_collect = (this.lab_category_sum * this.preliminary_percentage) / 100;
-        this.total_ohp_sum = (this.lab_category_sum * this.overhead_percentage) / 100;
-        this.total_consistgency_sum_collect = (this.lab_category_sum * this.consistgency_percentage) / 100;
+        if(type == 'Labour')
+        {
+          this.lab_category = true;
+          this.lab_category_sum = this.rescomponents.reduce(function (sum, current){
+            return (sum += Number(parseFloat(current.lab).toFixed(2)));
+          }, 0);
+          this.total_preliminary_sum_collect = (this.lab_category_sum * this.preliminary_percentage)/100;
+          this.total_ohp_sum = (this.lab_category_sum * this.overhead_percentage)/100;
+          this.total_consistgency_sum_collect = (this.lab_category_sum * this.consistgency_percentage)/100;
 
-        this.rescomp_total = this.lab_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
-      }
-      else if (type == 'Equipment') {
-        this.eqp_category = true;
-        this.eqp_category_sum = this.rescomponents.reduce(function (sum, current) {
-          return (sum += Number(parseFloat(current.eqp).toFixed(2)));
-        }, 0);
-        this.total_preliminary_sum_collect = (this.eqp_category_sum * this.preliminary_percentage) / 100;
-        this.total_ohp_sum = (this.eqp_category_sum * this.overhead_percentage) / 100;
-        this.total_consistgency_sum_collect = (this.eqp_category_sum * this.consistgency_percentage) / 100;
+          this.rescomp_total = this.lab_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
+        }
+        else if(type == 'Equipment'){
+          this.eqp_category = true;
+          this.eqp_category_sum = this.rescomponents.reduce(function (sum, current){
+            return (sum += Number(parseFloat(current.eqp).toFixed(2)));
+          }, 0);
+          this.total_preliminary_sum_collect = (this.eqp_category_sum * this.preliminary_percentage)/100;
+          this.total_ohp_sum = (this.eqp_category_sum * this.overhead_percentage)/100;
+          this.total_consistgency_sum_collect = (this.eqp_category_sum * this.consistgency_percentage)/100;
 
-        this.rescomp_total = this.eqp_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
+          this.rescomp_total = this.eqp_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
 
-      }
-      else if (type == 'Material') {
-        this.mat_category = true;
-        this.mat_category_sum = this.rescomponents.reduce(function (sum, current) {
-          return (sum += Number(parseFloat(current.mat).toFixed(2)));
-        }, 0);
-        this.total_preliminary_sum_collect = (this.mat_category_sum * this.preliminary_percentage) / 100;
-        this.total_ohp_sum = (this.mat_category_sum * this.overhead_percentage) / 100;
-        this.total_consistgency_sum_collect = (this.mat_category_sum * this.consistgency_percentage) / 100;
+        }
+        else if(type == 'Material')
+        {
+          this.mat_category = true;
+          this.mat_category_sum = this.rescomponents.reduce(function (sum, current){
+            return (sum += Number(parseFloat(current.mat).toFixed(2)));
+          },0);
+          this.total_preliminary_sum_collect = (this.mat_category_sum * this.preliminary_percentage)/100;
+          this.total_ohp_sum = (this.mat_category_sum * this.overhead_percentage)/100;
+          this.total_consistgency_sum_collect = (this.mat_category_sum * this.consistgency_percentage)/100;
 
-        this.rescomp_total = this.mat_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
+          this.rescomp_total = this.mat_category_sum + this.total_preliminary_sum_collect + this.total_ohp_sum + this.total_consistgency_sum_collect;
 
-      }
-      this.rescomp_sub_total = this.rescomp_total;
+        }
+        this.rescomp_sub_total = this.rescomp_total;
       // this.rescomp_total = parseFloat(
       //   parseFloat(this.lab_category_sum) +
       //     parseFloat(this.eqp_category_sum) +
@@ -3253,7 +3973,7 @@ export default {
       // ).toFixed(2);
 
     },
-    sortableArray() {
+    sortableArray() {      
       var selectedData = new Array();
       var sortableArray = new Array();
       $(".row_position > tr").each(function () {
@@ -3346,7 +4066,7 @@ export default {
           //   _this.success = "";
           // }
         });
-    },
+    },    
     formDetails() {
       this.loading = true;
       var _this = this;
@@ -3389,7 +4109,7 @@ export default {
           _this.owner = formDetail.owner;
           _this.contractor = formDetail.contractor;
           _this.project_specification = formDetail.project_specification;
-          if (_this.country == null || _this.country == '') {
+          if(_this.country == null || _this.country == ''){
             alert("Please selecte the country");
           }
           _this.total_amout_sum = _this.totalCalculation.reduce(function (
@@ -3398,7 +4118,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.amount).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_labour_sum = _this.totalCalculation.reduce(function (
             sum,
@@ -3406,7 +4126,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.lab).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_equipment_sum = _this.totalCalculation.reduce(function (
             sum,
@@ -3414,7 +4134,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.eqp).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_material_sum = _this.totalCalculation.reduce(function (
             sum,
@@ -3422,7 +4142,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.mat).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_addition_sum = _this.totalCalculation.reduce(function (
             sum,
@@ -3430,7 +4150,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.addcost).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_preliminary_sum = _this.totalCalculation.reduce(function (
             sum,
@@ -3440,7 +4160,7 @@ export default {
               parseFloat(current.preliminary_cost).toFixed(2)
             ));
           },
-            0);
+          0);
           _this.total_preliminary_sum_collect = parseFloat(
             _this.total_preliminary_sum
           );
@@ -3451,7 +4171,7 @@ export default {
           ) {
             return (sum += Number(parseFloat(current.ohp).toFixed(2)));
           },
-            0);
+          0);
 
           _this.total_consistgency_sum = _this.totalCalculation.reduce(
             function (sum, current) {
@@ -3466,18 +4186,18 @@ export default {
           );
           _this.total_amout_collect = parseFloat(
             parseFloat(_this.total_labour_sum) +
-            parseFloat(_this.total_equipment_sum) +
-            parseFloat(_this.total_material_sum) +
-            parseFloat(_this.total_preliminary_sum) +
-            parseFloat(_this.total_addition_sum) +
-            parseFloat(_this.total_ohp_sum) +
-            parseFloat(_this.total_consistgency_sum)
+              parseFloat(_this.total_equipment_sum) +
+              parseFloat(_this.total_material_sum) +
+              parseFloat(_this.total_preliminary_sum) +
+              parseFloat(_this.total_addition_sum) +
+              parseFloat(_this.total_ohp_sum) +
+              parseFloat(_this.total_consistgency_sum)
           ).toFixed(2);
           _this.getResults();
           _this.loadComponent();
           _this.loading = false;
 
-
+          
         });
     },
     abc: function () {
@@ -3488,8 +4208,8 @@ export default {
     },
     getCookie(name) {
       let cookie = {};
-      document.cookie.split(';').forEach(function (el) {
-        let [k, v] = el.split('=');
+      document.cookie.split(';').forEach(function(el) {
+        let [k,v] = el.split('=');
         cookie[k.trim()] = v;
       })
       return cookie[name];
@@ -3503,15 +4223,15 @@ export default {
       let d = new Date();
       d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
       let expires = "expires=" + d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      document.cookie = cname+"="+cvalue+";" + expires + ";path=/";
     },
-    trackJobActivity: function () {
+    trackJobActivity: function(){
       var lastUpdated = this.getCookie("lastActivityUpdated");
-      if (lastUpdated !== undefined) {
+      if(lastUpdated !== undefined){
         var data = lastUpdated.split(":");
         var code = data[0];
-        var selected = $(".detail-form-list > tr[data=" + code + "]").index();
-        if (data[1] == 'up') {
+        var selected = $(".detail-form-list > tr[data="+code+"]").index();
+        if(data[1] == 'up'){
           var itemlist = $(".detail-form-list");
           if (selected > 0) {
             jQuery(
@@ -3519,11 +4239,11 @@ export default {
                 .children()
                 .eq(selected - 1)
             ).before(jQuery($(itemlist).children().eq(selected)));
-            setTimeout(function () {
+             setTimeout(function(){
               document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }, 1000);
+            },1000);
           }
-        } else if (data[1] == 'down') {
+        }else if(data[1] == 'down'){
           var itemlist = $(".detail-form-list");
           var len = $(itemlist).children().length;
           if (selected < len) {
@@ -3532,49 +4252,49 @@ export default {
                 .children()
                 .eq(selected + 1)
             ).after(jQuery($(itemlist).children().eq(selected)));
-            setTimeout(function () {
+            setTimeout(function(){
               document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }, 1000);
-
+            },1000);
+            
           }
-        } else if (data[1] == 'remove') {
-          $(".detail-form-list > tr[data=" + code + "]").find(".removebtn").trigger("click");
-          setTimeout(function () {
-            document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-          }, 1000);
-        } else if (data[1] == 'edit') {
-          var rowUpdated = this.getCookie("rowUpdated");
-          if (rowUpdated !== undefined) {
+        }else if(data[1] == 'remove'){
+           $(".detail-form-list > tr[data="+code+"]").find(".removebtn").trigger("click");
+           setTimeout(function(){
+              document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            },1000);
+         }else if(data[1] == 'edit'){
+           var rowUpdated = this.getCookie("rowUpdated");
+           if(rowUpdated !== undefined){
             rowUpdated = JSON.parse(rowUpdated);
-            if (rowUpdated.edit_activity_code == data[0]) {
-              $(".detail-form-list > tr[data=" + code + "]").find(".activity_code").val(rowUpdated.activity_code);
-              $(".detail-form-list > tr[data=" + code + "]").find(".element_description").val(rowUpdated.element_description);
-              $(".detail-form-list > tr[data=" + code + "]").find(".job_activity").val(rowUpdated.job_activity);
-              $(".detail-form-list > tr[data=" + code + "]").find(".editbtn").trigger("click");
-              $(".detail-form-list > tr[data=" + code + "]").find(".donebtn").trigger("click");
-
-              setTimeout(function () {
-                document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                document.cookie = 'rowUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-              }, 1000);
+            if(rowUpdated.edit_activity_code == data[0]){
+                $(".detail-form-list > tr[data="+code+"]").find(".activity_code").val(rowUpdated.activity_code);
+                $(".detail-form-list > tr[data="+code+"]").find(".element_description").val(rowUpdated.element_description);
+                $(".detail-form-list > tr[data="+code+"]").find(".job_activity").val(rowUpdated.job_activity);
+                $(".detail-form-list > tr[data="+code+"]").find(".editbtn").trigger("click");
+                $(".detail-form-list > tr[data="+code+"]").find(".donebtn").trigger("click");
+                
+                setTimeout(function(){
+                  document.cookie = 'lastActivityUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                  document.cookie = 'rowUpdated=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                },1000);
             }
-          }
-
-        }
+           }
+           
+         }
       }
     },
-    viewEsitmate() {
+    viewEsitmate(){
       this.job_activity_section = true;
       var _this = this;
-      setTimeout(function () {
+      setTimeout(function(){
         _this.activityWindow();
-      }, 500);
-
+      },500);
+      
     },
-    storeActivity() {
+    storeActivity(){
       var selectedData = [];
       $(".detail-form-list > tr").each(function () {
-        selectedData.push({ activity_code: $(this).attr("data"), index: $(this).attr("data-index") });
+        selectedData.push({activity_code:$(this).attr("data"),index:$(this).attr("data-index")});
       });
       var result_arr = [];
       selectedData.forEach((value, index) => {
@@ -3589,21 +4309,21 @@ export default {
         JSON.stringify(result_arr)
       );
       sessionStorage.setItem(
-        "timestamp", this.timestamp
+        "timestamp",this.timestamp
       );
       this.trackActivity = 1;
       this.country_name = $("#country_id").find(":selected").text().trim();
       var formdata = {
-        form_name: this.form_name,
-        form_id: $("#detail_id").val(),
-        project_title: this.project_title,
-        estimate_type: this.estimate_type,
-        country: this.country,
-        country_job: this.country_name,
-        contractor: this.contractor,
-        owner: this.owner,
-        project_description: this.project_description,
-        project_specification: this.project_specification,
+        form_name:this.form_name,
+        form_id:$("#detail_id").val(),
+        project_title:this.project_title,
+        estimate_type:this.estimate_type,
+        country:this.country,
+        country_job:this.country_name,
+        contractor:this.contractor,
+        owner:this.owner,
+        project_description:this.project_description,
+        project_specification:this.project_specification,
         activity_code: this.activity_code,
         category: this.category,
         activity_description: this.activity_description,
@@ -3633,27 +4353,27 @@ export default {
       };
       axios.post("/cost-estimate/store-activities", {
         results: result_arr,
-        formdata: formdata,
-        updated_from: 'parent_window',
-        grid_show: 1
+        formdata:formdata,
+        updated_from:'parent_window',
+        grid_show:1
       })
-        .then(function (response) {
-          _this.$toast.success("Form Save Successfully");
-          location.reload();
-          _this.hideSaveModal();
-        })
-        .catch((error) => {
-          // if (error.response.status == 422) {
-          //   _this.errors = error.response.data.errors;
-          //   _this.success = "";
-          // }
-        });
+      .then(function (response) {
+        _this.$toast.success("Form Save Successfully");
+        location.reload();
+        _this.hideSaveModal();
+      })
+      .catch((error) => {
+        // if (error.response.status == 422) {
+        //   _this.errors = error.response.data.errors;
+        //   _this.success = "";
+        // }
+      });
     },
-    activityWindow() {
+    activityWindow() {      
       $(".detail-form-list").sortable({
         delay: 150
       });
-      sessionStorage.setItem("startTrack", 1);
+      sessionStorage.setItem("startTrack",1);
       this.storeActivity();
 
       // chrome.tabs.getCurrent(function(tab){ 
@@ -3664,7 +4384,7 @@ export default {
         "Activity",
         "width=1500 height=1000"
       );
-
+      
       // this.activity = window.open('http://127.0.0.1:8000/cost-estimate/detail-form/activity', 'Activity', 'width=1500 height=1000');
       // this.activity = window.open('', 'Activity', 'width=1500 height=1000');
       // this.windowRef.addEventListener('beforeunload', this.closePortal);
@@ -3841,61 +4561,61 @@ export default {
       //     this.totalCalculation = JSON.parse(sessionStorage.getItem("totalCalculation"));
       // }
     },
-    reloadData(data) {
-      this.totalCalculation = data;
-      this.jobActivitiesList = data;
-      this.loadResourceComponent = true;
+    reloadData(data){
+        this.totalCalculation = data;
+        this.jobActivitiesList = data;
+        this.loadResourceComponent = true;            
 
-      this.total_amout_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.amount).toFixed(2));
-      }, 0);
-      this.total_labour_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.lab).toFixed(2));
-      }, 0);
+        this.total_amout_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.amount).toFixed(2));
+        }, 0);
+        this.total_labour_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.lab).toFixed(2));
+        }, 0);
 
-      this.total_equipment_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.eqp).toFixed(2));
-      }, 0);
+        this.total_equipment_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.eqp).toFixed(2));
+        }, 0);
 
-      this.total_material_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.mat).toFixed(2));
-      }, 0);
+        this.total_material_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.mat).toFixed(2));
+        }, 0);
 
-      this.total_addition_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.addcost).toFixed(2));
-      }, 0);
+        this.total_addition_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.addcost).toFixed(2));
+        }, 0);
+        
+        this.total_preliminary_sum  = this.totalCalculation.reduce(function(sum, current) {
+            return sum += Number(parseFloat(current.preliminary_cost).toFixed(2));
+        }, 0);
 
-      this.total_preliminary_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.preliminary_cost).toFixed(2));
-      }, 0);
+        this.total_ohp_sum  = this.totalCalculation.reduce(function(sum, current) {
+                return sum += Number(parseFloat(current.ohp).toFixed(2));
+        }, 0);
 
-      this.total_ohp_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.ohp).toFixed(2));
-      }, 0);
+        this.total_preliminary_sum_collect =  parseFloat(this.total_preliminary_sum);
+        this.total_consistgency_sum  = this.totalCalculation.reduce(function(sum, current) {
+            return sum += Number(parseFloat(current.consistgency_cost).toFixed(2));
+        }, 0);
 
-      this.total_preliminary_sum_collect = parseFloat(this.total_preliminary_sum);
-      this.total_consistgency_sum = this.totalCalculation.reduce(function (sum, current) {
-        return sum += Number(parseFloat(current.consistgency_cost).toFixed(2));
-      }, 0);
-
-      this.total_consistgency_sum_collect = parseFloat(this.total_consistgency_sum);
-      this.total_amout_collect = parseFloat(parseFloat(this.total_labour_sum) + parseFloat(this.total_equipment_sum) + parseFloat(this.total_material_sum) + parseFloat(this.total_preliminary_sum) + parseFloat(this.total_addition_sum) + parseFloat(this.total_ohp_sum) + parseFloat(this.total_consistgency_sum)).toFixed(2)
+        this.total_consistgency_sum_collect =  parseFloat(this.total_consistgency_sum );
+        this.total_amout_collect = parseFloat(parseFloat(this.total_labour_sum) + parseFloat(this.total_equipment_sum) + parseFloat(this.total_material_sum) + parseFloat(this.total_preliminary_sum) + parseFloat(this.total_addition_sum) + parseFloat(this.total_ohp_sum) + parseFloat(this.total_consistgency_sum)).toFixed(2)
     },
-    viewGrid(status = false) {
-      console.log("job_activity_section", this.job_activity_section);
+    viewGrid(status=false){
+      console.log("job_activity_section",this.job_activity_section);
       // if(this.job_activity_section == false){
-      var _this = this;
-      axios.get("/cost-estimate/fetch-data")
+        var _this = this;
+        axios.get("/cost-estimate/fetch-data")
         .then(function (response) {
-          if (response.data.updated_from == 'popup_window') {
+          if(response.data.updated_from == 'popup_window'){
             _this.reloadData(response.data.results)
             _this.storeActivity();
-            if (response.data.grid_show) {
+            if(response.data.grid_show){
               _this.job_activity_section = true;
-            } else {
+            }else{
               _this.job_activity_section = false;
             }
-            if (status) {
+            if(status){
               _this.job_activity_section = true;
             }
           }
@@ -3909,7 +4629,7 @@ export default {
       this.job_activity_section = false;
       var selectedData = new Array();
       $(".detail-form-list > tr").each(function () {
-        selectedData.push({ activity_code: $(this).attr("data"), index: $(this).attr("data-index") });
+        selectedData.push({activity_code:$(this).attr("data"),index:$(this).attr("data-index")});
       });
       // var result_arr = [];
       // selectedData.forEach((value, index) => {
@@ -3928,7 +4648,7 @@ export default {
       //   "timestamp", this.timestamp
       // );
       // this.country_name = $("#country_id").find(":selected").text().trim();
-
+     
       // var formdata = {
       //   form_name:this.form_name,
       //   form_id:$("#detail_id").val(),
@@ -3970,10 +4690,10 @@ export default {
       //   grid_show:0
       // })
       // .then(function (response) {
-
+        
       // })
       // .catch((error) => {
-
+        
       // });
       this.storeActivity();
       this.trackActivity = 1;
@@ -3984,7 +4704,7 @@ export default {
       );
     },
     groupComponents() {
-      var groupComponents = [];
+      var groupComponents = []; 
       this.totalCalculation.forEach((activity) => {
         activity.activity_detail.forEach((detail) => {
           var isExist = false;
@@ -3997,7 +4717,7 @@ export default {
               break;
             }
           }
-          if (!isExist) {
+          if (! isExist) {
             groupComponents.push({
               resource_type: detail.resource_type,
               quantity: Math.ceil(detail.quantity),
@@ -4058,18 +4778,15 @@ export default {
     visibility: hidden;
     font-size: 10px !important;
   }
-
   #print,
   #print * {
     visibility: visible;
   }
-
   #print {
     position: absolute;
     left: 0;
     top: 0;
   }
-
   @page {
     size: landscape;
   }

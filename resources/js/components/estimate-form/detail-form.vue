@@ -2757,7 +2757,7 @@ export default {
       total_material_sum: 0,
       total_ohp_sum: 0,
       total_addition_sum: 0,
-      project_description: "",
+      
       project_specification: "",
       owner: "",
       contractor: "",
@@ -2878,7 +2878,7 @@ export default {
           _this.project_description = response.data.candidates[0].content.parts[0].text;
           console.log("project_description================>", _this.project_description);
 
-          _this.project_description = response.data.candidates[0].content.parts.text;
+          //_this.project_description = response.data.candidates[0].content.parts.text;
 
 
         //   _this.descriptions = response.data.data.descriptions;

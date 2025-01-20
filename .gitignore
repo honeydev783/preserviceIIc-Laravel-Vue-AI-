@@ -1,5 +1,11 @@
 node_modules/
 public/
+public/css/
+public/js/
+public/images/
+public/fonts/
+public/uploads/
+public/mix.manifest.json
 vendor/
 storage/VertexAIKey.json
 VertexAIKey.json

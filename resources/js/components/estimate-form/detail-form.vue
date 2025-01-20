@@ -2873,9 +2873,14 @@ export default {
         .get("/predict?text=" + project_description)
         .then(function (response) {
           console.log("vertex result================>", response.data);
+<<<<<<< HEAD
           //_this.project_description = response.data.candidates[0].content.parts.text;
           _this.project_description = response.data.candidates[0].content.parts[0].text;
           console.log("project_description================>", _this.project_description);
+=======
+          _this.project_description = response.data.candidates[0].content.parts.text;
+
+>>>>>>> 097a50491c6bae1a205d98c290c7095cded89d38
         //   _this.descriptions = response.data.data.descriptions;
           _this.$Progress.finish();
           _this.loading = false;

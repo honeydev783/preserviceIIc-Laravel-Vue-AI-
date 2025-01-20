@@ -1,6 +1,5 @@
 node_modules/
 public/
-<<<<<<< HEAD
 public/css/
 public/js/
 public/images/
@@ -9,9 +8,6 @@ public/uploads/
 public/mix.manifest.json
 vendor/
 storage/logs/
-=======
-vendor/
->>>>>>> 097a50491c6bae1a205d98c290c7095cded89d38
 storage/VertexAIKey.json
 VertexAIKey.json
 .env

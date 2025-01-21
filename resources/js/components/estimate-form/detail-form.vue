@@ -2757,7 +2757,7 @@ export default {
       total_material_sum: 0,
       total_ohp_sum: 0,
       total_addition_sum: 0,
-      
+      project_description: "",
       project_specification: "",
       owner: "",
       contractor: "",
@@ -2873,15 +2873,10 @@ export default {
         .get("/predict?text=" + project_description)
         .then(function (response) {
           console.log("vertex result================>", response.data);
-
-          //_this.project_description = response.data.candidates[0].content.parts.text;
           _this.project_description = response.data.candidates[0].content.parts[0].text;
-          console.log("project_description================>", _this.project_description);
+          console.log("project_description=========", _this.project_description);
 
-          //_this.project_description = response.data.candidates[0].content.parts.text;
-
-
-          _this.descriptions = response.data.data.descriptions;
+        //   _this.descriptions = response.data.data.descriptions;
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2903,8 +2898,47 @@ export default {
           _this.imperial_unit = response.data.data.imperial_unit;
           _this.metric_unit = response.data.data.metric_unit;
           _this.conservation_factor = response.data.data.conservation_factor;
+
+          /*updated by Ming*/
+          var job_active_title = response.data.data.description;
+          var project_description = 'Project Discription of ' + job_active_title;
+          var project_specification = 'Project Specifications of ' + job_active_title;
+          var project_specification_images = 'Project Specifications Images of ' + job_active_title;
+          var component_note = 'Component List Prices and provider list of ' + job_active_title;
+          axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {                          
+          const targetElement = document.getElementById('project_specification');  
+          let sibling = targetElement.previousElementSibling;
+          while (sibling) {
+              const prevSibling = sibling.previousElementSibling; // Store previous sibling
+              sibling.remove(); // Remove current sibling
+              sibling = prevSibling; // Move to the previous sibling
+          }
+                
+          targetElement.insertAdjacentHTML('beforebegin', response.data);
+        });
+
+        axios.get("/predict?text=" + project_specification).then(function (response) {        
+          _this.project_specification = response.data.candidates[0].content.parts[0].text;
+          const project_specification_textarea = document.getElementById('project_specification');
+          project_specification_textarea.value = '';        
+          project_specification_textarea.value = response.data.candidates[0].content.parts[0].text;
+        });        
+
+        axios.get("/predict?text=" + component_note).then(function (response) {        
+          _this.component_note = response.data.candidates[0].content.parts[0].text;
+          const component_note_textarea = document.getElementById('component_note');
+          component_note_textarea.value = '';        
+          component_note_textarea.value = response.data.candidates[0].content.parts[0].text;
+        });
+
+        axios.get("/predict?text=" + project_description).then(function (response) {        
+          _this.project_description = response.data.candidates[0].content.parts[0].text;
+          const project_discription_textarea = document.getElementById('project_discription');
+          project_discription_textarea.value = '';        
+          project_discription_textarea.value = response.data.candidates[0].content.parts[0].text;        
+        });
           //updated by Ming
-          //getVertexResults();
+          //_this.getVertexResults();
           _this.$Progress.finish();
           _this.loading = false;
         });

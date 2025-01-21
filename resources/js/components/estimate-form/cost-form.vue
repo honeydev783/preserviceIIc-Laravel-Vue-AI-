@@ -68,7 +68,7 @@
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <strong>Country:</strong>
-                                                <select class="form-control"" v-model="country" id="country"
+                                                <select class="form-control" v-model="country" id="country"
                                                     @change="getResults(($event))">
                                                     <option value=""></option>
                                                     <option v-for="con in countrys" :key="con.id" :value="con.id">
@@ -145,7 +145,8 @@
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
                                         <strong>Project Discription:</strong>
-                                        <textarea class="form-control" rows="11" v-model="description"></textarea>
+                                        <textarea class="form-control" rows="11" v-model="description"
+                                            id="description"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
@@ -208,7 +209,8 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Design Program Notes:</strong>
-                                        <textarea class="form-control" rows="10" v-model="conceptual_note"></textarea>
+                                        <textarea class="form-control" rows="10" v-model="conceptual_note"
+                                            id="conceptual_note"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -369,8 +371,9 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" style="border:1px solid #ccc" v-model="description"
-                                                    class="form-control-plaintext" id="description"></textarea>
+                                                <textarea type="text" style="border:1px solid #ccc"
+                                                    v-model="description" class="form-control-plaintext"
+                                                    id="description"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -392,8 +395,9 @@
                                                 </strong>
                                             </label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" style="border:1px solid #ccc" v-model="estimate_note"
-                                                    class="form-control-plaintext" id="estimate_note"></textarea>
+                                                <textarea type="text" style="border:1px solid #ccc"
+                                                    v-model="estimate_note" class="form-control-plaintext"
+                                                    id="estimate_note"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -447,7 +451,7 @@
                                                 <tr>
                                                     <td colspan="6"><b>Total:</b></td>
                                                     <td>{{ total | currency }}</td>
-                                                    <td>{{ total_factor }}</td>
+                                                    <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -708,13 +712,15 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <strong>Basis of Estimate Notes:</strong>
-                            <textarea class="form-control" rows="10" v-model="estimate_note"></textarea>
+                            <textarea class="form-control" rows="10" v-model="estimate_note"
+                                id="estimate_note"></textarea>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <strong>Inclustions & Exclustions Notes:</strong>
-                            <textarea class="form-control" rows="10" v-model="exculstion_note"></textarea>
+                            <textarea class="form-control" rows="10" v-model="exculstion_note"
+                                id="exculstion_note"></textarea>
                         </div>
                     </div>
                 </div>
@@ -786,7 +792,7 @@ var id = $('#approx_id').val();
 export default {
     mounted() {
         console.log('Estimation Form 1 Component');
-        
+
     },
     created() {
         this.getResults();
@@ -802,6 +808,7 @@ export default {
             num_unit: 1,
             num_story: 1,
             project_title: '',
+            project_location: '',
             category: 1,
             country: '',
             cost_sf: 0,
@@ -925,12 +932,12 @@ export default {
                 .then(function (response) {
                     _this.countrys = response.data.data.countrys
                     _this.$Progress.finish()
-                    _this.loading = false   
+                    _this.loading = false
                     $(".detail-form-list").sortable({
                         delay: 150
-                    })                                 
+                    })
                 });
-                
+
         },
         getEstimateType() {
             var _this = this
@@ -1058,7 +1065,7 @@ export default {
             this.total = this.total - this.elements[index].element_cost;
             this.elements.splice(index, 1);
             this.elements.forEach((value, key) => {
-                value.factor_type = Number(parseFloat(value.element_cost / this.total*100).toFixed(2));
+                value.factor_type = parseFloat(value.element_cost / this.total * 100).toFixed(2) + '%';
                 console.log("key, id==>", value, key);
             });
 

@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12" id="project_design">
                                     <img :src="image_src" alt="Estimate Type Image" style="width:100%"></img>
                                 </div>
                             </div>
@@ -788,6 +788,8 @@
     </div>
 </template>
 <script>
+import { get } from 'jquery';
+
 var id = $('#approx_id').val();
 export default {
     mounted() {
@@ -801,6 +803,7 @@ export default {
         if (id != 0) {
             this.formDetails();
         }
+        this.getVertexResults();
     },
     data() {
         return {
@@ -898,6 +901,59 @@ export default {
                     }
                 });
         },
+        getVertexResults() {
+            var _this = this
+            _this.$Progress.start()
+            _this.loading = true
+            var estimate = $('#category').find(":selected").text();
+            //var country = $('#country').find(":selected").text();
+            console.log("estimate type==>", estimate);
+            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include Conversion Currency and Country of ' + _this.country;
+            const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate;
+            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
+                const targetElement = document.getElementById('project_design');
+                // let sibling = targetElement.previousElementSibling;
+                // while (sibling) {
+                //     const prevSibling = sibling.previousElementSibling; // Store previous sibling
+                //     sibling.remove(); // Remove current sibling
+                //     sibling = prevSibling; // Move to the previous sibling
+                // }
+                //targetElement.insertAdjacentHTML('beforebegin', response.data);
+                targetElement.innerHTML = response.data;
+            });
+            axios.get("/predict?text=" + approx_project_description).then(function (response) {
+                _this.description = response.data.candidates[0].content.parts[0].text;
+                const project_discription_textarea = document.getElementById('description');
+                project_discription_textarea.value = '';
+                project_discription_textarea.value = response.data.candidates[0].content.parts[0].text;
+            });
+
+            axios.get("/predict?text=" + basis_estimate_notes).then(function (response) {
+                _this.estimate_note = response.data.candidates[0].content.parts[0].text;
+                const basis_estimate_notes_textarea = document.getElementById('estimate_note');
+                basis_estimate_notes_textarea.value = '';
+                basis_estimate_notes_textarea.value = response.data.candidates[0].content.parts[0].text;
+            });
+
+            axios.get("/predict?text=" + design_program_notes).then(function (response) {
+                _this.conceptual_note = response.data.candidates[0].content.parts[0].text;
+                const design_program_notes_textarea = document.getElementById('conceptual_note');
+                design_program_notes_textarea.value = '';
+                design_program_notes_textarea.value = response.data.candidates[0].content.parts[0].text;
+            });
+
+            axios.get("/predict?text=" + inclustions_exclustions_notes).then(function (response) {
+                _this.exculstion_note = response.data.candidates[0].content.parts[0].text;
+                const inclustions_exclustions_notes_textarea = document.getElementById('exculstion_note');
+                inclustions_exclustions_notes_textarea.value = '';
+                inclustions_exclustions_notes_textarea.value = response.data.candidates[0].content.parts[0].text;
+            });
+            _this.$Progress.finish()
+            _this.loading = false
+        },
         getResults() {
             var _this = this
             _this.$Progress.start()
@@ -920,9 +976,9 @@ export default {
                     _this.$Progress.finish()
                     _this.loading = false
                     console.log("response data===>", response.data.data);
-
+                    
                 });
-
+               // _this.getVertexResults();
         },
         getCountrys() {
             var _this = this

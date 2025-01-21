@@ -2799,7 +2799,7 @@ export default {
       var job_activity_data = e.params.data;
       vm.activity_description = job_activity_data.id;
       vm.getActivity();
-      //vm.getVertexResults(); updated by Ming
+      vm.getVertexResults(); 
     });
     $("#preliminries").on("select2:select", function (e) {
       vm.prelim_comp = e.params.data.id;
@@ -2881,7 +2881,7 @@ export default {
           //_this.project_description = response.data.candidates[0].content.parts.text;
 
 
-        //   _this.descriptions = response.data.data.descriptions;
+          _this.descriptions = response.data.data.descriptions;
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2904,7 +2904,7 @@ export default {
           _this.metric_unit = response.data.data.metric_unit;
           _this.conservation_factor = response.data.data.conservation_factor;
           //updated by Ming
-           _this.getVertexResults();
+          //getVertexResults();
           _this.$Progress.finish();
           _this.loading = false;
         });

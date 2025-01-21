@@ -3452,7 +3452,8 @@ $(document).ready(function () {
               sibling.remove(); // Remove current sibling
               sibling = prevSibling; // Move to the previous sibling
           }
-          console.log("project_specification_images===>", response.data);      
+        
+          console.log("project_specification_images app.js ===>", response.data);      
           targetElement.insertAdjacentHTML('beforebegin', response.data);
         });
 

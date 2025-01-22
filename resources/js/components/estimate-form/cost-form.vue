@@ -803,7 +803,7 @@ export default {
         if (id != 0) {
             this.formDetails();
         }
-        this.getVertexResults();
+        //this.getVertexResults();
     },
     data() {
         return {
@@ -908,11 +908,12 @@ export default {
             var estimate = $('#category').find(":selected").text();
             //var country = $('#country').find(":selected").text();
             console.log("estimate type==>", estimate);
-            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
-            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
-            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include Conversion Currency and Country of ' + _this.country;
+            var totalsqft = _this.quantity_sq_ft * _this.num_unit;
+            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include Conversion Currency and Country of ' + _this.country;
             const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate;
-            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + _this.totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
+            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA SQ/FT -QUANTITY and ' + _this.num_unit + ' units and ' + _this.num_story + ' STORIES and ' + totalsqft + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include onversion Currency and Country of ' + _this.country;
             axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
                 const targetElement = document.getElementById('project_design');
                 // let sibling = targetElement.previousElementSibling;
@@ -976,9 +977,10 @@ export default {
                     _this.$Progress.finish()
                     _this.loading = false
                     console.log("response data===>", response.data.data);
+                    _this.getVertexResults();
                     
                 });
-               // _this.getVertexResults();
+               
         },
         getCountrys() {
             var _this = this

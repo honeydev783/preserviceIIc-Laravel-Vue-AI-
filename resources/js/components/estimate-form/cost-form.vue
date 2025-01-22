@@ -418,7 +418,7 @@
                                                     Image
                                                 </strong>
                                             </label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-10" id="print_project_design">
                                                 <img :src="image_src" alt="Estimate Type Image"
                                                     style="width:400px !important"></img>
                                             </div>
@@ -924,6 +924,8 @@ export default {
                 // }
                 //targetElement.insertAdjacentHTML('beforebegin', response.data);
                 targetElement.innerHTML = response.data;
+                const print_project_design = document.getElementById('print_project_design');
+                print_project_design.innerHTML = response.data;
             });
             axios.get("/predict?text=" + approx_project_description).then(function (response) {
                 _this.description = response.data.candidates[0].content.parts[0].text;

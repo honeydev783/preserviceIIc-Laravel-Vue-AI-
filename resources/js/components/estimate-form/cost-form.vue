@@ -1,4 +1,17 @@
 <style>
+#print_project_design {
+    display: inline-block;
+    position: relative;
+}
+
+#print_project_design img {
+    display: block;
+    max-width: none;
+    /* Disable width restrictions */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
 .pull-right {
     float: right;
 }
@@ -418,9 +431,11 @@
                                                     Image
                                                 </strong>
                                             </label>
-                                            <div class="col-sm-10" id="print_project_design">
-                                                <img :src="image_src" alt="Estimate Type Image"
-                                                    style="width:400px !important"></img>
+                                            <div class="col-sm-10">
+                                                <div id="print_project_design">
+                                                </div>
+                                                <!-- <img :src="image_src" alt="Estimate Type Image"
+                                                    style="width:400px !important"></img> -->
                                             </div>
                                         </div>
                                         <table class="table table-striped table-bordered" id="print_1"
@@ -790,6 +805,7 @@
 <script>
 import { get } from 'jquery';
 
+
 var id = $('#approx_id').val();
 export default {
     mounted() {
@@ -805,6 +821,7 @@ export default {
         }
         //this.getVertexResults();
     },
+
     data() {
         return {
             quantity_sq_ft: 0,
@@ -869,6 +886,13 @@ export default {
         }
     },
     methods: {
+        onResize(newRect) {
+            console.log("Resizing:", newRect);
+
+        },
+        onDrag(newPosition) {
+            console.log("Dragging:", newPosition);
+        },
         //handle file 
         handleFileUpload() {
             this.file = this.$refs.file.files[0];
@@ -922,10 +946,22 @@ export default {
                 //     sibling.remove(); // Remove current sibling
                 //     sibling = prevSibling; // Move to the previous sibling
                 // }
-                //targetElement.insertAdjacentHTML('beforebegin', response.data);
+                // targetElement.insertAdjacentHTML('beforebegin', response.data);
                 targetElement.innerHTML = response.data;
+
                 const print_project_design = document.getElementById('print_project_design');
                 print_project_design.innerHTML = response.data;
+                $("#print_project_design").resizable({
+                    aspectRatio: true, // Maintain the aspect ratio of the image
+                    handles: "all",    // Allow resizing from all sides and corners
+                    resize: function (event, ui) {
+                        // Dynamically adjust the image size to match the container
+                        ui.element.find("img").css({
+                            width: ui.size.width + "px",
+                            height: ui.size.height + "px"
+                        });
+                    }
+                });
             });
             axios.get("/predict?text=" + approx_project_description).then(function (response) {
                 _this.description = response.data.candidates[0].content.parts[0].text;
@@ -980,9 +1016,9 @@ export default {
                     _this.loading = false
                     console.log("response data===>", response.data.data);
                     _this.getVertexResults();
-                    
+
                 });
-               
+
         },
         getCountrys() {
             var _this = this

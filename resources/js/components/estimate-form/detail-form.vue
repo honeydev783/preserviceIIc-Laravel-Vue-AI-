@@ -2157,20 +2157,25 @@ export default {
 
           _this.descriptions = response.data.data.descriptions;
           console.log("selected activity   description================>", _this.descriptions);
-          
+
         });
-        _this.$Progress.finish();
-        _this.loading = false;
+      _this.$Progress.finish();
+      _this.loading = false;
     },
     getVertexResults: function () {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-      
+
       var project_description = 'Project Discription of ' + _this.job_activity;
       console.log("project_description================>", project_description);
+      const charsToRemove = "#"; // Characters to remove
+      const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
+      const result = _this.job_activity.replace(regex, '');
+      _this.job_activity= result;
       var project_specification = 'Project Specifications of ' + _this.job_activity;
-      var project_specification_images = 'A realistic depiction of ' + _this.job_activity + 'in construction industry';
+      var project_specification_images = 'Project Specifications Images of ' + _this.job_activity;
+      console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
       axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
         const targetElement = document.getElementById('project_specification');
@@ -2191,7 +2196,7 @@ export default {
         console.log("project_description A================>", response.data);
       });
       axios.get("/predict?text=" + project_specification).then(function (response) {
-         console.log("project_specification B================>", response.data);
+        console.log("project_specification B================>", response.data);
         _this.project_specification = response.data.candidates[0].content.parts[0].text;
         const project_specification_textarea = document.getElementById('project_specification');
         project_specification_textarea.value = '';

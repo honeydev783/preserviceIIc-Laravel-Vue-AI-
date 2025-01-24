@@ -16,7 +16,7 @@ class OpenAIController extends Controller
         ]);
 
         $prompt = $request->text;
-        $prompt = str_replace('"', '', $prompt);
+        $prompt = str_replace('"#', '', $prompt);
         $apiKey = env('OPENAI_API_KEY'); // Store your API key in .env file
 
         // OpenAI API URL for image generation

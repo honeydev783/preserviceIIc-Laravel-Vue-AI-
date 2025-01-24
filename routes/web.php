@@ -10,7 +10,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\VertexAIController;
 use App\Http\Controllers\DocumentController;
 use App\Models\Menus;
-
+use App\Http\Controllers\OpenAIController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +31,10 @@ Route::get('/demo', function(){
 })->name('demo');
 
 //Cron URL
-
+Route::get('/predictimages', [OpenAIController::class, 'predictimages']);
 Route::get('/cron/expire-estimates','App\Http\Controllers\CronController@expireEsitmate');
 Route::get('/predict', [VertexAIController::class, 'predict']);
-Route::get('/predictimages', [VertexAIController::class, 'predictimages']);
+// Route::get('/predictimages', [VertexAIController::class, 'predictimages']);
 Route::get('/upload', [DocumentController::class, 'showForm'])->name('upload.form');
 Route::post('/uploadpdf', [DocumentController::class, 'uploadPDF'])->name('upload.pdf');
 

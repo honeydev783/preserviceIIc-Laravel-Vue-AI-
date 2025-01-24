@@ -2167,12 +2167,13 @@ export default {
       _this.$Progress.start();
       _this.loading = true;
 
-      var project_description = 'Project Discription of ' + _this.job_activity;
-      console.log("project_description================>", project_description);
+      
       const charsToRemove = "#"; // Characters to remove
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
       const result = _this.job_activity.replace(regex, '');
       _this.job_activity= result;
+      var project_description = 'Project Discription of ' + _this.job_activity;
+      console.log("project_description================>", project_description);
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       var project_specification_images = 'Project Specifications Images of ' + _this.job_activity;
       console.log("Activity query===>", project_specification_images);

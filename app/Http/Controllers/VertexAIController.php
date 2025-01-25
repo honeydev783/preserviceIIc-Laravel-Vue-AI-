@@ -94,9 +94,10 @@ class VertexAIController extends Controller
         curl_setopt($ch, CURLOPT_URL, "https://us-central1-aiplatform.googleapis.com/v1/projects/474073143471/locations/us-central1/publishers/google/models/imagen-3.0-generate-001:predict");
         curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $prompt = str_replace('"#', '', $request->text);
-        $refinedPrompt = $this->processor->refinePrompt($prompt);
-        $data = ["instances" => ["prompt" => $refinedPrompt], "parameters" => ["sampleCount" => 1, "aspectRatio" => '4:3']];
+        $prompt = $request->text;
+        Log::error("error===>".$prompt);
+        // $refinedPrompt = $this->processor->refinePrompt($prompt);
+        $data = ["instances" => ["prompt" => $prompt], "parameters" => ["sampleCount" => 1, "aspectRatio" => '4:3']];
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $accessToken,
@@ -107,7 +108,9 @@ class VertexAIController extends Controller
             return response()->json(['error' => curl_error($ch)], 500);
         }
         curl_close($ch);
+        Log::error("error===>".$response);
         $aidata = json_decode($response, true);
+        
         $airesult = $aidata['predictions'];
         $imagetexts = "";
         foreach ($airesult as $key => $value) {

@@ -2166,8 +2166,6 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-
-      
       const charsToRemove = "#"; // Characters to remove
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
       const result = _this.job_activity.replace(regex, '');
@@ -2178,7 +2176,14 @@ export default {
       var project_specification_images = 'Project Specifications Images of ' + _this.job_activity;
       console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
-      axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
+      
+      axios.get("/predict?text=" + project_description).then(function (response) {
+        _this.project_description = response.data.candidates[0].content.parts[0].text;
+        const project_discription_textarea = document.getElementById('project_discription');
+        project_discription_textarea.value = '';
+        project_discription_textarea.value = _this.project_description;
+        console.log("project_description A================>", response.data);
+        axios.get("/predictimages?text=" + _this.project_description, { timeout: 30000 }).then(function (response) {
         const targetElement = document.getElementById('project_specification');
         let sibling = targetElement.previousElementSibling;
         while (sibling) {
@@ -2189,12 +2194,8 @@ export default {
 
         targetElement.insertAdjacentHTML('beforebegin', response.data);
       });
-      axios.get("/predict?text=" + project_description).then(function (response) {
-        _this.project_description = response.data.candidates[0].content.parts[0].text;
-        const project_discription_textarea = document.getElementById('project_discription');
-        project_discription_textarea.value = '';
-        project_discription_textarea.value = _this.project_description;
-        console.log("project_description A================>", response.data);
+
+
       });
       axios.get("/predict?text=" + project_specification).then(function (response) {
         console.log("project_specification B================>", response.data);

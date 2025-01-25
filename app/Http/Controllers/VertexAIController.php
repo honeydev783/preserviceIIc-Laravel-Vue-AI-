@@ -95,9 +95,9 @@ class VertexAIController extends Controller
         curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $prompt = $request->text;
-        Log::error("error===>".$prompt);
-        // $refinedPrompt = $this->processor->refinePrompt($prompt);
-        $data = ["instances" => ["prompt" => $prompt], "parameters" => ["sampleCount" => 1, "aspectRatio" => '4:3']];
+        //Log::error("error===>".$prompt);
+        $refinedPrompt = $this->processor->refinePrompt($prompt);
+        $data = ["instances" => ["prompt" => $refinedPrompt], "parameters" => ["sampleCount" => 1, "aspectRatio" => '4:3']];
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $accessToken,

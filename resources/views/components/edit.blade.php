@@ -145,7 +145,8 @@ Resource Component Edit
     })
 
     $('#mySelect2').on('select2:select', function (e) {
-        var data = e.params.data;   
+        var data = e.params.data;
+        console.log("select event data************", data);   
         var html = '';        
         html += '<table class="table table-bordered" id="dynamicTable_'+data.id+'">';
         html +=     '<tr>';
@@ -179,9 +180,24 @@ Resource Component Edit
             var resource_comp_data = 'Generate an HTML code for average hourly rate cost value of ' + document.getElementById('resource_type').value + ' job skills in USA area';
         } else if(document.getElementById('resource_category').value == "Equipment") {
             var resource_comp_data = 'Generate an HTML code for average hourly cost and cost of purchasing one of ' + document.getElementById('resource_type').value + ' Equipment in USA area';
+        } else if(document.getElementById('resource_category').value == "Premilinaries") {
+            // var resource_comp_data = 'Generate an HTML code to get Prices ' + ' of' + document.getElementById('resource_category').value + 'consist of ' + document.getElementById('resource_type').value + 'as much as possible in USA area';
+            var resource_type= document.getElementById('resource_type').value;
+            const charsToRemove = "#"; // Characters to remove
+            const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
+            const result = resource_type.replace(regex, '');
+            console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
+            var resource_comp_data = 'Generate an HTML code for  description, Component List, average hourly costs and company list with contact information of ' + result + ' in USA area';
+            
         } else {
-            var resource_comp_data = 'Generate an HTML code for Online Vendors List and Prices ' + document.getElementById('resource_category').value + ' of ' + document.getElementById('resource_type').value;
-        }
+
+        }var resource_type= document.getElementById('resource_type').value;
+            const charsToRemove = "#"; // Characters to remove
+            const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
+            const result = resource_type.replace(regex, '');
+            console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
+            var resource_comp_data = 'Generate an HTML code by description, Component List, Prices and company list with contact information of ' + result + ' in USA area';
+            
         
         axios.get("/predict?text=" + resource_comp_data).then(function (response) {                  
           $('#resourceaicompdata').html(response.data.candidates[0].content.parts[0].text);
@@ -189,8 +205,10 @@ Resource Component Edit
     }
     
     function rateCal(id, e)
-    {
+    {   
+        console.log("rateCal e************", e);
         var rate = $(e).val();
+        console.log("rateCal rate************", rate);
         var category = $('#category').val();
         var cal_rate = 0;
         // alert($('#mySelect2').val());

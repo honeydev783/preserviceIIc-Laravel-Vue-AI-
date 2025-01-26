@@ -2173,8 +2173,7 @@ export default {
       var project_description = 'Project Discription of ' + _this.job_activity;
       console.log("project_description================>", project_description);
       var project_specification = 'Project Specifications of ' + _this.job_activity;
-      var project_specification_images = 'Project Specifications Images of ' + _this.job_activity;
-      console.log("Activity query===>", project_specification_images);
+      // console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
       
       axios.get("/predict?text=" + project_description).then(function (response) {
@@ -2183,7 +2182,9 @@ export default {
         project_discription_textarea.value = '';
         project_discription_textarea.value = _this.project_description;
         console.log("project_description A================>", response.data);
-        axios.get("/predictimages?text=" + _this.project_description, { timeout: 30000 }).then(function (response) {
+        var project_specification_images = _this.project_description + "for constructon area";
+
+        axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
         const targetElement = document.getElementById('project_specification');
         let sibling = targetElement.previousElementSibling;
         while (sibling) {

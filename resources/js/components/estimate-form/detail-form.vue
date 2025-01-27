@@ -1998,7 +1998,7 @@ export default {
       consistgency_percentage: 0,
       overhead_cost: 0,
       overhead_cost_collect: 0,
-      overhead_percentage: 0,
+      overhead_percentage: 25,
       total_cost: 0,
       total_cost_collect: 0,
       additional_cost: 0,
@@ -2082,6 +2082,8 @@ export default {
       rescomp_total: 0,
       trackActivity: 0,
       job_activity_section: true,
+      currency: "USD",
+      exchange_rate: 1,
       timestamp: Math.floor(Math.random() * 100000000),
     };
   },
@@ -2243,6 +2245,7 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
+      _this.overhead_percentage =25;
       axios
         .get("/cost-estimate/detail-form/getcomponents?id=" + _this.country)
         .then(function (response) {
@@ -2425,11 +2428,13 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
+      _this.components=[];
+      console.log("activity_description===id========>", _this.activity_description);
       axios
         .get(
           "/cost-estimate/detail-form/getInfo/Components?id=" +
           _this.activity_description +
-          "&country=" +
+          "&country=" + 
           _this.country
         )
         .then((response) => {
@@ -2470,28 +2475,38 @@ export default {
               materialTotal = parseFloat(materialTotal) + parseFloat(m_c);
             }
           });
-
-          this.labour_cost_collect = labourTotal;
+          /**updated code by Ming */
+          _this.currency=response.data.data.currency;
+          _this.exchange_rate= Number.parseFloat(response.data.data.exchange_rate).toFixed(2);
+          equipmentTotal = equipmentTotal / _this.exchange_rate;
+          materialTotal = materialTotal / _this.exchange_rate;
+          labourTotal = labourTotal / _this.exchange_rate;
+          this.labour_cost_collect = labourTotal;// 
           (this.labour_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD",
+            currency: _this.currency,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.labour_cost_collect)),
             (this.equipment_cost_collect = equipmentTotal);
           (this.equipment_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD",
+            currency: _this.currency,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.equipment_cost_collect)),
             (this.material_cost_collect = parseFloat(materialTotal));
           this.material_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD",
+            currency: _this.currency,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.material_cost_collect);
+          
+          if(this.overhead_percentage == 0){
+            this.overhead_percentage = 25;
+          }
+          
           var addsub = 0;
           addsub = parseFloat(
             parseFloat(this.additional_cost_collect) +
@@ -2502,13 +2517,18 @@ export default {
 
           this.sub_total = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD",
+            currency: _this.currency,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(addsub);
           this.sub_total_collect = addsub;
+          this.overheadProfit();
+          this.consistgencyCost();
+          this.preliminaryCost();
           this.total_cost = this.sub_total;
-          this.total_cost_collect = this.sub_total_collect;
+          console.log("!!!total_cost!!!", this.total_cost);
+          this.totalcostAmount();
+          //this.total_cost_collect = this.sub_total_collect+ this.overhead_cost_collect+this.consistgency_cost_collect+this.preliminary_cost_collect;
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2700,7 +2720,7 @@ export default {
             parseFloat(this.material_cost_collect);
           this.sub_total = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: "USD",
+            currency: this.currency,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.sub_total_collect);
@@ -2720,7 +2740,7 @@ export default {
         parseFloat(this.material_cost_collect);
       this.sub_total = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.sub_total_collect);
@@ -2730,7 +2750,7 @@ export default {
       this.additional_cost = this.additional_cost_collect;
       this.additional_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.additional_cost_collect);
@@ -2742,7 +2762,7 @@ export default {
       );
       (this.preliminary_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.preliminary_cost_collect)),
@@ -2756,7 +2776,7 @@ export default {
     overheadLeave() {
       this.overhead_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.overhead_cost_collect);
@@ -2767,7 +2787,7 @@ export default {
       );
       this.overhead_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.overhead_cost_collect);
@@ -2781,7 +2801,7 @@ export default {
     preliminaryLeave() {
       this.preliminary_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.preliminary_cost_collect);
@@ -2793,7 +2813,7 @@ export default {
     consistgencyLeave() {
       this.consistgency_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
@@ -2805,7 +2825,7 @@ export default {
 
       this.consistgency_cost = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
@@ -2821,7 +2841,7 @@ export default {
 
       this.total_cost = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.total_cost_collect);
@@ -2829,7 +2849,7 @@ export default {
 
       this.imperial_rate = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.imperial_rate_collect);
@@ -2838,7 +2858,7 @@ export default {
         this.imperial_rate_collect * this.conservation_factor;
       this.metric_rate = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: this.currency,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.metric_rate_collect);
@@ -3051,7 +3071,7 @@ export default {
       this.sub_total = 0;
       this.preliminary_percentage = 0;
       this.preliminary_cost = 0;
-      this.overhead_percentage = 0;
+      this.overhead_percentage = 25;
       this.overhead_cost = 0;
       this.consistgency_percentage = 0;
       this.consistgency_cost = 0;

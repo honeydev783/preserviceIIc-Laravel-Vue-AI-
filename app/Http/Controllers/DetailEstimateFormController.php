@@ -65,7 +65,8 @@ class DetailEstimateFormController extends Controller
             $country = Countries::where('id', $request->country)->first();
            
             $active = JobActivities::where('id',$request->id)->whereRaw('FIND_IN_SET(?,country_id)', [$request->country])->first();            
-            
+            $currency = $country->currency;
+            $exchange_rate = $country->exchange_rate;
             $lablour = 0;
             $equipment =0;
             $material =0;
@@ -113,12 +114,14 @@ class DetailEstimateFormController extends Controller
                     $material += $lablour += $rate;;
                 }
             }            
-
+            
             $data = array(
                 'components'=>$components,
                 'labour' => $lablour,
                 'material'=>$material,
-                'equipment'=>$equipment
+                'equipment'=>$equipment,
+                'currency'=>$currency,
+                'exchange_rate'=>$exchange_rate
                 
             );
             return response()->json(['data'=>$data],200);

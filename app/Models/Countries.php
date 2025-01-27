@@ -14,6 +14,8 @@ class Countries extends Model
         'country_name',
         'labour_rate',
         'equipment_rate',
-        'material_rate'
+        'material_rate',
+        'currency',
+        'exchange_rate'
     ];
 }

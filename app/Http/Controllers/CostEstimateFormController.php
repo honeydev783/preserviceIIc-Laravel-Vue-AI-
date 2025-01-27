@@ -65,8 +65,10 @@ class CostEstimateFormController extends Controller
         $cost_sf_p = 0;
         $cost_m2_p = 0;
         $substructure = 0;
+        $currency = $country->currency;
+        $exchange_rate = $country->exchange_rate;
         foreach($elements as $element){
-            $element->cost_sf = $country->labour_rate / 100.0 * $element->cost_sf;
+            $element->cost_sf = $country->labour_rate / 100.0 * $element->cost_sf/$exchange_rate;
             $element->cost_m2 = floor($element->cost_sf * 100) / 100 * 10.7639;
             if(!empty($request->quantity_sq_ft)) $element->element_cost = $element->cost_sf * $request->quantity_sq_ft;
             else $element->element_cost = 0 ;
@@ -143,7 +145,9 @@ class CostEstimateFormController extends Controller
             'num_story'=>$request->num_story,
             'category'=>$request->category,
             'rock_percent'=>$request->rock_percent,
-            'category_name'=>$category->menu_name
+            'category_name'=>$category->menu_name,
+            'currency'=>$currency,
+            'exchange_rate'=>$exchange_rate
         );
         Session::put('pdf_data','');
         Session::put('pdf-data',$data);

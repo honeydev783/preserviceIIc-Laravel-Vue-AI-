@@ -805,11 +805,19 @@
 <script>
 import { get } from 'jquery';
 
-
+$(document).ready(function () {
+//    $('#country').select2();
+});
 var id = $('#approx_id').val();
 export default {
     mounted() {
         console.log('Estimation Form 1 Component');
+        // $('#country').on('select2:select', function (e) {
+        //     var _this = this;
+        //     var data = e.params.data;
+        //     _this.country = data.text;
+        //     console.log("country==>", data.text);
+        // });
 
     },
     created() {
@@ -863,6 +871,8 @@ export default {
             cost_gross: 0,
             cost_gross_calculat: 0,
             file: '',
+            currency: '',
+            exchange_rate: 0,
 
             main_preliminary_collect: 0,
             main_profit_collect: 0,
@@ -930,14 +940,14 @@ export default {
             _this.$Progress.start()
             _this.loading = true
             var estimate = $('#category').find(":selected").text();
-            //var country = $('#country').find(":selected").text();
             console.log("estimate type==>", estimate);
+            var country = $('#country').find(":selected").text();
             //var totalsqft = _this.quantity_sq_ft * _this.num_unit;
-            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include conversion Currency and ' + _this.Country + ' Country';
-            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include conversion Currency and ' + _this.country + ' Country';
-            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include Conversion Currency and ' + _this.country+ ' Country';
-            const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate +' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include conversion Currency and ' + _this.country+ ' Country';
-            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF include conversion Currency and ' + _this.country + ' Country';
+            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +'Conversion Currency and '+_this.exchange_rate +'exchange rate to usd and ' + _this.country + ' current location';
+            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  +' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +'Conversion Currency and '+_this.exchange_rate +'exchange rate to usd and ' + _this.country + 'current location';
+            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + _this.currency +'Conversion Currency and '+_this.exchange_rate +'exchange rate to usd and ' + _this.country + ' current location';
+            const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate +' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +'Conversion Currency and '+_this.exchange_rate +'exchange rate to usd and ' + _this.country + ' current location';
+            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +'Conversion Currency and '+_this.exchange_rate +'exchange rate and' + _this.country + 'current location';
             axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
                 const targetElement = document.getElementById('project_design');
                 // let sibling = targetElement.previousElementSibling;
@@ -997,6 +1007,8 @@ export default {
             var _this = this
             _this.$Progress.start()
             _this.loading = true
+            // var country = $('#country').find(":selected").text();
+            // _this.country = country;
             axios.get('/cost-estimate/cost-form/getResults?quantity_sq_ft=' + _this.quantity_sq_ft
                 + '&category=' + _this.category + '&num_unit=' + _this.num_unit + '&num_story=' + _this.num_story +
                 '&rock_percent=' + _this.rock_percent + '&country=' + _this.country + '&soil_conditions=' + _this.soil_conditions)
@@ -1012,9 +1024,12 @@ export default {
                     _this.cost_gross = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2, }).format(response.data.data.cost_gross);
                     _this.cost_gross_calculat = response.data.data.cost_gross
                     _this.category_name = response.data.data.category_name
+                    _this.currency = response.data.data.currency
+                    _this.exchange_rate = Number.parseFloat(response.data.data.exchange_rate).toFixed(2)
                     _this.$Progress.finish()
                     _this.loading = false
                     console.log("response data===>", response.data.data);
+                    console.log("ex_rate===>", _this.exchange_rate);
                     _this.getVertexResults();
 
                 });

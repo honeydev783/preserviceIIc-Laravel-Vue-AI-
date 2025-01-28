@@ -292,7 +292,7 @@ input::-webkit-inner-spin-button {
                       <strong>IMPERIAL RATE:</strong>
                       <div class="form-group">
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="imperial_rate"></vue-numeric> -->
-                        <input type="text" v-model="imperial_rate" class="form-control" />
+                        <input type="text" v-model="imperial_rate_fmt" class="form-control" />
                       </div>
                       <div class="form-group">
                         <strong>UNIT:</strong>
@@ -310,7 +310,7 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="metric_rate"></vue-numeric> -->
 
-                        <input type="text" v-model="metric_rate" class="form-control" />
+                        <input type="text" v-model="metric_rate_fmt" class="form-control" />
                       </div>
                       <div class="form-group">
                         <strong>UNIT:</strong>
@@ -384,7 +384,7 @@ input::-webkit-inner-spin-button {
                         <strong>LABOUR COST:</strong>
                         <!-- <span class="form-control"></span>  -->
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="labour_cost"></vue-numeric> -->
-                        <input type="text" class="form-control" v-model="labour_cost" />
+                        <input type="text" class="form-control" v-model="labour_cost_fmt" />
                       </div>
                     </div>
                   </div>
@@ -394,7 +394,7 @@ input::-webkit-inner-spin-button {
                         <strong>EQUIPMENT COST:</strong>
                         <!-- <span class="form-control"></span>                                        -->
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="equipment_cost"></vue-numeric> -->
-                        <input type="text" class="form-control" v-model="equipment_cost" />
+                        <input type="text" class="form-control" v-model="equipment_cost_fmt" />
                       </div>
                     </div>
                   </div>
@@ -402,7 +402,7 @@ input::-webkit-inner-spin-button {
                     <div class="col-sm-12">
                       <div class="form-group">
                         <strong>MATERIAL COST:</strong>
-                        <input type="text" class="form-control" v-model="material_cost" />
+                        <input type="text" class="form-control" v-model="material_cost_fmt" />
                         <!-- <vue-numeric currency="$" class="form-control" separator=","  v-model="material_cost"></vue-numeric>                                     -->
                       </div>
                     </div>
@@ -424,7 +424,7 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>SUB-TOTAL:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="sub_total"></vue-numeric>  -->
-                        <input type="text" class="form-control" v-model="sub_total" />
+                        <input type="text" class="form-control" v-model="sub_total_fmt" />
                       </div>
                     </div>
                   </div>
@@ -438,7 +438,7 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>PRELIMINARIES / GENERAL REQUIREMENTS COST:</strong>
 
-                        <input type="text" class="form-control" v-model="preliminary_cost"
+                        <input type="text" class="form-control" v-model="preliminary_cost_fmt"
                           v-on:keyup="preliminaryCostAmount" v-on:mouseleave="preliminaryLeave" />
                         <!-- <div class="dollar">
                                               <input type="text" class="form-control" v-model="preliminary_cost" value="0"  >  
@@ -462,7 +462,7 @@ input::-webkit-inner-spin-button {
                         <strong>OVERHEADS & PROFIT:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="overhead_cost"></vue-numeric>  -->
                         <!-- <div class="dollar"> -->
-                        <input type="text" class="form-control" v-model="overhead_cost" max="100" value="0"
+                        <input type="text" class="form-control" v-model="overhead_cost_fmt" max="100" value="0"
                           placeholder="%" v-on:keyup="overheadCost" v-on:mouseleave="overheadLeave" />
                         <!-- </div> -->
                       </div>
@@ -480,7 +480,7 @@ input::-webkit-inner-spin-button {
                         <strong>CONTINGENCY COST:</strong>
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="consistgency_cost" v-on:change="consistgencyCostAmount"></vue-numeric>  -->
                         <!-- <div class="dollar"> -->
-                        <input type="text" class="form-control" v-model="consistgency_cost"
+                        <input type="text" class="form-control" v-model="consistgency_cost_fmt"
                           v-on:keyup="consistgencyCostAmount" v-on:mouseleave="consistgencyLeave" />
                         <!-- </div> -->
                         <!-- Val: {{this.consistgency_cost | currency}}                                   -->
@@ -492,7 +492,7 @@ input::-webkit-inner-spin-button {
                       <div class="form-group">
                         <strong>TOTAL ACTIVITY COST:</strong>
 
-                        <input type="text" class="form-control" v-model="total_cost" min="0" value="0" />
+                        <input type="text" class="form-control" v-model="total_cost_fmt" min="0" value="0" />
                         <!-- <vue-numeric class="form-control" currency="$" separator=","  v-model="total_cost"></vue-numeric>  -->
                         <!-- <input type="number" class="form-control" v-model="total_cost" min="0"  >                                       -->
                       </div>
@@ -1686,14 +1686,14 @@ input::-webkit-inner-spin-button {
                       </td>
                       <td>{{ activity.quantity }}</td>
                       <td>{{ activity.unit }}</td>
-                      <td align="right">{{ activity.rate | currency }}</td>
-                      <td align="right">{{ activity.lab | currency }}</td>
-                      <td align="right">{{ activity.eqp | currency }}</td>
-                      <td align="right">{{ activity.mat | currency }}</td>
-                      <td align="right">{{ activity.addcost | currency }}</td>
-                      <td align="right">{{ activity.ohp | currency }}</td>
-                      <td align="right">{{ activity.cont | currency }}</td>
-                      <td align="right">{{ activity.amount | currency }}</td>
+                      <td align="right">{{ currency =='USD' ? '$' + activity.rate.toFixed(2)  : '$' + currency + activity.rate.toFixed(2) }}</td>
+                      <td align="right">{{ currency =='USD' ? '$' + activity.lab.toFixed(2) : '$' + currency +  activity.lab.toFixed(2)}}</td>
+                      <td align="right">{{ currency =='USD' ? '$' + activity.eqp.toFixed(2) : '$' + currency + activity.eqp.toFixed(2)}}</td>
+                      <td align="right">{{ currency =='USD' ? '$' +activity.mat.toFixed(2) : '$' + currency + activity.mat.toFixed(2)}}</td>
+                      <td align="right">{{ currency =='USD' ? '$' +activity.addcost.toFixed(2) : '$' + currency + activity.addcost.toFixed(2)}}</td>
+                      <td align="right">{{ currency =='USD' ? '$' +activity.ohp.toFixed(2) : '$' + currency +activity.ohp.toFixed(2) }}</td>
+                      <td align="right">{{ currency =='USD' ? '$' +activity.cont.toFixed(2) : '$' + currency +activity.cont.toFixed(2) }}</td>
+                      <td align="right">{{ currency =='USD' ? '$' + Number.parseFloat(activity.amount).toFixed(2) : '$' + currency + Number.parseFloat(activity.amount).toFixed(2)}}</td>
                       <td>
                         <div class="btn-group-list">
                           <span class="btn btn-success editbtn" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
@@ -1937,6 +1937,7 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(value);
+      
     },
   },
 
@@ -1973,9 +1974,11 @@ export default {
       project_description: "",
       activity_description: "",
       imperial_rate: 0,
+      imperial_rate_fmt: "",
       imperial_rate_collect: 0,
       imperial_unit: 0,
       metric_rate: 0,
+      metric_rate_fmt: "",
       metric_rate_collect: 0,
       metric_unit: 0,
       activity_quantity: 0,
@@ -1984,24 +1987,33 @@ export default {
       descriptions: {},
       total: 0,
       equipment_cost: 0,
+      equipment_cost_fmt: "",
       labour_cost: 0,
+      labour_cost_fmt: "",
       material_cost: 0,
+      material_cost_fmt: "",
       equipment_cost_collect: 0,
       labour_cost_collect: 0,
       material_cost_collect: 0,
       sub_total: 0,
+      sub_total_fmt: "",
       preliminary_percentage: 0,
       preliminary_cost: 0,
+      preliminary_cost_fmt: "",
       preliminary_cost_collect: 0,
       consistgency_cost: 0,
+      consistgency_cost_fmt: "",
       consistgency_cost_collect: 0,
       consistgency_percentage: 0,
       overhead_cost: 0,
+      overhead_cost_fmt: "",
       overhead_cost_collect: 0,
       overhead_percentage: 25,
       total_cost: 0,
+      total_cost_fmt: "",
       total_cost_collect: 0,
       additional_cost: 0,
+      additional_cost_fmt: "",
       additional_cost_collect: 0,
       //  total_labour_cost:0,
       total_labour: this.total_labour_cost,
@@ -2171,13 +2183,13 @@ export default {
       const charsToRemove = "#"; // Characters to remove
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
       const result = _this.job_activity.replace(regex, '');
-      _this.job_activity= result;
+      _this.job_activity = result;
       var project_description = 'Project Discription of ' + _this.job_activity;
       console.log("project_description================>", project_description);
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       // console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
-      
+
       axios.get("/predict?text=" + project_description).then(function (response) {
         _this.project_description = response.data.candidates[0].content.parts[0].text;
         const project_discription_textarea = document.getElementById('project_discription');
@@ -2187,16 +2199,16 @@ export default {
         var project_specification_images = _this.project_description + "for constructon area";
 
         axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
-        const targetElement = document.getElementById('project_specification');
-        let sibling = targetElement.previousElementSibling;
-        while (sibling) {
-          const prevSibling = sibling.previousElementSibling; // Store previous sibling
-          sibling.remove(); // Remove current sibling
-          sibling = prevSibling; // Move to the previous sibling
-        }
+          const targetElement = document.getElementById('project_specification');
+          let sibling = targetElement.previousElementSibling;
+          while (sibling) {
+            const prevSibling = sibling.previousElementSibling; // Store previous sibling
+            sibling.remove(); // Remove current sibling
+            sibling = prevSibling; // Move to the previous sibling
+          }
 
-        targetElement.insertAdjacentHTML('beforebegin', response.data);
-      });
+          targetElement.insertAdjacentHTML('beforebegin', response.data);
+        });
 
 
       });
@@ -2245,7 +2257,7 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-      _this.overhead_percentage =25;
+      _this.overhead_percentage = 25;
       axios
         .get("/cost-estimate/detail-form/getcomponents?id=" + _this.country)
         .then(function (response) {
@@ -2428,13 +2440,13 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-      _this.components=[];
+      _this.components = [];
       console.log("activity_description===id========>", _this.activity_description);
       axios
         .get(
           "/cost-estimate/detail-form/getInfo/Components?id=" +
           _this.activity_description +
-          "&country=" + 
+          "&country=" +
           _this.country
         )
         .then((response) => {
@@ -2476,8 +2488,8 @@ export default {
             }
           });
           /**updated code by Ming */
-          _this.currency=response.data.data.currency;
-          _this.exchange_rate= Number.parseFloat(response.data.data.exchange_rate).toFixed(2);
+          _this.currency = response.data.data.currency;
+          _this.exchange_rate = Number.parseFloat(response.data.data.exchange_rate).toFixed(2);
           equipmentTotal = equipmentTotal / _this.exchange_rate;
           materialTotal = materialTotal / _this.exchange_rate;
           labourTotal = labourTotal / _this.exchange_rate;
@@ -2502,11 +2514,11 @@ export default {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.material_cost_collect);
-          
-          if(this.overhead_percentage == 0){
+
+          if (this.overhead_percentage == 0) {
             this.overhead_percentage = 25;
           }
-          
+
           var addsub = 0;
           addsub = parseFloat(
             parseFloat(this.additional_cost_collect) +
@@ -2529,6 +2541,7 @@ export default {
           console.log("!!!total_cost!!!", this.total_cost);
           this.totalcostAmount();
           //this.total_cost_collect = this.sub_total_collect+ this.overhead_cost_collect+this.consistgency_cost_collect+this.preliminary_cost_collect;
+          
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2726,7 +2739,7 @@ export default {
           }).format(this.sub_total_collect);
 
           this.totalcostAmount();
-
+          this.displayWithFormat();
           // this.overheadProfit()
           // this.consistgencyCost()
         });
@@ -2745,6 +2758,7 @@ export default {
         maximumFractionDigits: 2,
       }).format(this.sub_total_collect);
       this.totalcostAmount();
+
     },
     additionalLeave() {
       this.additional_cost = this.additional_cost_collect;
@@ -2817,6 +2831,7 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
+
     },
     consistgencyCost() {
       this.consistgency_cost_collect = parseFloat(
@@ -2829,6 +2844,7 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
+
       this.totalcostAmount();
     },
     totalcostAmount() {
@@ -2862,6 +2878,7 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.metric_rate_collect);
+      this.displayWithFormat();
     },
     preliminriesCost() {
       this.preliminries_amount = parseFloat(
@@ -3151,6 +3168,39 @@ export default {
 
 
       // this.totalCalculation = sortableArray;
+    },
+    displayWithFormat() {
+
+      var _this = this;
+      if (_this.currency != 'XCD') {
+        console.log("currency", _this.currency);
+        console.log("imperial_rate", _this.imperial_rate);
+        _this.consistgency_cost_fmt ='$'+ _this.consistgency_cost;
+        _this.overhead_cost_fmt = '$' + _this.overhead_cost;
+        _this.imperial_rate_fmt = '$' + _this.imperial_rate;
+        _this.metric_rate_fmt = '$' + _this.metric_rate;
+        _this.labour_cost_fmt = '$' + _this.labour_cost;
+        _this.equipment_cost_fmt = '$' + _this.equipment_cost;
+        _this.material_cost_fmt = '$' + _this.material_cost;
+        _this.additional_cost_fmt = '$' + _this.additional_cost;
+        _this.sub_total_fmt = '$' + _this.sub_total;
+        _this.preliminary_cost_fmt = '$' + _this.preliminary_cost;
+        _this.total_cost_fmt = '$' + _this.total_cost;
+      } else {
+        _this.consistgency_cost_fmt =''+ _this.consistgency_cost;
+        _this.overhead_cost_fmt = '' + _this.overhead_cost;
+        _this.imperial_rate_fmt = '' + _this.imperial_rate;
+        _this.metric_rate_fmt = '' + _this.metric_rate;
+        _this.labour_cost_fmt = '' + _this.labour_cost;
+        _this.equipment_cost_fmt = '' + _this.equipment_cost;
+        _this.material_cost_fmt = '' + _this.material_cost;
+        _this.additional_cost_fmt = '' + _this.additional_cost;
+        _this.sub_total_fmt = '' + _this.sub_total;
+        _this.preliminary_cost_fmt = '' + _this.preliminary_cost;
+        _this.total_cost_fmt = '' + _this.total_cost;
+      }
+
+      //this.total
     },
     // up(id,ind) {
     //   var selected = 0;

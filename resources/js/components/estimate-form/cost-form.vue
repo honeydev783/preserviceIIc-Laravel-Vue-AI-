@@ -118,19 +118,19 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>TOTAL CONSTRUCTION COST:</strong>
-                                        <span class="form-control">{{ contract_sum | currency }}</span>
+                                        <span class="form-control">{{currency + '$' + contract_sum  }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / SF:</strong>
-                                        <span class="form-control">{{ e_cost_sf | currency }}</span>
+                                        <span class="form-control">{{currency + '$' + e_cost_sf }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / M2:</strong>
-                                        <span class="form-control">{{ e_cost_m2 | currency }}</span>
+                                        <span class="form-control">{{currency + '$' + e_cost_m2  }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -138,19 +138,19 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>TOTAL PROJECT COST:</strong>
-                                        <span class="form-control">{{ project_cost | currency }}</span>
+                                        <span class="form-control">{{ currency + '$' + project_cost }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / SF:</strong>
-                                        <span class="form-control">{{ cost_sf | currency }}</span>
+                                        <span class="form-control">{{currency + '$' + cost_sf }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / M2:</strong>
-                                        <span class="form-control">{{ cost_m2 | currency }}</span>
+                                        <span class="form-control">{{currency + '$' + cost_m2 }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -196,11 +196,11 @@
 
                                     <div class="form-group">
                                         <strong>UNIT COST:</strong>
-                                        <span class="form-control">{{ t_unit_cost | currency }}</span>
+                                        <span class="form-control">{{ currency + '$' + t_unit_cost }}</span>
                                     </div>
                                     <div class="form-group">
                                         <strong>TOTAL UNIT COST:</strong>
-                                        <span class="form-control">{{ total_cost | currency }}</span>
+                                        <span class="form-control">{{ currency + '$' + total_cost  }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -583,12 +583,12 @@
                                                 style="display: none" />
                                         </td>
                                         <td>
-                                            {{ element.cost_m2 | currency }}
+                                            {{ currency + '$' + element.cost_m2.toFixed(2) }}
                                         </td>
                                         <td>{{ element.unit_m2 }}</td>
-                                        <td>{{ element.cost_sf | currency }}</td>
+                                        <td>{{ currency + '$' + element.cost_sf.toFixed(2)}}</td>
                                         <td>{{ element.unit_sf }}</td>
-                                        <td>{{ element.element_cost | currency }}</td>
+                                        <td>{{ currency + '$' + element.element_cost.toFixed(2) }}</td>
                                         <td>{{ element.factor_type }}</td>
                                         <td>
                                             <div class="btn-group-list">
@@ -607,7 +607,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6"><b>Total:</b></td>
-                                        <td>{{ total | currency }}</td>
+                                        <td>{{ currency + '$' + total }}</td>
                                         <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
                                     </tr>
                                 </tbody>
@@ -628,7 +628,7 @@
                                     </td>
                                     <td width="5%"><strong>%</strong></td>
                                     <td width="15%">
-                                        <input type="text" class="form-control" v-model="main_preliminary_collect"
+                                        <input type="text" class="form-control" v-model="main_preliminary_collect_fmt"
                                             v-on:keyup="preliminaryKeyUp" v-on:mouseleave="permainpreliminary">
                                         <!-- <span class="form-control">{{main_preliminary|currency}}</span>  -->
                                     </td>
@@ -643,7 +643,7 @@
                                     </td>
                                     <td><strong>%</strong></td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="main_profit_collect"
+                                        <input type="text" class="form-control" v-model="main_profit_collect_fmt"
                                             v-on:keyup="mainProfitKeyUp" v-on:mouseleave="mainProfit">
                                         <!-- <span class="form-control">{{main_profit|currency}}</span> -->
                                     </td>
@@ -654,7 +654,7 @@
                                             Contractor's Design Fees)</strong>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="contract_sum_collect"
+                                        <input type="text" class="form-control" v-model="contract_sum_collect_fmt"
                                             v-on:keyup="contractSumKeyUp" v-on:mouseleave="contractsum">
                                         <!-- <span class="form-control">{{contract_sum|currency}}</span> -->
                                     </td>
@@ -669,7 +669,7 @@
                                     </td>
                                     <td><strong>%</strong></td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="team_fee_collect"
+                                        <input type="text" class="form-control" v-model="team_fee_collect_fmt"
                                             v-on:keyup="teamFeeKeyUp" v-on:mouseleave="teamFee">
                                         <!-- <span class="form-control">{{team_fee|currency}}</span> -->
                                     </td>
@@ -684,7 +684,7 @@
                                     </td>
                                     <td><strong>%</strong></td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="dev_cost_collect"
+                                        <input type="text" class="form-control" v-model="dev_cost_collect_fmt"
                                             v-on:keyup="devCostKeyUp" v-on:mouseleave="devCost">
                                         <!-- <span class="form-control">{{dev_cost|currency}}</span> -->
                                     </td>
@@ -699,7 +699,7 @@
                                     </td>
                                     <td><strong>%</strong></td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="client_risk_collect"
+                                        <input type="text" class="form-control" v-model="client_risk_collect_fmt"
                                             v-on:keyup="clientRiskKeyUp" v-on:mouseleave="clientRisk">
                                         <!-- <span class="form-control">{{client_risk|currency}}</span>  -->
                                     </td>
@@ -709,7 +709,7 @@
                                         <strong>TOTAL PROJECT COST</strong>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" v-model="project_cost_collect"
+                                        <input type="text" class="form-control" v-model="project_cost_collect_fmt"
                                             v-on:mouseleave="projectCost">
                                         <!-- <span class="form-control">{{project_cost|currency}}</span>  -->
                                     </td>
@@ -875,12 +875,19 @@ export default {
             exchange_rate: 0,
 
             main_preliminary_collect: 0,
+            main_preliminary_collect_fmt: "0",
             main_profit_collect: 0,
+            main_profit_collect_fmt: "0",
             contract_sum_collect: 0,
+            contract_sum_collect_fmt: "0",
             team_fee_collect: 0,
+            team_fee_collect_fmt: "0",
             dev_cost_collect: 0,
+            dev_cost_collect_fmt: "0",
             client_risk_collect: 0,
+            client_risk_collect_fmt: "0",
             project_cost_collect: 0,
+            project_cost_collect_fmt: "0",
             form_name: '',
             estimate: {},
 
@@ -943,9 +950,9 @@ export default {
             console.log("estimate type==>", estimate);
             var country = $('#country').find(":selected").text();
             //var totalsqft = _this.quantity_sq_ft * _this.num_unit;
-            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and ' +'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ this.project_cost +' TOTAL PROJECT COST and '+ this.total_cost +' TOTAL UNIT COST';
+            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and ' +'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ _this.project_cost +' TOTAL PROJECT COST and '+ _this.total_cost +' TOTAL UNIT COST and ' + _this.contract_sum + 'TOTAL CONSTRUCTION COST';
             const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  +' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + 'current location';
-            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ this.project_cost +' TOTAL PROJECT COST and '+ this.total_cost +' TOTAL UNIT COST';
+            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ _this.project_cost +' TOTAL PROJECT COST and '+ _this.total_cost +' TOTAL UNIT COST and ' + _this.contract_sum + 'TOTAL CONSTRUCTION COST';
             const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate +' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and '+ country + ' current location';
             const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include' + country + 'current location';
             axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
@@ -1003,6 +1010,20 @@ export default {
             _this.$Progress.finish()
             _this.loading = false
         },
+        displayFiexedValue() {
+            var _this = this
+            _this.total = Number.parseFloat(_this.total).toFixed(2);
+            _this.total_cost = Number.parseFloat(_this.total_cost).toFixed(2);
+            _this.t_unit_cost = Number.parseFloat(_this.t_unit_cost).toFixed(2);
+            _this.e_cost_sf = Number.parseFloat(_this.e_cost_sf).toFixed(2);
+            _this.e_cost_m2 = Number.parseFloat(_this.e_cost_m2).toFixed(2);
+            _this.contract_sum = Number.parseFloat(_this.contract_sum).toFixed(2);
+            _this.project_cost = Number.parseFloat(_this.project_cost).toFixed(2);
+            _this.cost_sf = Number.parseFloat(_this.cost_sf).toFixed(2);
+            _this.cost_m2 = Number.parseFloat(_this.cost_m2).toFixed(2);
+            
+
+        },  
         getResults() {
             var _this = this
             _this.$Progress.start()
@@ -1030,6 +1051,7 @@ export default {
                     _this.loading = false
                     console.log("response data===>", response.data.data);
                     console.log("ex_rate===>", _this.exchange_rate);
+                    _this.displayFiexedValue();
                     _this.getVertexResults();
 
                 });
@@ -1249,6 +1271,17 @@ export default {
             this.client_risk = this.client_risk_collect;
             this.calculateAmount();
         },
+        displayCurrencyString(){
+            var _this = this
+            _this.project_cost_collect_fmt = _this.currency + _this.project_cost_collect;
+            _this.main_preliminary_collect_fmt = _this.currency + _this.main_preliminary_collect;
+            _this.main_profit_collect_fmt = _this.currency + _this.main_profit_collect;
+            _this.contract_sum_collect_fmt = _this.currency + _this.contract_sum_collect;
+            _this.team_fee_collect_fmt = _this.currency + _this.team_fee_collect;
+            _this.dev_cost_collect_fmt = _this.currency + _this.dev_cost_collect;
+            _this.client_risk_collect_fmt = _this.currency + _this.client_risk_collect;
+            _this.project_cost_collect_fmt = _this.currency + _this.project_cost_collect;
+        },
         calculate() {
             var _this = this
             if (_this.per_main_preliminary != 0) {
@@ -1289,6 +1322,8 @@ export default {
             if (_this.cost_gross != 0) _this.cost_sf = _this.project_cost / _this.cost_gross_calculat
             //if(_this.cost_gross != 0) _this.cost_m2 = Math.round(_this.project_cost/_this.cost_gross,2)            
             _this.cost_m2 = _this.cost_sf * 10.7646;
+            _this.displayFiexedValue();
+            _this.displayCurrencyString();
             _this.getVertexResults();
 
         },

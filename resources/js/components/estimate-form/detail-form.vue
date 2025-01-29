@@ -534,13 +534,13 @@ input::-webkit-inner-spin-button {
                           <td style="width: 10%">{{ component.quantity }}</td>
                           <td style="width: 10%">{{ component.unit }}</td>
                           <td align="right" style="width: 10%">
-                            {{ component.rate | currency }}
+                            {{ currency +'$'+ Number.parseFloat(component.rate).toFixed(2)   }}
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.rate"></vue-numeric> -->
                             <!-- ${{        new Intl.NumberFormat().format(parseFloat(component.rate).toFixed(2)) }} -->
                             <!-- ${{parseFloat(component.rate).toFixed(2).toLocaleString() }} -->
                           </td>
                           <td align="right" style="width: 10%">
-                            {{ component.amount | currency }}
+                            {{  currency + '$' + Number.parseFloat(component.amount).toFixed(2)  }}
                             <!-- {{ formatter.format(component.amount) }} -->
                             <!-- $ {{ Number(parseFloat(component.amount).toFixed(2)).toLocaleString() }} -->
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.amount"></vue-numeric> -->
@@ -1686,14 +1686,22 @@ input::-webkit-inner-spin-button {
                       </td>
                       <td>{{ activity.quantity }}</td>
                       <td>{{ activity.unit }}</td>
-                      <td align="right">{{ currency =='USD' ? '$' + activity.rate.toFixed(2)  : '$' + currency + activity.rate.toFixed(2) }}</td>
-                      <td align="right">{{ currency =='USD' ? '$' + activity.lab.toFixed(2) : '$' + currency +  activity.lab.toFixed(2)}}</td>
-                      <td align="right">{{ currency =='USD' ? '$' + activity.eqp.toFixed(2) : '$' + currency + activity.eqp.toFixed(2)}}</td>
-                      <td align="right">{{ currency =='USD' ? '$' +activity.mat.toFixed(2) : '$' + currency + activity.mat.toFixed(2)}}</td>
-                      <td align="right">{{ currency =='USD' ? '$' +activity.addcost.toFixed(2) : '$' + currency + activity.addcost.toFixed(2)}}</td>
-                      <td align="right">{{ currency =='USD' ? '$' +activity.ohp.toFixed(2) : '$' + currency +activity.ohp.toFixed(2) }}</td>
-                      <td align="right">{{ currency =='USD' ? '$' +activity.cont.toFixed(2) : '$' + currency +activity.cont.toFixed(2) }}</td>
-                      <td align="right">{{ currency =='USD' ? '$' + Number.parseFloat(activity.amount).toFixed(2) : '$' + currency + Number.parseFloat(activity.amount).toFixed(2)}}</td>
+                      <td align="right">{{ currency + '$' + activity.rate.toFixed(2)
+                        }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.lab.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.eqp.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.mat.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.addcost.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.ohp.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + activity.cont.toFixed(2) }}</td>
+                      <td align="right">{{
+                        currency + '$' + Number.parseFloat(activity.amount).toFixed(2) }}</td>
                       <td>
                         <div class="btn-group-list">
                           <span class="btn btn-success editbtn" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
@@ -1937,7 +1945,7 @@ export default {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(value);
-      
+
     },
   },
 
@@ -2496,21 +2504,21 @@ export default {
           this.labour_cost_collect = labourTotal;// 
           (this.labour_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: _this.currency,
+            currency: "USD",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.labour_cost_collect)),
             (this.equipment_cost_collect = equipmentTotal);
           (this.equipment_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: _this.currency,
+            currency: "USD",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.equipment_cost_collect)),
             (this.material_cost_collect = parseFloat(materialTotal));
           this.material_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: _this.currency,
+            currency: "USD",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.material_cost_collect);
@@ -2529,7 +2537,7 @@ export default {
 
           this.sub_total = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: _this.currency,
+            currency: "USD",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(addsub);
@@ -2541,7 +2549,7 @@ export default {
           console.log("!!!total_cost!!!", this.total_cost);
           this.totalcostAmount();
           //this.total_cost_collect = this.sub_total_collect+ this.overhead_cost_collect+this.consistgency_cost_collect+this.preliminary_cost_collect;
-          
+
           _this.$Progress.finish();
           _this.loading = false;
         });
@@ -2733,13 +2741,13 @@ export default {
             parseFloat(this.material_cost_collect);
           this.sub_total = new Intl.NumberFormat("en-US", {
             style: "currency",
-            currency: this.currency,
+            currency: "USD",
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(this.sub_total_collect);
 
           this.totalcostAmount();
-          this.displayWithFormat();
+          //this.displayWithFormat();
           // this.overheadProfit()
           // this.consistgencyCost()
         });
@@ -2753,7 +2761,7 @@ export default {
         parseFloat(this.material_cost_collect);
       this.sub_total = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.sub_total_collect);
@@ -2764,7 +2772,7 @@ export default {
       this.additional_cost = this.additional_cost_collect;
       this.additional_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.additional_cost_collect);
@@ -2776,7 +2784,7 @@ export default {
       );
       (this.preliminary_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.preliminary_cost_collect)),
@@ -2790,7 +2798,7 @@ export default {
     overheadLeave() {
       this.overhead_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.overhead_cost_collect);
@@ -2801,7 +2809,7 @@ export default {
       );
       this.overhead_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.overhead_cost_collect);
@@ -2815,7 +2823,7 @@ export default {
     preliminaryLeave() {
       this.preliminary_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.preliminary_cost_collect);
@@ -2827,7 +2835,7 @@ export default {
     consistgencyLeave() {
       this.consistgency_cost = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
@@ -2840,7 +2848,7 @@ export default {
 
       this.consistgency_cost = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.consistgency_cost_collect);
@@ -2857,7 +2865,7 @@ export default {
 
       this.total_cost = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.total_cost_collect);
@@ -2865,7 +2873,7 @@ export default {
 
       this.imperial_rate = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.imperial_rate_collect);
@@ -2874,7 +2882,7 @@ export default {
         this.imperial_rate_collect * this.conservation_factor;
       this.metric_rate = Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: this.currency,
+        currency: "USD",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(this.metric_rate_collect);
@@ -3172,33 +3180,21 @@ export default {
     displayWithFormat() {
 
       var _this = this;
-      if (_this.currency != 'XCD') {
-        console.log("currency", _this.currency);
-        console.log("imperial_rate", _this.imperial_rate);
-        _this.consistgency_cost_fmt ='$'+ _this.consistgency_cost;
-        _this.overhead_cost_fmt = '$' + _this.overhead_cost;
-        _this.imperial_rate_fmt = '$' + _this.imperial_rate;
-        _this.metric_rate_fmt = '$' + _this.metric_rate;
-        _this.labour_cost_fmt = '$' + _this.labour_cost;
-        _this.equipment_cost_fmt = '$' + _this.equipment_cost;
-        _this.material_cost_fmt = '$' + _this.material_cost;
-        _this.additional_cost_fmt = '$' + _this.additional_cost;
-        _this.sub_total_fmt = '$' + _this.sub_total;
-        _this.preliminary_cost_fmt = '$' + _this.preliminary_cost;
-        _this.total_cost_fmt = '$' + _this.total_cost;
-      } else {
-        _this.consistgency_cost_fmt =''+ _this.consistgency_cost;
-        _this.overhead_cost_fmt = '' + _this.overhead_cost;
-        _this.imperial_rate_fmt = '' + _this.imperial_rate;
-        _this.metric_rate_fmt = '' + _this.metric_rate;
-        _this.labour_cost_fmt = '' + _this.labour_cost;
-        _this.equipment_cost_fmt = '' + _this.equipment_cost;
-        _this.material_cost_fmt = '' + _this.material_cost;
-        _this.additional_cost_fmt = '' + _this.additional_cost;
-        _this.sub_total_fmt = '' + _this.sub_total;
-        _this.preliminary_cost_fmt = '' + _this.preliminary_cost;
-        _this.total_cost_fmt = '' + _this.total_cost;
-      }
+
+      console.log("currency", _this.currency);
+      console.log("imperial_rate", _this.imperial_rate);
+      _this.consistgency_cost_fmt = _this.currency + _this.consistgency_cost;
+      _this.overhead_cost_fmt = _this.currency + _this.overhead_cost;
+      _this.imperial_rate_fmt = _this.currency + _this.imperial_rate;
+      _this.metric_rate_fmt = _this.currency + _this.metric_rate;
+      _this.labour_cost_fmt = _this.currency + _this.labour_cost;
+      _this.equipment_cost_fmt = _this.currency + _this.equipment_cost;
+      _this.material_cost_fmt = _this.currency + _this.material_cost;
+      _this.additional_cost_fmt = _this.currency + _this.additional_cost;
+      _this.sub_total_fmt = _this.currency + _this.sub_total;
+      _this.preliminary_cost_fmt = _this.currency + _this.preliminary_cost;
+      _this.total_cost_fmt = _this.currency + _this.total_cost;
+
 
       //this.total
     },

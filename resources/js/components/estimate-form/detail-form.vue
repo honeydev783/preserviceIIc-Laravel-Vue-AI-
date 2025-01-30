@@ -531,16 +531,16 @@ input::-webkit-inner-spin-button {
                           <td style="width: 50%">
                             {{ component.resource_type }}
                           </td>
-                          <td style="width: 10%">{{ component.quantity }}</td>
+                          <td style="width: 10%">{{ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.quantity) }}</td>
                           <td style="width: 10%">{{ component.unit }}</td>
                           <td align="right" style="width: 10%">
-                            {{ currency +'$'+ Number.parseFloat(component.rate).toFixed(2)   }}
+                            {{ currency +'$'+ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.rate)}}
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.rate"></vue-numeric> -->
                             <!-- ${{        new Intl.NumberFormat().format(parseFloat(component.rate).toFixed(2)) }} -->
                             <!-- ${{parseFloat(component.rate).toFixed(2).toLocaleString() }} -->
                           </td>
                           <td align="right" style="width: 10%">
-                            {{  currency + '$' + Number.parseFloat(component.amount).toFixed(2)  }}
+                            {{  currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.amount)  }}
                             <!-- {{ formatter.format(component.amount) }} -->
                             <!-- $ {{ Number(parseFloat(component.amount).toFixed(2)).toLocaleString() }} -->
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.amount"></vue-numeric> -->
@@ -706,41 +706,41 @@ input::-webkit-inner-spin-button {
                             <td>{{ component.job_activity }}</td>
                             <td>{{ component.quantity }}</td>
                             <td>{{ component.unit }}</td>
-                            <td>{{ currency + '$' + component.rate }}</td>
-                            <td>{{ currency + '$' + component.lab  }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.rate) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.lab)  }}</td>
 
-                            <td>{{ currency + '$' + component.eqp  }}</td>
-                            <td>{{ currency + '$' + component.mat }}</td>
-                            <td>{{ currency + '$' + component.addcost  }}</td>
-                            <td>{{ currency + '$' + component.ohp }}</td>
-                            <td>{{ currency + '$' + component.cont  }}</td>
-                            <td align="right">{{ currency + '$' + component.amount  }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.eqp)}}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.mat) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.addcost) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.ohp) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.cont)}}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.amount) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">SUB-TOTAL-COST</td>
-                            <td align="right">{{ currency + '$' + this.total_amout_sum  }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_amout_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-LABOUR-COST</td>
-                            <td align="right">{{ currency + '$' + this.total_labour_sum  }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_labour_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-EQUIPMENT-COST</td>
-                            <td align="right">{{ currency + '$' + this.total_equipment_sum }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_equipment_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-MATERIAL-COST</td>
-                            <td align="right">{{ currency + '$' + this.total_material_sum  }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_material_sum)  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
 
                             <td colspan="2">ADDITIONAL/DISCOUNT COST </td>
-                            <td align="right">{{ currency + '$' + this.total_addition_sum  }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_addition_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -748,7 +748,7 @@ input::-webkit-inner-spin-button {
 
                             <td align="right">
                               {{
-                                currency + '$' + this.total_preliminary_sum_collect 
+                                currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_preliminary_sum_collect)
                               }}
                             </td>
                           </tr>
@@ -756,7 +756,7 @@ input::-webkit-inner-spin-button {
                             <td colspan="10"></td>
                             <td colspan="2">OVERHEADS & PROFIT</td>
 
-                            <td align="right">{{ currency + '$' + this.total_ohp_sum }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_ohp_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -764,14 +764,14 @@ input::-webkit-inner-spin-button {
                             <td colspan="2">CONTINGENCY COST</td>
                             <td align="right">
                               {{
-                                currency + '$' + this.total_consistgency_sum_collect 
+                                currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_consistgency_sum_collect) 
                               }}
                             </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL COST</td>
-                            <td align="right">{{ currency + '$' + this.total_amout_collect }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_amout_collect)}}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1686,22 +1686,22 @@ input::-webkit-inner-spin-button {
                       </td>
                       <td>{{ activity.quantity }}</td>
                       <td>{{ activity.unit }}</td>
-                      <td align="right">{{ currency + '$' + activity.rate.toFixed(2)
+                      <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.rate)
                         }}</td>
                       <td align="right">{{
-                        currency + '$' + activity.lab.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.lab)  }}</td>
                       <td align="right">{{
-                        currency + '$' + activity.eqp.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.eqp)}}</td>
                       <td align="right">{{
-                        currency + '$' + activity.mat.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.mat) }}</td>
                       <td align="right">{{
-                        currency + '$' + activity.addcost.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.addcost) }}</td>
                       <td align="right">{{
-                        currency + '$' + activity.ohp.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.ohp) }}</td>
                       <td align="right">{{
-                        currency + '$' + activity.cont.toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.cont)}}</td>
                       <td align="right">{{
-                        currency + '$' + Number.parseFloat(activity.amount).toFixed(2) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.amount)}}</td>
                       <td>
                         <div class="btn-group-list">
                           <span class="btn btn-success editbtn" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
@@ -1722,7 +1722,7 @@ input::-webkit-inner-spin-button {
                       <td colspan="10"></td>
                       <td colspan="2"><b>Total Cost</b></td>
                       <td align="right">
-                        <b class="total_amount_sum">{{currency + '$' + total_amout_sum }}</b>
+                        <b class="total_amount_sum">{{currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(total_amout_sum) }}</b>
                       </td>
                     </tr>
                   </tfoot>
@@ -2481,6 +2481,8 @@ export default {
           response.data.data.components.forEach((value, index) => {
             if (value.category == "Labour") {
               labourTotal += value.quantity * value.rate * this.quantity;
+              console.log("labourTotal in=========>", labourTotal);
+
             }
           });
           var equipmentTotal = 0;
@@ -2500,11 +2502,12 @@ export default {
           });
           /**updated code by Ming */
           _this.currency = response.data.data.currency;
-          _this.exchange_rate = Number.parseFloat(response.data.data.exchange_rate).toFixed(2);
+          //_this.exchange_rate = Number.parseFloat(response.data.data.exchange_rate).toFixed(2);
           equipmentTotal = equipmentTotal / _this.exchange_rate;
           materialTotal = materialTotal / _this.exchange_rate;
           labourTotal = labourTotal / _this.exchange_rate;
           this.labour_cost_collect = labourTotal;// 
+          console.log("labourTotal out=========>", labourTotal);
           (this.labour_cost = new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",

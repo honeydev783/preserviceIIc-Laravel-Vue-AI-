@@ -118,19 +118,19 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>TOTAL CONSTRUCTION COST:</strong>
-                                        <span class="form-control">{{currency + '$' + contract_sum  }}</span>
+                                        <span class="form-control">{{currency + '$' + contract_sum_collect  }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / SF:</strong>
-                                        <span class="form-control">{{currency + '$' + e_cost_sf }}</span>
+                                        <span class="form-control">{{currency + '$' + e_cost_sf_collect }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / M2:</strong>
-                                        <span class="form-control">{{currency + '$' + e_cost_m2  }}</span>
+                                        <span class="form-control">{{currency + '$' + e_cost_m2_collect  }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -138,19 +138,19 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>TOTAL PROJECT COST:</strong>
-                                        <span class="form-control">{{ currency + '$' + project_cost }}</span>
+                                        <span class="form-control">{{ currency + '$' + project_cost_collect }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / SF:</strong>
-                                        <span class="form-control">{{currency + '$' + cost_sf }}</span>
+                                        <span class="form-control">{{currency + '$' + cost_sf_collect }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <strong>COST / M2:</strong>
-                                        <span class="form-control">{{currency + '$' + cost_m2 }}</span>
+                                        <span class="form-control">{{currency + '$' + cost_m2_collect }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -196,11 +196,11 @@
 
                                     <div class="form-group">
                                         <strong>UNIT COST:</strong>
-                                        <span class="form-control">{{ currency + '$' + t_unit_cost }}</span>
+                                        <span class="form-control">{{ currency + '$' + t_unit_cost_collect }}</span>
                                     </div>
                                     <div class="form-group">
                                         <strong>TOTAL UNIT COST:</strong>
-                                        <span class="form-control">{{ currency + '$' + total_cost  }}</span>
+                                        <span class="form-control">{{ currency + '$' + total_cost_collect  }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -456,16 +456,16 @@
                                                 <tr v-for="element in elements" :key="element.id">
                                                     <td>{{ element.element_code }}</td>
                                                     <td>{{ element.description }}</td>
-                                                    <td>{{ element.cost_m2 | currency }}</td>
+                                                    <td>{{ currency + '$'+ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.cost_m2) }}</td>
                                                     <td>{{ element.unit_m2 }}</td>
-                                                    <td>{{ element.cost_sf | currency }}</td>
+                                                    <td>{{ currency + '$'+ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.cost_sf) }}</td>
                                                     <td>{{ element.unit_sf }}</td>
-                                                    <td>{{ element.element_cost | currency }}</td>
-                                                    <td>{{ element.factor_type }}</td>
+                                                    <td>{{ currency + '$'+ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.element_cost) }}</td>
+                                                    <td>{{  element.factor_type }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="6"><b>Total:</b></td>
-                                                    <td>{{ total | currency }}</td>
+                                                    <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(total)  }}</td>
                                                     <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
                                                 </tr>
                                             </tbody>
@@ -477,7 +477,7 @@
                                                 <td width="13%" align="right"><strong style="color:black">{{
                                                     per_main_preliminary }} %</strong></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    main_preliminary_collect }}</strong></td>
+                                                    main_preliminary_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">MAIN CONTRACTOR'S OVERHEADS
@@ -485,7 +485,7 @@
                                                 <td width="13%" align="right"><strong style="color:black">{{
                                                     per_main_profit }} %</strong></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    main_profit_collect }}</strong></td>
+                                                    main_profit_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">TOTAL CONSTRUCTION COST -
@@ -493,7 +493,7 @@
                                                         Fees)</strong></td>
                                                 <td width="13%" align="right"></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    contract_sum_collect }}</strong></td>
+                                                    contract_sum_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">PROJECT / DESIGN TEAM
@@ -501,7 +501,7 @@
                                                 <td width="13%" align="right"><strong style="color:black">{{
                                                     per_team_fee }} %</strong></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    team_fee_collect }}</strong></td>
+                                                    team_fee_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">OTHER DEVELOPMENT
@@ -509,7 +509,7 @@
                                                 <td width="13%" align="right"><strong style="color:black">{{
                                                     per_dev_cost }} %</strong></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    dev_cost_collect }}</strong></td>
+                                                    dev_cost_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">CONTENGENCIES (Client's
@@ -517,14 +517,14 @@
                                                 <td width="13%" align="right"><strong style="color:black">{{
                                                     per_client_risk }} %</strong></td>
                                                 <td width="10%" align="right"><strong style="color:black">{{
-                                                    client_risk_collect }}</strong></td>
+                                                    client_risk_collect_fmt }}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td width="77%"><strong style="color:black">TOTAL PROJECT COST</strong>
                                                 </td>
                                                 <td width="13%" align="right"></td>
-                                                <td width="10%" align="right"><strong style="color:black">{{
-                                                    project_cost | currency }}</strong></td>
+                                                <td width="10%" align="right"><strong style="color:black">
+                                                    {{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(project_cost) }}</strong></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -583,12 +583,12 @@
                                                 style="display: none" />
                                         </td>
                                         <td>
-                                            {{ currency + '$' + element.cost_m2.toFixed(2) }}
+                                            {{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.cost_m2)}}
                                         </td>
                                         <td>{{ element.unit_m2 }}</td>
-                                        <td>{{ currency + '$' + element.cost_sf.toFixed(2)}}</td>
+                                        <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.cost_sf) }}</td>
                                         <td>{{ element.unit_sf }}</td>
-                                        <td>{{ currency + '$' + element.element_cost.toFixed(2) }}</td>
+                                        <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(element.element_cost) }}</td>
                                         <td>{{ element.factor_type }}</td>
                                         <td>
                                             <div class="btn-group-list">
@@ -607,7 +607,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6"><b>Total:</b></td>
-                                        <td>{{ currency + '$' + total }}</td>
+                                        <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(total) }}</td>
                                         <td>{{ parseFloat(total_factor).toFixed(2) }} %</td>
                                     </tr>
                                 </tbody>
@@ -840,14 +840,20 @@ export default {
             category: 1,
             country: '',
             cost_sf: 0,
+            cost_sf_collect: 0,
             cost_m2: 0,
+            cost_m2_collect: 0,
             e_cost_sf: 0,
+            e_cost_sf_collect: 0,
             e_cost_m2: 0,
+            e_cost_m2_collect: 0,
             element_factor: 0,
             rock_percent: 0,
             description: '',
             t_unit_cost: 0,
+            t_unit_cost_collect: 0,
             total_cost: 0,
+            total_cost_collect: 0,
             conceptual_note: '',
             estimate_note: '',
             exculstion_note: '',
@@ -859,6 +865,7 @@ export default {
             per_main_profit: 0,
             main_profit: 0,
             contract_sum: 0,
+            contract_sum_collect: 0,
             team_fee: 0,
             per_team_fee: 0,
             dev_cost: 0,
@@ -866,6 +873,7 @@ export default {
             client_risk: 0,
             per_client_risk: 0,
             project_cost: 0,
+            //project_cost_collect: 0,
             image_src: '',
             total_factor: 0,
             cost_gross: 0,
@@ -950,9 +958,9 @@ export default {
             console.log("estimate type==>", estimate);
             var country = $('#country').find(":selected").text();
             //var totalsqft = _this.quantity_sq_ft * _this.num_unit;
-            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and ' +'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ _this.project_cost +' TOTAL PROJECT COST and '+ _this.total_cost +' TOTAL UNIT COST and ' + _this.contract_sum + 'TOTAL CONSTRUCTION COST';
-            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  +' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + 'current location';
-            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and ' + country + ' current location and '+ _this.project_cost +' TOTAL PROJECT COST and '+ _this.total_cost +' TOTAL UNIT COST and ' + _this.contract_sum + 'TOTAL CONSTRUCTION COST';
+            const approx_project_description = 'Project Discription text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA :SQ/FT -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency + '$' + 'Currency and ' + 'exchange rate from '+ _this.currency +'$1 to' + 'USD$ '+ _this.exchange_rate +  'and ' + country + ' current location and '+ _this.project_cost_collect +' TOTAL PROJECT COST and '+ _this.total_cost_collect +' TOTAL UNIT COST and ' + _this.contract_sum_collect + 'TOTAL CONSTRUCTION COST';
+            const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  +' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +'$ Currency and '+'exchange rate from '+ _this.currency +'$1 to' + 'USD$' + _this.exchange_rate+ ' and ' + country + 'current location';
+            const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + _this.currency +'$ Currency and '+'exchange rate from '+ _this.currency +'$1 to' + 'USD$ '+ _this.exchange_rate + 'and ' + country + ' current location and '+ _this.project_cost_collect +' TOTAL PROJECT COST and '+ _this.total_cost_collect +' TOTAL UNIT COST and ' + _this.contract_sum_collect + 'TOTAL CONSTRUCTION COST';
             const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate +' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA:SQ/SF include'+ _this.currency +' Currency and '+'exchange rate from 1'+ _this.currency +' to' +_this.exchange_rate+ 'usd and '+ country + ' current location';
             const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include' + country + 'current location';
             axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
@@ -1021,7 +1029,15 @@ export default {
             _this.project_cost = Number.parseFloat(_this.project_cost).toFixed(2);
             _this.cost_sf = Number.parseFloat(_this.cost_sf).toFixed(2);
             _this.cost_m2 = Number.parseFloat(_this.cost_m2).toFixed(2);
-            
+            _this.total_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.total);
+            _this.total_cost_collect = new Intl.NumberFormat("en-US", {minimumFractionDigits:2,  maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.total_cost);
+            _this.t_unit_cost_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.t_unit_cost);
+            _this.e_cost_sf_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.e_cost_sf);
+            _this.e_cost_m2_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.e_cost_m2);
+            _this.contract_sum_collect = new Intl.NumberFormat("en-US", {minimumFractionDigits:2,  maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.contract_sum);
+            _this.project_cost_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2,  maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.project_cost);
+            _this.cost_sf_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.cost_sf);
+            _this.cost_m2_collect = new Intl.NumberFormat("en-US", { minimumFractionDigits:2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(_this.cost_m2);
 
         },  
         getResults() {
@@ -1042,7 +1058,7 @@ export default {
                     _this.image_src = response.data.data.image_src
                     _this.e_cost_sf = response.data.data.e_cost_sf
                     _this.e_cost_m2 = response.data.data.e_cost_m2
-                    _this.cost_gross = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2, }).format(response.data.data.cost_gross);
+                    _this.cost_gross = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(response.data.data.cost_gross);
                     _this.cost_gross_calculat = response.data.data.cost_gross
                     _this.category_name = response.data.data.category_name
                     _this.currency = response.data.data.currency
@@ -1108,19 +1124,19 @@ export default {
         clearSummary() {
             var _this = this
             _this.main_preliminary = 0
-            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_preliminary);
+            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_preliminary);
             _this.main_profit = 0
-            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_profit);
+            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_profit);
             _this.contract_sum = 0
-            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.contract_sum);
+            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.contract_sum);
             _this.team_fee = 0
-            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.team_fee);
+            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.team_fee);
             _this.dev_cost = 0
-            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.dev_cost);
+            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.dev_cost);
             _this.client_risk = 0
-            this.project_cost_c = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.client_risk);
+            this.project_cost_c = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.client_risk);
             _this.project_cost = 0
-            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
         },
         /* edit, update, remove */
         edit(index) {
@@ -1227,25 +1243,25 @@ export default {
             this.$modal.hide('image-upload-modal')
         },
         permainpreliminary() {
-            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_preliminary);
+            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(this.main_preliminary);
         },
         contractsum() {
-            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.contract_sum);
+            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.contract_sum);
         },
         mainProfit() {
-            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_profit);
+            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_profit);
         },
         teamFee() {
-            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.team_fee);
+            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.team_fee);
         },
         devCost() {
-            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.dev_cost);
+            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.dev_cost);
         },
         clientRisk() {
-            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.client_risk);
+            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.client_risk);
         },
         projectCost() {
-            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
         },
         preliminaryKeyUp() {
             this.main_preliminary = this.main_preliminary_collect;
@@ -1273,49 +1289,50 @@ export default {
         },
         displayCurrencyString(){
             var _this = this
-            _this.project_cost_collect_fmt = _this.currency + _this.project_cost_collect;
+           
+            //_this.project_cost_collect_fmt = _this.currency + _this.project_cost_collect;
             _this.main_preliminary_collect_fmt = _this.currency + _this.main_preliminary_collect;
             _this.main_profit_collect_fmt = _this.currency + _this.main_profit_collect;
             _this.contract_sum_collect_fmt = _this.currency + _this.contract_sum_collect;
             _this.team_fee_collect_fmt = _this.currency + _this.team_fee_collect;
             _this.dev_cost_collect_fmt = _this.currency + _this.dev_cost_collect;
             _this.client_risk_collect_fmt = _this.currency + _this.client_risk_collect;
-            _this.project_cost_collect_fmt = _this.currency + _this.project_cost_collect;
+            _this.project_cost_collect_fmt = _this.currency + '$' + _this.project_cost_collect;
         },
         calculate() {
             var _this = this
             if (_this.per_main_preliminary != 0) {
                 _this.main_preliminary = (_this.total * _this.per_main_preliminary) / 100
             }
-            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_preliminary);
+            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_preliminary);
 
             if (_this.per_main_profit != 0) {
                 _this.main_profit = (_this.total * _this.per_main_profit) / 100
             }
-            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_profit);
+            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_profit);
 
             _this.contract_sum = parseFloat(_this.total) + parseFloat(_this.main_preliminary) + parseFloat(_this.main_profit)
 
             if (_this.per_team_fee != 0) {
                 _this.team_fee = (_this.contract_sum) * _this.per_team_fee / 100
             }
-            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.team_fee);
+            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.team_fee);
 
             if (_this.per_dev_cost != 0) {
                 _this.dev_cost = (_this.contract_sum) * _this.per_dev_cost / 100
             }
-            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.dev_cost);
+            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.dev_cost);
 
             if (_this.per_client_risk != 0) {
                 _this.client_risk = (_this.contract_sum) * _this.per_client_risk / 100
             }
-            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.client_risk);
+            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.client_risk);
 
             _this.project_cost = parseFloat(_this.contract_sum) + parseFloat(_this.team_fee) + parseFloat(_this.dev_cost) + parseFloat(_this.client_risk)
 
-            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
 
-            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.contract_sum);
+            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.contract_sum);
 
             _this.cost_sf = 0;
             // if(_this.cost_gross != 0) _this.cost_sf = Math.round(_this.project_cost/_this.cost_gross,2)
@@ -1329,10 +1346,10 @@ export default {
         },
         calculateAmount() {
             this.contract_sum = parseFloat(parseFloat(this.total) + parseFloat(this.main_preliminary) + parseFloat(this.main_profit)).toFixed(2)
-            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.contract_sum);
+            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.contract_sum);
 
             this.project_cost = parseFloat(parseFloat(this.contract_sum) + parseFloat(this.team_fee) + parseFloat(this.dev_cost) + parseFloat(this.client_risk));
-            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
         },
         showSaveModal() {
             this.$modal.show('save-form');
@@ -1442,9 +1459,9 @@ export default {
             this.project_title_sum = this.project_title
             this.estimate_type_sum = this.category_name
             this.project_location = $('#country').find(":selected").text();
-            this.e_cost_sf_sum = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.cost_sf);
-            this.e_cost_m2_sum = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.cost_m2);
-            this.project_cost_sum = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.e_cost_sf_sum = this.currency + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.cost_sf);
+            this.e_cost_m2_sum = this.currency +new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.cost_m2);
+            this.project_cost_sum = this.currency + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
         },
         printCloseFirst() {
             $('#print_1 thead tr th').css('font-size', '1rem')
@@ -1460,12 +1477,12 @@ export default {
             $('#estimate_type_sum').attr("value", this.estimate_type_sum);
             $('#project_location').attr("value", this.project_location);
             $('#cost_gross').attr("value", this.cost_gross);
-            $('#e_cost_sf_sum').attr("value", this.e_cost_sf_sum);
-            $('#e_cost_m2_sum').attr("value", this.e_cost_m2_sum);
+            $('#e_cost_sf_sum').attr("value", this.e_cost_sf_sum_collect);
+            $('#e_cost_m2_sum').attr("value", this.e_cost_m2_sum_collect);
             $('#num_unit').attr("value", this.num_unit);
             $('#num_story').attr("value", this.num_story);
             $('#rock_percent').attr("value", this.rock_percent);
-            $('#project_cost_sum').attr("value", this.project_cost_sum);
+            $('#project_cost_sum').attr("value", this.project_cost_sum_collect);
             $('#description').attr("value", this.description);
             $('#conceptual_note').attr("value", this.conceptual_note);
             $('#estimate_note').attr("value", this.estimate_note);
@@ -1478,35 +1495,35 @@ export default {
             if (_this.per_main_preliminary != 0) {
                 _this.main_preliminary = (_this.total * _this.per_main_preliminary) / 100
             }
-            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_preliminary);
+            this.main_preliminary_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_preliminary);
 
             if (_this.per_main_profit != 0) {
                 _this.main_profit = (_this.total * _this.per_main_profit) / 100
             }
-            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.main_profit);
+            this.main_profit_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.main_profit);
 
             _this.contract_sum = parseFloat(_this.total) + parseFloat(_this.main_preliminary) + parseFloat(_this.main_profit)
 
             if (_this.per_team_fee != 0) {
                 _this.team_fee = (_this.contract_sum) * _this.per_team_fee / 100
             }
-            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.team_fee);
+            this.team_fee_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.team_fee);
 
             if (_this.per_dev_cost != 0) {
                 _this.dev_cost = (_this.contract_sum) * _this.per_dev_cost / 100
             }
-            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.dev_cost);
+            this.dev_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.dev_cost);
 
             if (_this.per_client_risk != 0) {
                 _this.client_risk = (_this.contract_sum) * _this.per_client_risk / 100
             }
-            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.client_risk);
+            this.client_risk_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.client_risk);
 
             _this.project_cost = parseFloat(_this.contract_sum) + parseFloat(_this.team_fee) + parseFloat(_this.dev_cost) + parseFloat(_this.client_risk)
 
-            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.project_cost);
+            this.project_cost_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.project_cost);
 
-            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, }).format(this.contract_sum);
+            this.contract_sum_collect = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2, maximumSignificantDigits: 3,}).format(this.contract_sum);
 
         },
         //printPDF(){

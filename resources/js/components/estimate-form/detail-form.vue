@@ -706,41 +706,41 @@ input::-webkit-inner-spin-button {
                             <td>{{ component.job_activity }}</td>
                             <td>{{ component.quantity }}</td>
                             <td>{{ component.unit }}</td>
-                            <td>{{ component.rate | currency }}</td>
-                            <td>{{ component.lab | currency }}</td>
+                            <td>{{ currency + '$' + component.rate }}</td>
+                            <td>{{ currency + '$' + component.lab  }}</td>
 
-                            <td>{{ component.eqp | currency }}</td>
-                            <td>{{ component.mat | currency }}</td>
-                            <td>{{ component.addcost | currency }}</td>
-                            <td>{{ component.ohp | currency }}</td>
-                            <td>{{ component.cont | currency }}</td>
-                            <td align="right">{{ component.amount | currency }}</td>
+                            <td>{{ currency + '$' + component.eqp  }}</td>
+                            <td>{{ currency + '$' + component.mat }}</td>
+                            <td>{{ currency + '$' + component.addcost  }}</td>
+                            <td>{{ currency + '$' + component.ohp }}</td>
+                            <td>{{ currency + '$' + component.cont  }}</td>
+                            <td align="right">{{ currency + '$' + component.amount  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">SUB-TOTAL-COST</td>
-                            <td align="right">{{ this.total_amout_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_amout_sum  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-LABOUR-COST</td>
-                            <td align="right">{{ this.total_labour_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_labour_sum  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-EQUIPMENT-COST</td>
-                            <td align="right">{{ this.total_equipment_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_equipment_sum }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-MATERIAL-COST</td>
-                            <td align="right">{{ this.total_material_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_material_sum  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
 
                             <td colspan="2">ADDITIONAL/DISCOUNT COST </td>
-                            <td align="right">{{ this.total_addition_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_addition_sum  }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -748,7 +748,7 @@ input::-webkit-inner-spin-button {
 
                             <td align="right">
                               {{
-                                this.total_preliminary_sum_collect | currency
+                                currency + '$' + this.total_preliminary_sum_collect 
                               }}
                             </td>
                           </tr>
@@ -756,7 +756,7 @@ input::-webkit-inner-spin-button {
                             <td colspan="10"></td>
                             <td colspan="2">OVERHEADS & PROFIT</td>
 
-                            <td align="right">{{ this.total_ohp_sum | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_ohp_sum }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -764,14 +764,14 @@ input::-webkit-inner-spin-button {
                             <td colspan="2">CONTINGENCY COST</td>
                             <td align="right">
                               {{
-                                this.total_consistgency_sum_collect | currency
+                                currency + '$' + this.total_consistgency_sum_collect 
                               }}
                             </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL COST</td>
-                            <td align="right">{{ this.total_amout_collect | currency }}</td>
+                            <td align="right">{{ currency + '$' + this.total_amout_collect }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1722,7 +1722,7 @@ input::-webkit-inner-spin-button {
                       <td colspan="10"></td>
                       <td colspan="2"><b>Total Cost</b></td>
                       <td align="right">
-                        <b class="total_amount_sum">{{ total_amout_sum | currency }}</b>
+                        <b class="total_amount_sum">{{currency + '$' + total_amout_sum }}</b>
                       </td>
                     </tr>
                   </tfoot>
@@ -2461,6 +2461,9 @@ export default {
           _this.components = response.data.data.components;
 
           _this.components = response.data.data.components.map((item, key) => {
+            _this.exchange_rate = response.data.data.exchange_rate;
+            var rate = item.rate/ _this.exchange_rate;
+            console.log("rate=====>", rate);
             return {
               key: parseFloat(key) + 1,
               resource_type: item.resource_type,
@@ -2468,8 +2471,8 @@ export default {
                 parseFloat(item.quantity).toFixed(4) * this.quantity
               ).toFixed(4),
               unit: item.unit,
-              rate: item.rate,
-              amount: item.quantity * this.quantity * item.rate,
+              rate: rate,
+              amount: item.quantity * this.quantity * rate,
               category: item.category,
             };
           });

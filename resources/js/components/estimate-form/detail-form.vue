@@ -50,6 +50,21 @@ span.select2 {
   cursor: pointer;
 }
 
+.code-btn {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 85px;
+  height: 25px;
+  border-radius: 3px;
+  text-align: center;
+}
+.vgroup-center {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
 @media (max-width: 575.98px) {
   .modal-fullscreen {
     padding: 0 !important;
@@ -1663,12 +1678,13 @@ input::-webkit-inner-spin-button {
                   <tbody v-if="loadResourceComponent" class="row_position detail-form-list">
                     <tr v-for="(activity, i) in jobActivitiesList" :key="i" :id="i + '-row'"
                       :data="activity.activity_code" :data-index="i">
-                      <td>
+                      <td class="vgroup-center">
                         <span :id="'activity_code_label' + i">{{
                           activity.activity_code
                         }}</span>
                         <input class="form-control activity_code" type="text" :id="'activity_code_' + i"
                           style="display: none" :value="activity.activity_code" />
+                          <button  @click="updateActivityCode(activity)" class="code-btn">Get Code</button>
                       </td>
                       <td>
                         <span :id="'element_description_label' + i">{{
@@ -1934,6 +1950,7 @@ $(document).ready(function () {
   $("#material").select2();
 });
 
+import axios from "axios";
 import Input from "../../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/Input.vue";
 
 export default {
@@ -2237,6 +2254,21 @@ export default {
       _this.$Progress.finish();
       _this.loading = false;
 
+    },
+    updateActivityCode(value) {
+      var _this = this;
+      var job_activity = value.job_activity;
+      var query = "standard job activity code for" + job_activity + "in USA construction industry masterformat";
+      _this.$Progress.start();
+      _this.loading = true;
+      axios.get("/predict?text=" + query).then(function (response) {
+      console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
+      value.activity_code = response.data.candidates[0].content.parts[0].text;
+      console.log("JobActivityList===>", _this.jobActivitiesList[0].activity_code);
+      _this.$Progress.finish();
+      _this.loading = false;
+
+      });
     },
     getActivity: function () {
       var _this = this;

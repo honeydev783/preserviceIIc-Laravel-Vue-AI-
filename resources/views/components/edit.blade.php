@@ -187,16 +187,17 @@ Resource Component Edit
             const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
             const result = resource_type.replace(regex, '');
             console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
-            var resource_comp_data = 'Generate an HTML code for  description, Component List, average hourly costs and company list with contact information of ' + result + ' in USA area';
+        } else if(document.getElementById('resource_category').value == "Premilinaries") {
+            var resource_comp_data = 'Generate an HTML code for  description, Component List, average hourly costs and company list with contact information of ' + result + 'Premilinaries in USA area';
             
         } else {
-
-        }var resource_type= document.getElementById('resource_type').value;
+            var resource_type= document.getElementById('resource_type').value;
             const charsToRemove = "#"; // Characters to remove
             const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
             const result = resource_type.replace(regex, '');
             console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
-            var resource_comp_data = 'Generate an HTML code by description, Component List, Prices and company list with contact information of ' + result + ' in USA area';
+            var resource_comp_data = 'prices and Supplier contact informations for' + result + 'in USA construction industry \n separate the prices and contact informations';  
+        }
             
         
         axios.get("/predict?text=" + resource_comp_data).then(function (response) {                  

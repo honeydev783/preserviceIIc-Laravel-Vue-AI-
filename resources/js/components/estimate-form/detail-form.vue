@@ -54,7 +54,7 @@ span.select2 {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  width: 85px;
+  width: 100px;
   height: 25px;
   border-radius: 3px;
   text-align: center;
@@ -1684,7 +1684,7 @@ input::-webkit-inner-spin-button {
                         }}</span>
                         <input class="form-control activity_code" type="text" :id="'activity_code_' + i"
                           style="display: none" :value="activity.activity_code" />
-                          <button  @click="updateActivityCode(activity)" class="code-btn">Get Code</button>
+                          <button  @click="updateActivityCode(activity)" class="code-btn">Get CSI Code</button>
                       </td>
                       <td>
                         <span :id="'element_description_label' + i">{{
@@ -2221,7 +2221,7 @@ export default {
         project_discription_textarea.value = '';
         project_discription_textarea.value = _this.project_description;
         console.log("project_description A================>", response.data);
-        var project_specification_images = _this.project_description + "for constructon area";
+        var project_specification_images = _this.project_description + "in USA construction industry";
 
         axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
           const targetElement = document.getElementById('project_specification');
@@ -2258,7 +2258,7 @@ export default {
     updateActivityCode(value) {
       var _this = this;
       var job_activity = value.job_activity;
-      var query = "standard job activity code for" + job_activity + "in USA construction industry masterformat";
+      var query = "only masterformat csi  code for" + job_activity + "in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {

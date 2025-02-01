@@ -2299,7 +2299,7 @@ export default {
       _this.loading = true;
       const charsToRemove = "#-"; // Characters to remove
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
-      const result = _this.job_activity.replace(regex, '');
+      const result = _this.job_activity.replace(regex, ' ');
       _this.job_activity = result;
       var project_description = 'Project Discription of ' + _this.job_activity;
       console.log("project_description================>", project_description);
@@ -2348,7 +2348,7 @@ export default {
     updateActivityCode(value) {
       var _this = this;
       var job_activity = value.job_activity;
-      var query = "only masterformat csi  code for" + job_activity + "in USA construction industry";
+      var query = "only masterformat2018 csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {

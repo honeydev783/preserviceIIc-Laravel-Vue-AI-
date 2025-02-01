@@ -2301,7 +2301,7 @@ export default {
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
       const result = _this.job_activity.replace(regex, ' ');
       _this.job_activity = result;
-      var project_description = 'Project Discription of ' + _this.job_activity;
+      var project_description = 'Project Discription of ' + _this.job_activity + 'job activity and ' + _this.labour_cost_fmt + ' labour cost and ' + _this.material_cost_fmt + ' material cost and' + _this.equipment_cost_fmt + ' equipment cost and' + _this.total_cost_fmt + "Total Activity Cost";
       console.log("project_description================>", project_description);
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       // console.log("Activity query===>", project_specification_images);
@@ -3015,6 +3015,7 @@ export default {
         maximumFractionDigits: 2,
       }).format(this.metric_rate_collect);
       this.displayWithFormat();
+      this.getVertexResults();
     },
     preliminriesCost() {
       this.preliminries_amount = parseFloat(

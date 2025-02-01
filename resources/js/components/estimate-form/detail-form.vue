@@ -59,12 +59,14 @@ span.select2 {
   border-radius: 3px;
   text-align: center;
 }
+
 .vgroup-center {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
 }
+
 @media (max-width: 575.98px) {
   .modal-fullscreen {
     padding: 0 !important;
@@ -546,16 +548,25 @@ input::-webkit-inner-spin-button {
                           <td style="width: 50%">
                             {{ component.resource_type }}
                           </td>
-                          <td style="width: 10%">{{ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.quantity) }}</td>
+                          <td style="width: 10%">{{ Intl.NumberFormat('en-us', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2, maximumSignificantDigits: 3,
+                          }).format(component.quantity) }}</td>
                           <td style="width: 10%">{{ component.unit }}</td>
                           <td align="right" style="width: 10%">
-                            {{ currency +'$'+ Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.rate)}}
+                            {{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3,
+                            }).format(component.rate)}}
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.rate"></vue-numeric> -->
                             <!-- ${{        new Intl.NumberFormat().format(parseFloat(component.rate).toFixed(2)) }} -->
                             <!-- ${{parseFloat(component.rate).toFixed(2).toLocaleString() }} -->
                           </td>
                           <td align="right" style="width: 10%">
-                            {{  currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(component.amount)  }}
+                            {{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3,
+                            }).format(component.amount) }}
                             <!-- {{ formatter.format(component.amount) }} -->
                             <!-- $ {{ Number(parseFloat(component.amount).toFixed(2)).toLocaleString() }} -->
                             <!-- <vue-numeric class="form-control show-currency" currency="$" disabled={disabled} separator=","  :value="component.amount"></vue-numeric> -->
@@ -721,41 +732,80 @@ input::-webkit-inner-spin-button {
                             <td>{{ component.job_activity }}</td>
                             <td>{{ component.quantity }}</td>
                             <td>{{ component.unit }}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.rate) }}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.lab)  }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+}).format(component.rate) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+}).format(component.lab) }}</td>
 
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.eqp)}}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.mat) }}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.addcost) }}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.ohp) }}</td>
-                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.cont)}}</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(component.amount) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits:3}).format(component.eqp)}}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3}).format(component.mat) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(component.addcost) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3}).format(component.ohp) }}</td>
+                            <td>{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3}).format(component.cont)}}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(component.amount) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">SUB-TOTAL-COST</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_amout_sum) }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_amout_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-LABOUR-COST</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_labour_sum) }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_labour_sum) }}
+                            </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-EQUIPMENT-COST</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_equipment_sum) }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_equipment_sum) }}
+                            </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL-MATERIAL-COST</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_material_sum)  }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_material_sum) }}
+                            </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
 
                             <td colspan="2">ADDITIONAL/DISCOUNT COST </td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_addition_sum) }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_addition_sum) }}
+                            </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -763,7 +813,11 @@ input::-webkit-inner-spin-button {
 
                             <td align="right">
                               {{
-                                currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_preliminary_sum_collect)
+                                currency + '$' + Intl.NumberFormat('en-us', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                  maximumSignificantDigits: 3
+                                }).format(this.total_preliminary_sum_collect)
                               }}
                             </td>
                           </tr>
@@ -771,7 +825,10 @@ input::-webkit-inner-spin-button {
                             <td colspan="10"></td>
                             <td colspan="2">OVERHEADS & PROFIT</td>
 
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_ohp_sum) }}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_ohp_sum) }}</td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
@@ -779,14 +836,22 @@ input::-webkit-inner-spin-button {
                             <td colspan="2">CONTINGENCY COST</td>
                             <td align="right">
                               {{
-                                currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_consistgency_sum_collect) 
+                                currency + '$' + Intl.NumberFormat('en-us', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                  maximumSignificantDigits: 3
+                                }).format(this.total_consistgency_sum_collect)
                               }}
                             </td>
                           </tr>
                           <tr>
                             <td colspan="10"></td>
                             <td colspan="2">TOTAL COST</td>
-                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(this.total_amout_collect)}}</td>
+                            <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2, maximumSignificantDigits: 3
+                            }).format(this.total_amout_collect)}}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -1684,7 +1749,7 @@ input::-webkit-inner-spin-button {
                         }}</span>
                         <input class="form-control activity_code" type="text" :id="'activity_code_' + i"
                           style="display: none" :value="activity.activity_code" />
-                          <button  @click="updateActivityCode(activity)" class="code-btn">Get CSI Code</button>
+                        <button @click="updateActivityCode(activity)" class="code-btn">Get CSI Code</button>
                       </td>
                       <td>
                         <span :id="'element_description_label' + i">{{
@@ -1702,22 +1767,46 @@ input::-webkit-inner-spin-button {
                       </td>
                       <td>{{ activity.quantity }}</td>
                       <td>{{ activity.unit }}</td>
-                      <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.rate)
+                      <td align="right">{{ currency + '$' + Intl.NumberFormat('en-us', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2, maximumSignificantDigits: 3,
+                      }).format(activity.rate)
                         }}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.lab)  }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.lab) }}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.eqp)}}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.eqp)}}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.mat) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.mat) }}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.addcost) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.addcost) }}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.ohp) }}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.ohp) }}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.cont)}}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.cont)}}</td>
                       <td align="right">{{
-                        currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3,}).format(activity.amount)}}</td>
+                        currency + '$' + Intl.NumberFormat('en-us', {
+                          minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits: 3,
+                        }).format(activity.amount)}}</td>
                       <td>
                         <div class="btn-group-list">
                           <span class="btn btn-success editbtn" :id="'edit-btn-' + i" @click="edit(i)">Edit</span>
@@ -1738,7 +1827,10 @@ input::-webkit-inner-spin-button {
                       <td colspan="10"></td>
                       <td colspan="2"><b>Total Cost</b></td>
                       <td align="right">
-                        <b class="total_amount_sum">{{currency + '$' + Intl.NumberFormat('en-us', {minimumFractionDigits:2, maximumFractionDigits:2, maximumSignificantDigits:3}).format(total_amout_sum) }}</b>
+                        <b class="total_amount_sum">{{ currency + '$' + Intl.NumberFormat('en-us',
+                          {
+                            minimumFractionDigits: 2, maximumFractionDigits: 2,
+                          maximumSignificantDigits:3}).format(total_amout_sum) }}</b>
                       </td>
                     </tr>
                   </tfoot>
@@ -2205,7 +2297,7 @@ export default {
       var _this = this;
       _this.$Progress.start();
       _this.loading = true;
-      const charsToRemove = "#"; // Characters to remove
+      const charsToRemove = "#-"; // Characters to remove
       const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
       const result = _this.job_activity.replace(regex, '');
       _this.job_activity = result;
@@ -2214,27 +2306,25 @@ export default {
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       // console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
+      var project_specification_images = project_description + "in USA construction industry";
 
+      axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
+        const targetElement = document.getElementById('project_specification');
+        let sibling = targetElement.previousElementSibling;
+        while (sibling) {
+          const prevSibling = sibling.previousElementSibling; // Store previous sibling
+          sibling.remove(); // Remove current sibling
+          sibling = prevSibling; // Move to the previous sibling
+        }
+
+        targetElement.insertAdjacentHTML('beforebegin', response.data);
+      });
       axios.get("/predict?text=" + project_description).then(function (response) {
         _this.project_description = response.data.candidates[0].content.parts[0].text;
         const project_discription_textarea = document.getElementById('project_discription');
         project_discription_textarea.value = '';
         project_discription_textarea.value = _this.project_description;
         console.log("project_description A================>", response.data);
-        var project_specification_images = _this.project_description + "in USA construction industry";
-
-        axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
-          const targetElement = document.getElementById('project_specification');
-          let sibling = targetElement.previousElementSibling;
-          while (sibling) {
-            const prevSibling = sibling.previousElementSibling; // Store previous sibling
-            sibling.remove(); // Remove current sibling
-            sibling = prevSibling; // Move to the previous sibling
-          }
-
-          targetElement.insertAdjacentHTML('beforebegin', response.data);
-        });
-
 
       });
       axios.get("/predict?text=" + project_specification).then(function (response) {
@@ -2262,11 +2352,11 @@ export default {
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {
-      console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
-      value.activity_code = response.data.candidates[0].content.parts[0].text;
-      console.log("JobActivityList===>", _this.jobActivitiesList[0].activity_code);
-      _this.$Progress.finish();
-      _this.loading = false;
+        console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
+        value.activity_code = response.data.candidates[0].content.parts[0].text;
+        console.log("JobActivityList===>", _this.jobActivitiesList[0].activity_code);
+        _this.$Progress.finish();
+        _this.loading = false;
 
       });
     },
@@ -2494,7 +2584,7 @@ export default {
 
           _this.components = response.data.data.components.map((item, key) => {
             _this.exchange_rate = response.data.data.exchange_rate;
-            var rate = item.rate/ _this.exchange_rate;
+            var rate = item.rate / _this.exchange_rate;
             console.log("rate=====>", rate);
             return {
               key: parseFloat(key) + 1,

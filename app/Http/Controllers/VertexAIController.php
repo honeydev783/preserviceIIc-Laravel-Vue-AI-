@@ -91,7 +91,7 @@ class VertexAIController extends Controller
         $accessToken = $client->getAccessToken()['access_token'];
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://us-central1-aiplatform.googleapis.com/v1/projects/474073143471/locations/us-central1/publishers/google/models/imagen-3.0-generate-001:predict");
+        curl_setopt($ch, CURLOPT_URL, "https://us-central1-aiplatform.googleapis.com/v1/projects/474073143471/locations/us-central1/publishers/google/models/imagen-3.0-generate-002:predict");
         curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $prompt = $request->text;

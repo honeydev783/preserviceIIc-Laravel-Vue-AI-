@@ -2306,7 +2306,7 @@ export default {
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       // console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
-      var project_specification_images = project_specification;
+      var project_specification_images = 'Project Discription of ' + _this.job_activity;
 
       axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
         const targetElement = document.getElementById('project_specification');

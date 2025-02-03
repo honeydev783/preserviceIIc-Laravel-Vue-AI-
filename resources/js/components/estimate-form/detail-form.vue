@@ -2348,13 +2348,16 @@ export default {
     updateActivityCode(value) {
       var _this = this;
       var job_activity = value.job_activity;
-      var query = "only masterformat2018 csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
+      var query = "masterformat csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {
         console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
-        value.activity_code = response.data.candidates[0].content.parts[0].text;
-        console.log("JobActivityList===>", _this.jobActivitiesList[0].activity_code);
+        var result = response.data.candidates[0].content.parts[0].text;
+        var numbers = result.match(/\d+/g);
+        var csi_code = numbers.join('').substring(0, 6);
+        value.activity_code = csi_code;
+        console.log("JobActivityList===>", csi_code);
         _this.$Progress.finish();
         _this.loading = false;
 

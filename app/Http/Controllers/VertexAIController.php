@@ -35,8 +35,8 @@ class VertexAIController extends Controller
         curl_setopt($ch, CURLOPT_URL, "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=AIzaSyB_lCA_IkBmaH4hOMdtL2erpwD-oLfAg1A");
         curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $refinedPrompt = $this->processor->refinePrompt($request->text);
-        $data = ["contents" => ["parts" => ["text" =>  $refinedPrompt]]];
+        //$refinedPrompt = $this->processor->refinePrompt($request->text);
+        $data = ["contents" => ["parts" => ["text" =>  $request->text]]];
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json'

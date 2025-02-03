@@ -233,7 +233,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <span @click="getResults" class="btn btn-success">ADD UNIT#</span>
-                        <span @click="getResults" class="btn btn-success">RUN</span>
+                        <span @click="getEstimateResults" class="btn btn-success">RUN</span>
                         <span class="btn btn-success" @click="clearForm">Clear / Reset Form</span>
                         <!-- <span class="btn btn-success" @click="printPDF">Print / Preview</span> -->
                         <span class="btn btn-success" data-toggle="modal" data-target="#modal-fullscreen-xl"
@@ -806,22 +806,13 @@
 import { get } from 'jquery';
 
 $(document).ready(function () {
-//    $('#country').select2();
+   //$('#country').select2();
 });
 var id = $('#approx_id').val();
 export default {
-    mounted() {
-        console.log('Estimation Form 1 Component');
-        // $('#country').on('select2:select', function (e) {
-        //     var _this = this;
-        //     var data = e.params.data;
-        //     _this.country = data.text;
-        //     console.log("country==>", data.text);
-        // });
-
-    },
+    
     created() {
-        this.getResults();
+        //this.getResults();
         this.getCountrys();
         this.getEstimateType();
         if (id != 0) {
@@ -910,6 +901,19 @@ export default {
             soil_conditions: 1,
         }
     },
+    mounted() {
+        console.log('Estimation Form 1 Component');
+        // const vm = this;
+        // $('#country').on('select2:select', function (e) {
+        //     var data = e.params.data;
+        //     vm.country = data.text;
+        //     vm.country_id = data.id;
+        //     console.log("country==>", data.text);
+        //     console.log("country id==>", data.id);
+
+        // });
+
+    },
     methods: {
         onResize(newRect) {
             console.log("Resizing:", newRect);
@@ -962,8 +966,8 @@ export default {
             const basis_estimate_notes = 'Basis of Estimate Notes of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  +' TOTAL GROSS FLOOR AREA:SQ/SF include'+ country + 'current location';
             const design_program_notes = 'Design Program Notes text of ' + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA (GFA):SQ/SF with individual room design plan include' + country + 'current location';
             const inclustions_exclustions_notes = "Project Inclusions and Project Exclusions of " + estimate +' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES' + _this.cost_gross  + ' TOTAL GROSS FLOOR AREA:SQ/SF include' + country + ' current location';
-            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include' + country + 'current location';
-            axios.get("/predictimages?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
+            const project_specification_images = "Project Specification Images of " + estimate + ' with ' + _this.quantity_sq_ft + ' per BUILDING GROSS FLOOR AREA (SQ/FT) -QUANTITY and ' + _this.num_unit + ' NO. OF UNITS and ' + _this.num_story + ' NO. OF STORIES and ' + _this.cost_gross + ' TOTAL GROSS FLOOR AREA:SQ/SF include';
+            axios.get("/predictimages1?text=" + project_specification_images, { timeout: 20000 }).then(function (response) {
                 const targetElement = document.getElementById('project_design');
                 // let sibling = targetElement.previousElementSibling;
                 // while (sibling) {
@@ -1044,8 +1048,43 @@ export default {
             var _this = this
             _this.$Progress.start()
             _this.loading = true
-            // var country = $('#country').find(":selected").text();
-            // _this.country = country;
+            if(_this.country == ''){
+                _this.country = 2;
+            }
+            console.log("category==>", _this.category);
+            console.log("country==>", _this.country);
+           
+            
+            axios.get('/cost-estimate/cost-form/getResults?quantity_sq_ft=' + _this.quantity_sq_ft
+                + '&category=' + _this.category + '&num_unit=' + _this.num_unit + '&num_story=' + _this.num_story +
+                '&rock_percent=' + _this.rock_percent + '&country=' + _this.country + '&soil_conditions=' + _this.soil_conditions)
+                .then(function (response) {
+                    _this.elements = response.data.data.elements
+                    _this.total = response.data.data.total
+                    _this.total_cost = response.data.data.total
+                    _this.total_factor = response.data.data.total_factor
+                    _this.t_unit_cost = response.data.data.t_unit_cost
+                    _this.image_src = response.data.data.image_src
+                    _this.e_cost_sf = response.data.data.e_cost_sf
+                    _this.e_cost_m2 = response.data.data.e_cost_m2
+                    _this.cost_gross = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2,  maximumSignificantDigits: 3,  }).format(response.data.data.cost_gross);
+                    _this.cost_gross_calculat = response.data.data.cost_gross
+                    _this.category_name = response.data.data.category_name
+                    _this.currency = response.data.data.currency
+                    _this.exchange_rate = Number.parseFloat(response.data.data.exchange_rate).toFixed(2)
+                    _this.$Progress.finish()
+                    _this.loading = false
+                    console.log("response data===>", response.data.data);
+                    console.log("ex_rate===>", _this.exchange_rate);
+                    _this.displayFiexedValue();
+                    //_this.getVertexResults();
+
+                });
+
+        },
+        getEstimateResults(){
+            var _this = this
+                       
             axios.get('/cost-estimate/cost-form/getResults?quantity_sq_ft=' + _this.quantity_sq_ft
                 + '&category=' + _this.category + '&num_unit=' + _this.num_unit + '&num_story=' + _this.num_story +
                 '&rock_percent=' + _this.rock_percent + '&country=' + _this.country + '&soil_conditions=' + _this.soil_conditions)
@@ -1071,7 +1110,6 @@ export default {
                     _this.getVertexResults();
 
                 });
-
         },
         getCountrys() {
             var _this = this

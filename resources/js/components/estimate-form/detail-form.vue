@@ -2247,7 +2247,7 @@ export default {
     });
     setInterval(() => {
       // this.trackJobActivity()
-      this.viewGrid();
+      //this.viewGrid();
     }, 2000);
     // this.$root.$on("detail-estimate-form", () => {
     //   // this.trackJobActivity();
@@ -2348,7 +2348,7 @@ export default {
     updateActivityCode(value) {
       var _this = this;
       var job_activity = value.job_activity;
-      var query = "masterformat csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
+      var query = "recent csi code for " + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {
@@ -2380,7 +2380,7 @@ export default {
           _this.imperial_unit = response.data.data.imperial_unit;
           _this.metric_unit = response.data.data.metric_unit;
           _this.conservation_factor = response.data.data.conservation_factor;
-          _this.getVertexResults();
+          //_this.getVertexResults();
           _this.$Progress.finish();
           _this.loading = false;
         });

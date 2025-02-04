@@ -74,6 +74,46 @@ class VertexAIController extends Controller
         return response()->json(json_decode($response));
         // return $token;
     }
+
+    public function predictprice(Request $request)
+    {
+        $keyFilePath = env('GOOGLE_APPLICATION_CREDENTIALS');
+        $client = new Client();
+
+        $client->setAuthConfig($keyFilePath);
+        $client->addScope('https://www.googleapis.com/auth/cloud-platform');
+
+        // Check if the token is expired and refresh if needed
+        if ($client->isAccessTokenExpired()) {
+            $client->fetchAccessTokenWithAssertion();
+        }
+
+        $accessToken = $client->getAccessToken()['access_token'];
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://us-central1-aiplatform.googleapis.com/v1/projects/474073143471/locations/us-central1/publishers/google/models/gemini-1.0-pro-002:streamGenerateContent");
+        
+        curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $prompt = $request->text;
+        $data = ["contents" => ["role"=>"user", "parts" => ["text" => $prompt]], "generation_config" => ["temperature" => 0.9, "topP" => 1.0,  "maxOutputTokens" => 2048]];
+        
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $accessToken,
+            'Content-Type: application/json'
+        ]);
+        $response = curl_exec($ch);
+        $aidata = json_decode($response, true);
+        
+        if (curl_errno($ch)) {
+            Log::error("error===>" . curl_error($ch));
+            return response()->json(['error' => curl_error($ch)], 500);
+        }
+        curl_close($ch);
+        //Log::error("error===>".$response);
+        return response()->json($aidata);
+    }
     // public function predict(Request $request)
     // {
     //     $keyFilePath = env('GOOGLE_APPLICATION_CREDENTIALS');

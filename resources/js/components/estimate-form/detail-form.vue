@@ -2348,7 +2348,7 @@ export default {
     updateActivityCode(value) {
       var _this = this;
       var job_activity = value.job_activity;
-      var query = "recent csi code for " + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
+      var query = "only one last masterformat csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
       axios.get("/predict?text=" + query).then(function (response) {

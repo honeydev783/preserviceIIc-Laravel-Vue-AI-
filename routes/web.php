@@ -36,6 +36,7 @@ Route::get('/demo', function(){
 Route::get('/cron/expire-estimates','App\Http\Controllers\CronController@expireEsitmate');
 Route::get('/predict', [VertexAIController::class, 'predict']);
 Route::get('/predictprice', [VertexAIController::class, 'predictprice']);
+Route::get('/predictcode', [VertexAIController::class, 'predictcode']);
 Route::get('/predictimages1', [VertexAIController::class, 'predictimages1']);
 Route::get('/predictimages', [VertexAIController::class, 'predictimages']);
 Route::get('/upload', [DocumentController::class, 'showForm'])->name('upload.form');

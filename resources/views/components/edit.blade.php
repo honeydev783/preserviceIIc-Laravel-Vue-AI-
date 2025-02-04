@@ -67,7 +67,7 @@ Resource Component Edit
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Unit:</strong>
-                    <input type="text" name="unit" value="{{$resource_component->unit}}" class="form-control">
+                    <input type="text" id="component_unit" name="unit" value="{{$resource_component->unit}}" class="form-control">
                 </div>
             </div>
 
@@ -175,7 +175,7 @@ Resource Component Edit
         $('#dynamicTable_' + value).remove();
     });
 
-    function resourceaieditdata() {
+    async function resourceaieditdata() {
         if (document.getElementById('resource_category').value == "Labour") {
             var resource_comp_data = 'Generate an HTML code for average hourly rate cost value of ' + document.getElementById('resource_type').value + ' job skills in USA area';
             axios.get("/predict?text=" + resource_comp_data).then(function(response) {
@@ -204,15 +204,22 @@ Resource Component Edit
             const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
             const result = resource_type.replace(regex, '');
             console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
-            var resource_comp_data = 'Generate html table code for Costs  of ' + result + '  in famous USA construction material Suppliers with its official website link and contact information  one row per each supplier';
-            axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
+            const unit = document.getElementById('component_unit').value;
+            var query='Average cost of ' + result + 'per' + unit + ' Material in USA area';
+            var html='';
+            var resource_comp_data ='Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
+            await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
                 var aidata = response.data;
-                var html = '';
                 for(let i=0; i<aidata.length; i++) {
                     html+= aidata[i].candidates[0].content.parts[0].text;
                 }
-                $('#resourceaicompdata').html(html);
-            });
+                  // $('#resourceaicompdata').html(html);
+            }); 
+            
+            axios.get("/predict?text=" + query).then(function(response) {
+                    html += response.data.candidates[0].content.parts[0].text;
+                    $('#resourceaicompdata').html(html);
+                });
         }
 
 

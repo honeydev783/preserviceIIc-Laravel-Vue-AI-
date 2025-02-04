@@ -2351,7 +2351,7 @@ export default {
       var query = "only one last masterformat csi code for" + value.element_description + ' Activity category and ' +  job_activity + " job activity in USA construction industry";
       _this.$Progress.start();
       _this.loading = true;
-      axios.get("/predict?text=" + query).then(function (response) {
+      axios.get("/predictcode?text=" + query).then(function (response) {
         console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
         var result = response.data.candidates[0].content.parts[0].text;
         var numbers = result.match(/\d+/g);

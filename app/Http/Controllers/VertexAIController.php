@@ -18,8 +18,62 @@ class VertexAIController extends Controller
     {
         $this->processor = $processor;
     }
-
     public function predict(Request $request)
+    {
+        // Prepare the HTTP client
+        $client = new Client();
+
+        // Get the access token
+        $credentialsPath = env('GOOGLE_APPLICATION_CREDENTIALS');
+        $scopes = ['https://www.googleapis.com/auth/cloud-platform'];
+
+        $credentials = new ServiceAccountCredentials($scopes, $credentialsPath);
+        $token = $credentials->fetchAuthToken()['access_token'];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=AIzaSyB_lCA_IkBmaH4hOMdtL2erpwD-oLfAg1A");
+        curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //$refinedPrompt = $this->processor->refinePrompt($request->text);
+        $data = ["contents" => ["parts" => ["text" =>  $request->text]]];
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json'
+        ]);
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            return response()->json(['error' => curl_error($ch)], 500);
+        }
+        curl_close($ch);
+        //$response = json_decode($response);
+        $responseData = json_decode($response);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return response()->json(['error' => 'Invalid JSON response'], 500);
+        }
+        try {
+
+            $filePath = 'jsonl_files/dataset.jsonl';
+            $fileHandle = fopen($filePath, 'a');
+            $text = $responseData->candidates[0]->content->parts[0]->text;
+            $input = trim($request->text);
+            // Safely extract text from the response object
+            $save_data = [
+                "input" => $input,
+                "output" => $text ?? ''
+            ];
+
+            // Convert the array to JSON and write it to the file
+            fwrite($fileHandle, json_encode($save_data) . PHP_EOL);
+            fclose($fileHandle);
+        } catch (\Exception $e) {
+            Log::error("error===>" . $e->getMessage());
+        }
+
+
+        return response()->json(json_decode($response));
+        // return $token;
+    }
+    public function predictcode(Request $request)
     {
         // Prepare the HTTP client
         $client = new Client();
@@ -96,7 +150,7 @@ class VertexAIController extends Controller
         curl_setopt($ch, CURLOPT_POST, true); // Change to false if GET
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $prompt = $request->text;
-        $data = ["contents" => ["role"=>"user", "parts" => ["text" => $prompt]], "generation_config" => ["temperature" => 0.9, "topP" => 1.0,  "maxOutputTokens" => 2048]];
+        $data = ["contents" => ["role"=>"user", "parts" => ["text" => $prompt]], "generation_config" => ["temperature" => 0.9, "topP" => 1.0,  "maxOutputTokens" => 500]];
         
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [

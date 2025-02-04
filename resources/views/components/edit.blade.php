@@ -205,7 +205,7 @@ Resource Component Edit
             const result = resource_type.replace(regex, '');
             console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
             const unit = document.getElementById('component_unit').value;
-            var query='Average cost of ' + result + 'per' + unit + ' Material in USA area';
+            var query='Average cost of ' + result + ' per ' + unit + ' Material in USA area';
             var html='';
             var resource_comp_data ='Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
             await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {

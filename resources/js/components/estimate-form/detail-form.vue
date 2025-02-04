@@ -2354,6 +2354,12 @@ export default {
       axios.get("/predictcode?text=" + query).then(function (response) {
         console.log("standard Activity code=====>", response.data.candidates[0].content.parts[0].text);
         var result = response.data.candidates[0].content.parts[0].text;
+        var substring="masterformat";
+        var position = result.toLowerCase().indexOf(substring);
+        console.log("position===>", position);
+        if(position!=-1) {
+          result = result.slice(position+30);
+        }
         var numbers = result.match(/\d+/g);
         var csi_code = numbers.join('').substring(0, 6);
         value.activity_code = csi_code;

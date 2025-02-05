@@ -175,7 +175,8 @@ Resource Component Edit
         $('#dynamicTable_' + value).remove();
     });
 
-    async function resourceaieditdata() {
+    function resourceaieditdata() {
+        var country_ids = $('#mySelect2').val();
         if (document.getElementById('resource_category').value == "Labour") {
             var resource_comp_data = 'Generate an HTML code for average hourly rate cost value of ' + document.getElementById('resource_type').value + ' job skills in USA area';
             axios.get("/predict?text=" + resource_comp_data).then(function(response) {
@@ -189,7 +190,7 @@ Resource Component Edit
         } else if (document.getElementById('resource_category').value == "Preliminries") {
             // var resource_comp_data = 'Generate an HTML code to get Prices ' + ' of' + document.getElementById('resource_category').value + 'consist of ' + document.getElementById('resource_type').value + 'as much as possible in USA area';
             var resource_comp_data = 'Generate an HTML code for  description, Component List, average hourly costs and company list with contact information of ' + result + ' Preliminries in USA area';
-            
+
             // var resource_type = document.getElementById('resource_type').value;
             // const charsToRemove = "#"; // Characters to remove
             // const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
@@ -198,31 +199,53 @@ Resource Component Edit
             axios.get("/predict?text=" + resource_comp_data).then(function(response) {
                 $('#resourceaicompdata').html(response.data.candidates[0].content.parts[0].text);
             });
-        }  else {
+        } else {
             var resource_type = document.getElementById('resource_type').value;
-            const charsToRemove = "#"; // Characters to remove
-            const regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
-            const result = resource_type.replace(regex, '');
+            var charsToRemove = "#"; // Characters to remove
+            var regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
+            var result = resource_type.replace(regex, '');
             console.log("sfsfsfsdfs", document.getElementById('resource_type').value);
             const unit = document.getElementById('component_unit').value;
-            var query='Average cost of ' + result + ' per ' + unit + ' Material in USA area';
-            var html='';
-            var resource_comp_data ='Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
-            await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
+            var query = 'Average cost of ' + result + ' per ' + unit + ' Material in USA area';
+            var info_query = 'detail description for ' + result;
+            var html = '';
+            var resource_comp_data = 'Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
+            axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
                 var aidata = response.data;
-                for(let i=0; i<aidata.length; i++) {
-                    html+= aidata[i].candidates[0].content.parts[0].text;
+                for (let i = 0; i < aidata.length; i++) {
+                    html += aidata[i].candidates[0].content.parts[0].text;
                 }
-                  // $('#resourceaicompdata').html(html);
-            }); 
-            
-            axios.get("/predict?text=" + query).then(function(response) {
+                // $('#resourceaicompdata').html(html);
+            });
+
+            axios.get("/predict?text=" + info_query).then(function(response) {
+                var average_price = 'estimate average cost in USA per ' + unit + ' about ' + response.data.candidates[0].content.parts[0].text;
+                axios.get("/predict?text=" + average_price).then(function(response) {
+                    var final_query = 'get one average value in ' + response.data.candidates[0].content.parts[0].text;
                     html += response.data.candidates[0].content.parts[0].text;
                     $('#resourceaicompdata').html(html);
+                    axios.get("/predict?text=" + final_query).then(function(response) {
+                        var final_cost = response.data.candidates[0].content.parts[0].text;
+                        charsToRemove = "$"; // Characters to remove
+                        regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
+                        result_cost = final_cost.replace(regex, '');
+                        document.getElementById('input_rate_' + country_ids).value = result_cost;
+                        $.ajax({
+                            type: "GET",
+                            url: "/country_details/" + country_ids,
+                            dataType: 'json',
+                            success: function(result) {
+                                var cal_rate = Number.parseFloat(result_cost * result.country.material_rate).toFixed(2); 
+                                $('#rate_' + country_ids).text(cal_rate);
+                                $('#cal_rate_' + country_ids).val(cal_rate);
+                            }
+                        })
+                        console.log("final_cost======>", result_cost);
+                    });
+
                 });
+            });
         }
-
-
 
     }
 

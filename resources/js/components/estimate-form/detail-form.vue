@@ -1491,9 +1491,9 @@ input::-webkit-inner-spin-button {
           <br />
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
-              <form method="POST" enctype="multipart/form-data">
+              <form method="POST" @submit.prevent="submitForm" enctype="multipart/form-data">
                 @csrf
-                <input type="file" name="pdf_file" accept=".pdf" required>
+                <input type="file" ref="fileInput" name="pdf_file" accept=".pdf" required>
                 <button type="submit">Upload PDF</button>
               </form>
             </div>
@@ -2276,6 +2276,37 @@ export default {
     // alert(this.totalCalculation1);
   },
   methods: {
+    async submitForm() {
+      const file = this.$refs.fileInput.files[0];
+
+      if (!file) {
+        console.log("No file selected.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        console.log("Uploading file...");
+
+        const response = await axios.post('/uploadpdf', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        if (response.status === 200) {
+          console.log('Upload successful.');
+        } else {
+          console.log('Upload failed.');
+        }
+      } catch (error) {
+        console.error(error);
+        console.log('Upload failed.');
+      }
+    },
+  
     getResults() {
       var _this = this;
       _this.$Progress.start();
@@ -2306,7 +2337,7 @@ export default {
       var project_specification = 'Project Specifications of ' + _this.job_activity;
       // console.log("Activity query===>", project_specification_images);
       var component_note = 'Component List Prices and provider list of ' + _this.job_activity;
-      var project_specification_images = 'Project Discription of ' + _this.job_activity;
+      var project_specification_images = 'Project Description of ' + _this.job_activity;
 
       axios.get("/predictimages?text=" + project_specification_images, { timeout: 30000 }).then(function (response) {
         const targetElement = document.getElementById('project_specification');

@@ -12,16 +12,20 @@ use Google\Cloud\DocumentAI\V1\BatchDocumentsInputConfig;
 
 class DocumentController extends Controller
 {
-   public function showForm()
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
+    public function showForm()
     {
         return view('upload');
     }
 
     public function uploadPDF(Request $request)
     {
-        $fileName = time().'.pdf';       
+        $fileName = time() . '.pdf';
         $request->file->move(public_path('entry_images'), $fileName);
-        $path = url('/entry_images').'/'.$fileName;
+        $path = url('/entry_images') . '/' . $fileName;
         // Store the uploaded PDF
         // $path = $request->file('pdf_file')->store('uploads');
 
@@ -60,4 +64,3 @@ class DocumentController extends Controller
         }
     }
 }
-

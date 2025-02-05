@@ -226,9 +226,7 @@ Resource Component Edit
                     $('#resourceaicompdata').html(html);
                     axios.get("/predict?text=" + final_query).then(function(response) {
                         var final_cost = response.data.candidates[0].content.parts[0].text;
-                        charsToRemove = "$"; // Characters to remove
-                        regex = new RegExp(`[${charsToRemove}]`, 'g'); // Create a regex to match the characters
-                        result_cost = final_cost.replace(regex, '');
+                        result_cost = final_cost.replace(/[^0-9.-]+/g, "");
                         document.getElementById('input_rate_' + country_ids).value = result_cost;
                         $.ajax({
                             type: "GET",

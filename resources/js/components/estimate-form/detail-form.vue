@@ -2389,7 +2389,7 @@ export default {
         var position = result.toLowerCase().indexOf(substring);
         console.log("position===>", position);
         if(position!=-1) {
-          result = result.slice(position+30);
+          result = result.slice(position + 50);
         }
         var numbers = result.match(/\d+/g);
         var csi_code = numbers.join('').substring(0, 6);

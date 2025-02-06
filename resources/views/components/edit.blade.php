@@ -175,7 +175,7 @@ Resource Component Edit
         $('#dynamicTable_' + value).remove();
     });
 
-    function resourceaieditdata() {
+  async  function resourceaieditdata() {
         var country_ids = $('#mySelect2').val();
         if (document.getElementById('resource_category').value == "Labour") {
             var resource_comp_data = 'Generate an HTML code for average hourly rate cost value of ' + document.getElementById('resource_type').value + ' job skills in USA area';
@@ -210,7 +210,7 @@ Resource Component Edit
             var info_query = 'detail description for ' + result;
             var html = '';
             var resource_comp_data = 'Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
-            axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
+           await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
                 var aidata = response.data;
                 for (let i = 0; i < aidata.length; i++) {
                     html += aidata[i].candidates[0].content.parts[0].text;
@@ -223,8 +223,9 @@ Resource Component Edit
                 axios.get("/predict?text=" + average_price).then(function(response) {
                     var final_query = 'get one average value in ' + response.data.candidates[0].content.parts[0].text;
                     html += response.data.candidates[0].content.parts[0].text;
-                    $('#resourceaicompdata').html(html);
+                    
                     axios.get("/predict?text=" + final_query).then(function(response) {
+                        $('#resourceaicompdata').html(html);
                         var final_cost = response.data.candidates[0].content.parts[0].text;
                         result_cost = final_cost.replace(/[^0-9.-]+/g, "");
                         document.getElementById('input_rate_' + country_ids).value = result_cost;

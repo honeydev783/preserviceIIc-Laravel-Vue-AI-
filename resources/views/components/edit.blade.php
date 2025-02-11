@@ -210,13 +210,13 @@ Resource Component Edit
             var info_query = 'detail description for ' + result;
             var html = '';
             var resource_comp_data = 'Generate an HTML table code for ' + ' famous USA construction material Suppliers only official website link  and contact information for ' + result + 'no need narrative';
-           await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
-                var aidata = response.data;
-                for (let i = 0; i < aidata.length; i++) {
-                    html += aidata[i].candidates[0].content.parts[0].text;
-                }
-                // $('#resourceaicompdata').html(html);
-            });
+        //    await axios.get("/predictprice?text=" + resource_comp_data).then(function(response) {
+        //         var aidata = response.data;
+        //         for (let i = 0; i < aidata.length; i++) {
+        //             html += aidata[i].candidates[0].content.parts[0].text;
+        //         }
+        //         // $('#resourceaicompdata').html(html);
+        //     });
 
             axios.get("/predict?text=" + info_query).then(function(response) {
                 var average_price = 'estimate average cost in USA per ' + unit + ' about ' + response.data.candidates[0].content.parts[0].text;

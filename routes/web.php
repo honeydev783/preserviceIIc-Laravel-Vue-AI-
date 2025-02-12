@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainEntryController;
 use App\Http\Controllers\JobActivitiesController;
@@ -11,7 +12,9 @@ use App\Http\Controllers\VertexAIController;
 use App\Http\Controllers\DocumentController;
 use App\Models\Menus;
 use App\Http\Controllers\OpenAIController;
-use App\Http\Controllers\GoogleSearchController;
+// use App\Http\Controllers\GoogleSearchController;
+use App\Models\ProcessStatus;
+use App\Jobs\UpdateResourceComponentJob;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,14 +44,17 @@ Route::get('/predictimages1', [VertexAIController::class, 'predictimages1']);
 Route::get('/predictimages', [VertexAIController::class, 'predictimages']);
 Route::get('/upload', [DocumentController::class, 'showForm'])->name('upload.form');
 
-Route::get('/search', [GoogleSearchController::class, 'search']);
+
+// Route::get('/search', [GoogleSearchController::class, 'search']);
 
 Route::post('/user/login', 'App\Http\Controllers\Auth\LoginController@postLogin');
 Route::post('/user/register', 'App\Http\Controllers\Auth\RegisterController@postRegistration');
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::post('/uploadpdf', [DocumentController::class, 'uploadPDF'])->name('upload.pdf');
-
+    Route::post('/uploadpdf', [DocumentController::class, 'upload'])->name('upload.pdf');
+    //AutoPricing
+    Route::get('/start-process', [ResourceComponentsController::class, 'dispatchJob']);
+    Route::get('/stop-process', [ResourceComponentsController::class, 'stopJob']);
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
     ///--- Country ---///
     Route::group(['prefix' => 'country'], function () {

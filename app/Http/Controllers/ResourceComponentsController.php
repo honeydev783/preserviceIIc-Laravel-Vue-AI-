@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ResourceComponents;
 use App\Models\Countries;
+use App\Models\ProcessStatus;
 use Illuminate\Http\Request;
-
+use App\Jobs\UpdateResourceComponentJob;
 class ResourceComponentsController extends Controller
 {
     /**
@@ -16,7 +17,24 @@ class ResourceComponentsController extends Controller
     public function index()
     {
         $components = ResourceComponents::groupBy('component_id')->orderBy('component_id', 'asc')->orderBy('id', 'desc')->paginate(50);
-        return view('components.master_index',compact('components'));
+        $enabled = ProcessStatus::where('id', 1)->first()->is_running;
+        return view('components.master_index',compact('components', 'enabled'));
+    }
+
+    public function dispatchJob() {
+        $components = ResourceComponents::groupBy('component_id')->orderBy('component_id', 'asc')->orderBy('id', 'desc')->paginate(50);
+        dispatch(new UpdateResourceComponentJob());
+        ProcessStatus::updateOrCreate(['id' => 1], ['is_running' => true]);
+        $enabled = ProcessStatus::where('id', 1)->first()->is_running;
+        return view('components.master_index',compact('components','enabled'));
+
+    }
+
+    public function stopJob() {
+        $components = ResourceComponents::groupBy('component_id')->orderBy('component_id', 'asc')->orderBy('id', 'desc')->paginate(50);
+        ProcessStatus::where('id', 1)->update(['is_running' => false]);
+        $enabled = ProcessStatus::where('id', 1)->first()->is_running;
+        return view('components.master_index',compact('components','enabled'));
     }
 
     public function global()

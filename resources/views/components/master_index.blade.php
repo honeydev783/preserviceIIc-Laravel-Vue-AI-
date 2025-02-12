@@ -31,8 +31,10 @@
             <button type="button" class="btn btn-outline-secondary cancel-comp-btn edit-compid">Cancel Edit</button>
             <a class="btn btn-success" href="{{route('resource_components.create')}}"> Create New</a>
             <a class="btn btn-info" href="{{route('resource_components.global')}}"> Set Global</a>
-            @if (!$enabled) <a class="btn btn-danger" id="enable_btn" onclick="enableAutoPricing()"> Enable Updating</a>
-            @else <a class="btn btn-danger" id="disable_btn" onclick="disableAutoPricing()"> Disable Updating</a> @endif
+            @if($enabled)<a class="btn btn-danger" id="enable_btn" onclick="enableAutoPricing()" style="display:none"> Enable Updating</a>
+            <a class="btn btn-danger" id="disable_btn" onclick="disableAutoPricing()"> Disable Updating</a>
+            @else <a class="btn btn-danger" id="enable_btn" onclick="enableAutoPricing()" > Enable Updating</a>
+            <a class="btn btn-danger" id="disable_btn" onclick="disableAutoPricing()" style="display:none"> Disable Updating</a>@endif
         </div>
     </div>
 </div>
@@ -184,6 +186,13 @@
             $(".row-checkbox,.all-checkbox").prop("checked", false);
         });
         // console.log("is enabled =====> {{ $enabled }}");
+        // if("{{ $enabled }}" == 1){
+        //     document.getElementById('enable_btn').style = 'display:none';
+        //     document.getElementById('disable_btn').style = 'display:""';
+        // }else{
+        //     document.getElementById('disable_btn').style = 'display:none';
+        //     document.getElementById('enable_btn').style = 'display:""';
+        // }
         // sessionStorage.setItem("is_enabled", "{{ $enabled }}");
 
         // $(".save-comp-ids").click(function(){
@@ -192,26 +201,28 @@
     })
 
     function enableAutoPricing() {
-        document.getElementById('enable_btn').innerText = 'Disable Updating';
+        
         fetch('/start-process', {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
+
+            }).then(response => {
+                document.getElementById('enable_btn').style = 'display:none';
+                document.getElementById('disable_btn').style = 'display:""';
+            })
             .then(data => {
-                
+
             });
     }
 
     function disableAutoPricing() {
-        document.getElementById('disable_btn').innerText = 'Enable Updating';
+        
         fetch('/stop-process', {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
+            }).then(response => {
+                document.getElementById('disable_btn').style = 'display:none';
+                document.getElementById('enable_btn').style = 'display:""';
+
+            })
             .then(data => {
                 
             });

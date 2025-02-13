@@ -9,7 +9,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ProcessStatus;
-use App\Services\ResourceService;
 use Illuminate\Support\Facades\DB;
 use App\Models\Countries;
 use App\Models\ResourceComponents;

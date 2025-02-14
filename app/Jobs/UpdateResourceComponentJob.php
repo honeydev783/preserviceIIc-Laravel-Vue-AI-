@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Client;
 use Illuminate\Http\Request;
-
+use App\Services\ResourceService;
 class UpdateResourceComponentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

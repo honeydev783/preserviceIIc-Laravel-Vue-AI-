@@ -40,10 +40,10 @@ class UpdateResourceComponentJob implements ShouldQueue
 
     public function handle(ResourceService $resourceService)
     {
-
+        set_time_limit(0);
         while (true) {
             // Check if the process should continue
-            set_time_limit(0);
+            
             $status = ProcessStatus::first();
             if (!$status || !$status->is_running) {
                 break; // Stop the job if flag is false
@@ -71,6 +71,7 @@ class UpdateResourceComponentJob implements ShouldQueue
     }
     public function predict(Request $request)
     {
+        set_time_limit(0);
         // Prepare the HTTP client
         $client = new Client();
 
@@ -111,7 +112,7 @@ class UpdateResourceComponentJob implements ShouldQueue
         // return $token;
     }
     public function updateComponent($component)
-    {
+    {   set_time_limit(0);
         $id = $component->id;
         $country_id = $component->country;
         $resource_type = $component->resource_type;

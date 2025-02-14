@@ -17,6 +17,7 @@ use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Client;
 use Illuminate\Http\Request;
 use App\Services\ResourceService;
+
 class UpdateResourceComponentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -39,27 +40,31 @@ class UpdateResourceComponentJob implements ShouldQueue
 
     public function handle(ResourceService $resourceService)
     {
-       
+
         while (true) {
             // Check if the process should continue
+            set_time_limit(0);
             $status = ProcessStatus::first();
             if (!$status || !$status->is_running) {
                 break; // Stop the job if flag is false
             }
 
-            // Fetch random components and update
-            // set_time_limit(0);
             // $rand_id = rand(1, 47151);
             $component_1 = DB::table('resource_components')->where('category', 'Material')->where('id', '>', 1)->get();
             // $component_2 = DB::table('resource_components')->where('category', 'Material')->where('id', '>', $rand_id)->get();
 
             foreach ($component_1 as $component) {
+                
                 try {
                     $this->updateComponent($component);
                 } catch (\Exception $e) {
                     continue;
                 }
                 sleep(5);
+                $status = ProcessStatus::first();
+                if (!$status || !$status->is_running) {
+                    break; // Stop the job if flag is false
+                }
                 // Prevent excessive CPU usage
             }
         }
@@ -86,13 +91,13 @@ class UpdateResourceComponentJob implements ShouldQueue
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json'
         ]);
-        
-        try{
+
+        try {
             $response = curl_exec($ch);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
-        
+
         if (curl_errno($ch)) {
             return response()->json(['error' => curl_error($ch)], 500);
         }
@@ -111,8 +116,8 @@ class UpdateResourceComponentJob implements ShouldQueue
         $country_id = $component->country;
         $resource_type = $component->resource_type;
         $unit = $component->unit;
-        try{
-            $query1 = "detail description for " .$resource_type;
+        try {
+            $query1 = "detail description for " . $resource_type;
             $request = new Request([
                 'text'   => $query1,
             ]);
@@ -120,15 +125,15 @@ class UpdateResourceComponentJob implements ShouldQueue
             //die($response);
             //echo gettype($response);
             $result = $response['candidates'][0]['content']['parts'][0]['text'];
-    
-            $query2 = "estimate average cost in USA per  " .$unit. " about " .$result;
+
+            $query2 = "estimate average cost in USA per  " . $unit . " about " . $result;
             $request = new Request([
                 'text'   => $query2,
             ]);
             $response = $this->predict($request);
             $result = $response['candidates'][0]['content']['parts'][0]['text'];
-    
-            $query3 = "get one average value in  " .$result;
+
+            $query3 = "get one average value in  " . $result;
             $request = new Request([
                 'text'   => $query3,
             ]);
@@ -142,6 +147,5 @@ class UpdateResourceComponentJob implements ShouldQueue
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         }
-        
     }
 }
